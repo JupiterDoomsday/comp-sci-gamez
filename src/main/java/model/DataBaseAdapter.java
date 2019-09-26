@@ -70,11 +70,11 @@ public class DataBaseAdapter {
 
   public void addAccount(String firstname, String lastname, String accountname, String password) {
   
-    String encryptedPassword = SecureIt.encrypt(password);
+  //  String encryptedPassword = SecureIt.encrypt(password);
     try {
       String query = "insert into accounts(first_name, last_name, account_id, password) " 
        + "values ('" + firstname + "', '" + lastname + "', '" + accountname + "', '" 
-       + encryptedPassword + "');";
+       + password + "');";
       Statement stmt = conn.createStatement();
       stmt.executeUpdate(query);
     } catch (SQLException e) {
