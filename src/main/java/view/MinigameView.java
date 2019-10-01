@@ -1,8 +1,8 @@
 package view;
 
-import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
-public abstract class MinigameView extends Node {
+public abstract class MinigameView extends Pane {
 
 	public MinigameView() {
 		super();
