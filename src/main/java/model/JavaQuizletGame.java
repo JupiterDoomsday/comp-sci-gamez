@@ -1,4 +1,4 @@
-package view;
+package model;
 
 public class JavaQuizletGame {
 	private String question = "";
@@ -12,4 +12,19 @@ public class JavaQuizletGame {
 		questionType = newQuestionType;
 	}
 	
+	public String getQuestion() {
+		return question;
+	}
+	
+	public String[] getOptions() {
+		return options;
+	}
+	
+	public String getCorrectChoice() {
+		return options[correctChoice];
+	}
+	
+	public int getQuestionType() {
+		return questionType;
+	}
 }
