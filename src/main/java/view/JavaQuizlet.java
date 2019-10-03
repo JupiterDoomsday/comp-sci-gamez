@@ -29,6 +29,7 @@ public class JavaQuizlet extends VBox{
 	private Label currQuestion = new Label();
 	private ToggleGroup toggleQuestion;
 	private Button gameSelectorButton = new Button("Select");
+	private int score = 0;
 	
 	
 	public JavaQuizlet() {
@@ -37,6 +38,7 @@ public class JavaQuizlet extends VBox{
 		setDifficultyBox();
 	}
 	
+	// This method sets up the difficulty box
 	private void setDifficultyBox() {
 		mainBox.getChildren().add(difficultyBox);
 		
@@ -55,18 +57,21 @@ public class JavaQuizlet extends VBox{
 		setDifficultyButton.setOnAction(new EventHandler<ActionEvent>() {
 		      @Override
 		      public void handle(ActionEvent event) {
-		    	  startGame();
+		    	  setUpScreenForNewQuestion();
 		      }
 		  });
 	}
 	
-	private void startGame() {
+	// this method sets up a new question
+	private void setUpScreenForNewQuestion() {
+		welcomeLabel.setText("Current Score: " + score);
 		mainBox.getChildren().clear();
 		int returnCode = setQuestion();
 		
 		if (returnCode == 0) {
 			mainBox.getChildren().clear();
-			mainBox.getChildren().add(new Label ("That was the last question!"));
+			this.getChildren().clear();
+			this.getChildren().add(new Label ("That was the last question!\nYour score is " + score));
 		}
 	}
 	
@@ -93,6 +98,7 @@ public class JavaQuizlet extends VBox{
 			toggleQuestion.getToggles().add(newOption);
 			gameBox.getChildren().add(newOption);
 		}
+		toggleQuestion.selectToggle(toggleQuestion.getToggles().get(0));
 		
 		//set button selector
 		gameBox.getChildren().add(gameSelectorButton);
@@ -100,7 +106,8 @@ public class JavaQuizlet extends VBox{
 		gameSelectorButton.setOnAction(new EventHandler<ActionEvent>() {
 		      @Override
 		      public void handle(ActionEvent event) {
-		    	  startGame();
+		    	  checkIfCorrectAnswer(newQuestion.getCorrectChoice());
+		    	  setUpScreenForNewQuestion();
 		      }
 		  });
 		
@@ -108,5 +115,13 @@ public class JavaQuizlet extends VBox{
 		mainBox.getChildren().add(gameBox);
 		
 		return 1;
+	}
+	
+	public void checkIfCorrectAnswer(String correctChoice) {
+		RadioButton selected = (RadioButton)toggleQuestion.getSelectedToggle();
+		String currentSelection = selected.getText();
+		
+		if (currentSelection.equals(correctChoice))
+			score++;
 	}
 }

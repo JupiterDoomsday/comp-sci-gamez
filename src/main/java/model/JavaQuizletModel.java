@@ -24,6 +24,7 @@ public class JavaQuizletModel {
 	private void setAllQuestions() {
 		setQuestion1();
 		setQuestion2();
+		setQuestion1();
 	}
 	
 	private void setQuestion1() {
