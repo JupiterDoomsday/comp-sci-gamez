@@ -32,9 +32,11 @@ public class Spike1View extends Application {
   public void start(Stage primaryStage) throws Exception {
      
     BorderPane sprint1 = new BorderPane();
+    
+    JavaQuizlet javaQ = new JavaQuizlet();
     sprint1.setTop(new Heading());
     selector = new AccountView();  
-    sprint1.setCenter(selector);
+    sprint1.setCenter(javaQ);
     
     // Add a BorderPane to the Scene
     Scene scene = new Scene(sprint1, 1400, 800);
