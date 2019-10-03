@@ -14,12 +14,12 @@ public class GameTestView extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		BorderPane pane = new BorderPane();
-		ArrayAttackView AAGame = new ArrayAttackView();
-		pane.setCenter(AAGame);
-		Scene scene = new Scene(pane, 1366, 700);
+		ArrayAttackView game = new ArrayAttackView();
+		pane.setCenter(game);
+		Scene scene = new Scene(pane, 1000, 600);
 	    stage.setScene(scene);
 	    stage.show();
-	    AAGame.run();
+	    game.run();
 	}
 	
 }

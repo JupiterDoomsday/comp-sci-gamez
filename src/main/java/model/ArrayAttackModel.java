@@ -18,7 +18,7 @@ public class ArrayAttackModel {
 		generateRandomUnsorted();
 		score = 0;
 		curIndex = 0;
-		view.update(array, curIndex, null, 0);
+		view.update(array, curIndex, curIndex + 1, null, score);	
 	}
 
 	public void runBubble(boolean swap) {
@@ -32,7 +32,7 @@ public class ArrayAttackModel {
 		}
 		else if(curIndex > 8)
 			curIndex = 0;
-		view.update(array, curIndex, null, 0);	
+		view.update(array, curIndex, curIndex + 1, null, score);	
 	}
 	
 	private void swap() {
