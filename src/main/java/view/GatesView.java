@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Gate;
 
@@ -29,9 +30,12 @@ public class GatesView extends BorderPane implements Observer {
 	public GatesView(Gate gate) {
 		game= gate;
 		canvas= new Canvas(200,200);
+		message=new Label();
 		testLayOut= new GridPane();
 		gc= canvas.getGraphicsContext2D();
-		setTop(message);
+		setBottom(message);
+		message.setFont(new Font("serif", 20));
+		message.setText("AND GATE");
 		w1=new Button();
 		w1.setText("Switch 1");
 		w2= new Button();
@@ -77,10 +81,14 @@ public class GatesView extends BorderPane implements Observer {
 		 gc.clearRect(0, 0, 200, 200);
 		 initializePane();
 		 if(game.gateOutput()) {
+			 	message.setText("GATE is true");
 				System.out.println(game.getLogic()+" GATE is true");
 				gc.setFill(Color.YELLOW);
 				gc.fillOval(130, 0,40, 40);
 			}
+		 else {
+			 message.setText("AND GATE");
+		 }
 	 }
 	 /**
 	   * This changes and updates the view every game sate change
