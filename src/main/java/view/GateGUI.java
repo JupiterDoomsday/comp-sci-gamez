@@ -28,5 +28,6 @@ public class GateGUI extends Application {
 	    primaryStage.setScene(scene);
 	    // Don't forget to show the running application:
 	    primaryStage.show();
+	    selector.run();
 	}
 }

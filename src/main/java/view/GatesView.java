@@ -44,11 +44,18 @@ public class GatesView extends MinigameView implements Observer {
 		}
 		for(int i=0;i<boardGame.getHeight();i++) {
 			for(int j=0;j<boardGame.getWidth();j++) {
+				ImageView im;
 				if(boardGame.getTile(i,j)==null) {
-					layOut.add(new ImageView(emptyTile),i,j);
+					im=new ImageView(emptyTile);
+					layOut.add(im,i,j);
 				}
-				else
-					layOut.add(new ImageView(boardGame.getTile(i,j).getImg()),i,j);
+				else {
+					im= new ImageView(boardGame.getTile(i,j).getImg());
+					layOut.add(im,i,j);
+				}
+				im.setFitHeight(165);
+				im.setFitWidth(165);
+				im.setPreserveRatio(true);
 			}
 		}
 		
@@ -84,6 +91,7 @@ public class GatesView extends MinigameView implements Observer {
 			  System.out.println("You solved it!");
 			  stop();
 		  }
+		  System.out.println("Keep swimming");
 	}
 
 	@Override
