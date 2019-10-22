@@ -34,7 +34,7 @@ public class MainMenuController extends Application {
 	 * 1. Add menu button functionality
 	 * 2. Create background for menu bar
 	 * 3. Add credits-clickable button instead of menubar?
-	 * 4. Create backgrounds for game buttons
+	 * 4. Create backgrounds for game button
 	 */
 	
 
