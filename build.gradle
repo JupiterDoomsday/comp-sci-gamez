@@ -95,7 +95,7 @@ apply plugin: 'com.sandec.jpro'
  * App Main Class
  */
 //mainClassName = 'com.jpro.hellojpro.HelloJPro'
-mainClassName = 'view.Spike1View'
+mainClassName = 'view.MainMenuController'
 
 /**
  * jpro settings

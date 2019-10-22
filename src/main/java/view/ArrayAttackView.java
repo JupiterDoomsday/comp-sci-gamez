@@ -31,6 +31,7 @@ public class ArrayAttackView extends MinigameView {
 	@Override
 	protected void layoutScene() {
 		mainCanvas = new Canvas(1200, 700);
+
 		gc = mainCanvas.getGraphicsContext2D();
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.setTextBaseline(VPos.CENTER);
