@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -24,6 +25,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Gate;
+import model.TileMap;
 import model.Wire;
 
 public class MainMenuController extends Application {
@@ -45,6 +47,7 @@ public class MainMenuController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		BorderPane bPane = new BorderPane();
+		ScrollPane sPane = new ScrollPane();
 		// Add a background image for the main menu
 		Image image = new Image("file:resources/images/csbackground.png");
 		BackgroundImage bImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -193,7 +196,8 @@ public class MainMenuController extends Application {
 				bPane.setBackground(null);
 				bPane.setTop(menuBar);
 				ArrayAttackView arrayAttackView = new ArrayAttackView();
-				bPane.setCenter(arrayAttackView);
+				sPane.setContent(arrayAttackView);
+				bPane.setCenter(sPane);
 			}
 		});
 		
@@ -206,7 +210,8 @@ public class MainMenuController extends Application {
 				bPane.setBackground(null);
 				bPane.setTop(menuBar);
 				BinaryBattleView binaryView = new BinaryBattleView();
-				bPane.setCenter(binaryView);
+				sPane.setContent(binaryView);
+				bPane.setCenter(sPane);
 			}
 		});
 		
@@ -218,9 +223,12 @@ public class MainMenuController extends Application {
 				bPane.getChildren().clear();
 				bPane.setBackground(null);
 				bPane.setTop(menuBar);
-				Gate gate= new Gate(new Wire(false),new Wire(true),"AND");
-				GatesView gatesView = new GatesView(gate);
-				bPane.setCenter(gatesView);
+				Gate gate= new Gate(new Wire(false,1,1),new Wire(true,1,3),"AND",5,0);
+			    TileMap map= new TileMap(18,14);
+			    map.setTile(5, 2, gate);
+				GatesView gatesView = new GatesView(map);
+				sPane.setContent(gatesView);
+				bPane.setCenter(sPane);
 			}
 		});
 		
@@ -233,7 +241,8 @@ public class MainMenuController extends Application {
 				bPane.setBackground(null);
 				bPane.setTop(menuBar);
 				JavaQuizlet javaQuizletView = new JavaQuizlet();
-				bPane.setCenter(javaQuizletView);
+				sPane.setContent(javaQuizletView);
+				bPane.setCenter(sPane);
 			}
 		});
 		

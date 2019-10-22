@@ -2,6 +2,9 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -11,7 +14,7 @@ import model.Difficulties;
 import model.JavaQuizletGame;
 import model.JavaQuizletModel;
 
-public class JavaQuizlet extends VBox{
+public class JavaQuizlet extends MinigameView{
 	private JavaQuizletModel quiz = new JavaQuizletModel();
 	private Label welcomeLabel = new Label("Welcome to Java Quizlet!");
 	
@@ -33,8 +36,10 @@ public class JavaQuizlet extends VBox{
 	
 	
 	public JavaQuizlet() {
-		this.getChildren().add(welcomeLabel);
-		this.getChildren().add(mainBox);
+		mainBox.setPadding(new Insets(300,100,100,500));
+		mainBox.setSpacing(10);
+		this.getChildren().addAll(mainBox);
+		mainBox.getChildren().add(welcomeLabel);
 		setDifficultyBox();
 	}
 	
@@ -51,7 +56,7 @@ public class JavaQuizlet extends VBox{
 		}
 		
 		difficultyBox.getChildren().add(setDifficultyButton);
-		
+		difficultyBox.setSpacing(10);
 		toggleDifficulty.selectToggle(toggleDifficulty.getToggles().get(0));
 		
 		setDifficultyButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -78,6 +83,7 @@ public class JavaQuizlet extends VBox{
 	// returns 0 if no more questions
 	// returns 1 if succesfull
 	private int setQuestion() {
+		int test = 0;
 		gameBox.getChildren().clear();
 		
 		JavaQuizletGame newQuestion = quiz.getNextGame();
@@ -123,5 +129,29 @@ public class JavaQuizlet extends VBox{
 		
 		if (currentSelection.equals(correctChoice))
 			score++;
+	}
+
+	@Override
+	public String settings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void layoutScene() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		
 	}
 }
