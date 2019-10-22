@@ -16,9 +16,11 @@ public class Gate extends Observable{
 	private Image img;
 	private int x,y;
 	
-	public Gate(Wire one, Wire two, String state){
+	public Gate(Wire one, Wire two, String state, int x, int y){
 		wire1=one;
 		wire2=two;
+		this.x=x;
+		this.y=y;
 		gateType=Logic.valueOf(state);
 		String path="";
 		if(gateType.equals(Logic.valueOf("AND"))) {

@@ -40,13 +40,6 @@ public class Wire extends Button{
 		else
 			this.setGraphic(new ImageView(off));
 			
-		 this.setOnAction( ae -> {
-				invert();
-				if(state)
-					this.setGraphic(new ImageView(on));
-				else
-					this.setGraphic(new ImageView(off));
-			});
 	 }
 	 public boolean state() {
 		 return state;
@@ -59,5 +52,11 @@ public class Wire extends Button{
 	 }
 	 public void invert() {
 		 state=!state;
+	 }
+	 public Image getOnImg() {
+		 return on;
+	 }
+	 public Image getOffImg() {
+		 return off;
 	 }
 }

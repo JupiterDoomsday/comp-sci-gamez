@@ -29,11 +29,9 @@ public class TileMap {
 	public void setTile(int h, int w, Gate g) {
 		tileset[h][w]=g;
 		if(wires.contains(g.getW1())==false) {
-			System.out.println("Adding Wire 1");
 			wires.add(g.getW1());
 		}
 		if(wires.contains(g.getW2())==false) {
-			System.out.println("Adding Wire 2");
 			wires.add(g.getW2());
 		}
 		gates.add(g);

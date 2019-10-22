@@ -31,17 +31,13 @@ public class GatesView extends MinigameView implements Observer {
 	private Canvas mainCanvas;
 	//private GraphicsContext gc;
 	private Image emptyTile;
+	private Image lampOn;
+	private Image lampOff;
 	private TileMap boardGame;
 	private GridPane layOut;
 	public GatesView(TileMap tileBoard) {
 		boardGame= tileBoard;ArrayList<Wire>wires= boardGame.getListOfWires();
-		try {
-			emptyTile=new Image(new FileInputStream("Image/empty.png"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(-1);
-		}
+
 		for(int i=0;i<boardGame.getHeight();i++) {
 			for(int j=0;j<boardGame.getWidth();j++) {
 				ImageView im;
@@ -52,22 +48,30 @@ public class GatesView extends MinigameView implements Observer {
 				else {
 					im= new ImageView(boardGame.getTile(i,j).getImg());
 					layOut.add(im,i,j);
+					layOut.add(new  ImageView(lampOff),boardGame.getTile(i,j).getX(),boardGame.getTile(i,j).getY());
 				}
-				im.setFitHeight(165);
-				im.setFitWidth(165);
-				im.setPreserveRatio(true);
 			}
 		}
 		
 		for(int i=0;i<wires.size();i++) {
-			layOut.add(wires.get(i), wires.get(i).getX(), wires.get(i).getY());
+			Wire w= wires.get(i);
+			w.setOnAction( ae -> {
+				w.invert();
+				if(w.state())
+					w.setGraphic(new ImageView(w.getOnImg()));
+				else
+					w.setGraphic(new ImageView(w.getOffImg()));
+				run();
+			});
+			w.setStyle("-fx-padding: 0 0 0 0; -fx-margin: 0 0 0 0;");
+			layOut.add(w, wires.get(i).getX(), wires.get(i).getY());
 		}
 	}
 	 /**
 	   * This changes and updates the view every game sate change
 	   */
-	  @Override
-	  public void update(Observable o, Object arg) {
+	  public void update(Wire w) {
+			  System.out.println("Button pressed");
 	  }
 
 	@Override
@@ -80,6 +84,16 @@ public class GatesView extends MinigameView implements Observer {
 	protected void layoutScene() {
 		mainCanvas = new Canvas(1000, 500);
 		layOut= new GridPane();
+		try {
+			emptyTile=new Image(new FileInputStream("Image/empty.png"));
+			lampOff=new Image(new FileInputStream("Image/lightbulb.png"));
+			lampOn=new Image(new FileInputStream("Image/lightbulb_lit.png"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		this.getChildren().add(layOut);
 		// TODO Auto-generated method stub
 		
 	}
@@ -87,11 +101,13 @@ public class GatesView extends MinigameView implements Observer {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		  if(boardGame.isFinished()) {
-			  System.out.println("You solved it!");
-			  stop();
-		  }
-		  System.out.println("Keep swimming");
+		ArrayList<Gate> gates= boardGame.getListOfGates();
+		for(int i=0;i< gates.size();i++) {
+			if(gates.get(i).gateOutput())
+				layOut.add(new  ImageView(lampOn), gates.get(i).getX(), gates.get(i).getY());
+			else 
+				layOut.add(new  ImageView(lampOff), gates.get(i).getX(), gates.get(i).getY());
+		}
 	}
 
 	@Override
@@ -99,5 +115,10 @@ public class GatesView extends MinigameView implements Observer {
 		// TODO Auto-generated method stub
 		System.out.println("You solved it!");
 		
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		System.out.println("Button pressed");
 	}
 }
