@@ -36,6 +36,7 @@ public class MainMenuController extends Application {
 	 * 1. Add menu button functionality
 	 * 2. Create background for menu bar
 	 * 3. Add credits-clickable button instead of menubar?
+	 * 4. Create backgrounds for game buttons 
 	 */
 	
 
@@ -48,7 +49,7 @@ public class MainMenuController extends Application {
 		BorderPane bPane = new BorderPane();
 		ScrollPane sPane = new ScrollPane();
 		// Add a background image for the main menu
-		Image image = new Image("file:resources/images/csbackground.png");
+		Image image = new Image("file:resources/image/csbackground.png");
 		BackgroundImage bImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		Background background = new Background(bImage);
