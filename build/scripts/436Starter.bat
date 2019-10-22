@@ -82,7 +82,7 @@ set CMD_LINE_ARGS=%*
 set CLASSPATH=%APP_HOME%\lib\436Starter.jar;%APP_HOME%\lib\mysql-connector-java-8.0.15.jar;%APP_HOME%\lib\jpro-webapi-2019.1.2.jar;%APP_HOME%\lib\protobuf-java-3.6.1.jar
 
 @rem Execute 436Starter
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %436_STARTER_OPTS%  -classpath "%CLASSPATH%" view.Spike1View %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %436_STARTER_OPTS%  -classpath "%CLASSPATH%" view.MainMenuController %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell
