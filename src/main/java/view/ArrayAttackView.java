@@ -106,6 +106,7 @@ public class ArrayAttackView extends MinigameView {
 
 	@Override
 	public void run() {
+		//TODO:
 	}
 
 	@Override
