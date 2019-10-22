@@ -1,9 +1,6 @@
 package model;
-<<<<<<< HEAD
 import java.util.ArrayList;
 
-=======
->>>>>>> 8352c94042622a56596949af90ec50dd2e750b05
 /*
  * @AUTHOR: Isabela Hutchings
  * This works as a Tile board that lays out my 16 x 16 pixel tiles
@@ -13,7 +10,6 @@ import javafx.scene.image.Image;
 public class TileMap {
 	private int width;
 	private int height;
-<<<<<<< HEAD
 	private ArrayList<Wire> wires;
 	private ArrayList<Gate> gates;
 	private Gate [][] tileset;
@@ -61,21 +57,5 @@ public class TileMap {
 		}
 		return true;
 	}
-=======
-	private Image [][] tileset;
-	public TileMap(int w, int h) {
-		width=w;
-		height=h;
-		tileset=new Image[h][w];
-	}
-	public void setTile(int h, int w, Image i) {
-		tileset[h][w]=i;
-	}
-	public Image getTile(int h, int w) {
-		return tileset[h][w];
-	}
-	public Image[][] getBoard(){
-		return tileset;
-	}
->>>>>>> 8352c94042622a56596949af90ec50dd2e750b05
+
 }
