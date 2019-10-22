@@ -530,3 +530,75 @@
 2019-09-24 16:54:00,570 [INFO] in scala-execution-context-global-30 - [[37minfo[0m] c.j.i.s.ViewInfo$ - zipped         : 12017
 2019-09-24 16:54:00,570 [INFO] in scala-execution-context-global-30 - [[37minfo[0m] c.j.i.s.ViewInfo$ - 
 2019-09-24 16:54:29,625 [INFO] in scala-execution-context-global-42 - [[37minfo[0m] c.j.i.c.InstanceImpl - closing window!
+2019-10-03 16:21:59,670 [INFO] in scala-execution-context-global-31 - [info] c.j.i.s.Initializer$ - redirected OUT / ERR
+2019-10-03 16:21:59,671 [INFO] in scala-execution-context-global-31 - [info] c.j.i.s.Initializer$ - installed SLF4JBridge
+2019-10-03 16:21:59,671 [INFO] in scala-execution-context-global-31 - [info] c.j.i.s.MonocleInitializer$ - screen: null
+2019-10-03 16:21:59,671 [INFO] in scala-execution-context-global-31 - Warning: Quantum will not submit render jobs, nothing should draw
+2019-10-03 16:21:59,671 [INFO] in scala-execution-context-global-31 - [info] c.j.i.s.Initializer$ - finished init!
+2019-10-03 16:21:59,726 [INFO] in scala-execution-context-global-31 - [info] c.j.i.s.Initializer$ - JavaFX version: 8.0.121-b13
+2019-10-03 16:21:59,752 [INFO] in scala-execution-context-global-31 - [info] c.j.i.c.m.DynamicDataModel - Started Monitoring chart data...
+2019-10-03 16:21:59,964 [INFO] in scala-execution-context-global-31 - [info] c.j.i.c.m.ChartJSONImExporter - Imported chart data Thu Oct 03 16:21:59 MST 2019
+2019-10-03 16:22:00,233 [INFO] in scala-execution-context-global-31 - [info] play.api.Play - Application started (Prod)
+2019-10-03 16:22:02,640 [INFO] in scala-execution-context-global-31 - [info] p.c.s.AkkaHttpServer - Listening for HTTP on /0:0:0:0:0:0:0:0:8080
+2019-10-03 16:24:25,608 [INFO] in scala-execution-context-global-32 - [info] c.j.i.s.Initializer$ - redirected OUT / ERR
+2019-10-03 16:24:25,609 [INFO] in scala-execution-context-global-32 - [info] c.j.i.s.Initializer$ - installed SLF4JBridge
+2019-10-03 16:24:25,609 [INFO] in scala-execution-context-global-32 - [info] c.j.i.s.MonocleInitializer$ - screen: null
+2019-10-03 16:24:25,609 [INFO] in scala-execution-context-global-32 - Warning: Quantum will not submit render jobs, nothing should draw
+2019-10-03 16:24:25,609 [INFO] in scala-execution-context-global-32 - [info] c.j.i.s.Initializer$ - finished init!
+2019-10-03 16:24:25,629 [INFO] in scala-execution-context-global-32 - [info] c.j.i.s.Initializer$ - JavaFX version: 8.0.121-b13
+2019-10-03 16:24:25,661 [INFO] in scala-execution-context-global-32 - [info] c.j.i.c.m.DynamicDataModel - Started Monitoring chart data...
+2019-10-03 16:24:25,866 [INFO] in scala-execution-context-global-32 - [info] c.j.i.c.m.ChartJSONImExporter - Imported chart data Thu Oct 03 16:24:25 MST 2019
+2019-10-03 16:24:26,084 [INFO] in scala-execution-context-global-32 - [info] play.api.Play - Application started (Prod)
+2019-10-03 16:24:27,378 [INFO] in scala-execution-context-global-32 - [info] p.c.s.AkkaHttpServer - Listening for HTTP on /0:0:0:0:0:0:0:0:8080
+2019-10-03 16:24:29,391 [INFO] in scala-execution-context-global-32 - [info] c.jpro - application requested: 0!default
+2019-10-03 16:24:29,425 [INFO] in scala-execution-context-global-32 - [info] c.jpro - Creating Application: 0!default
+2019-10-03 16:24:29,429 [INFO] in scala-execution-context-global-32 - [info] c.jpro - remoteAddress 0:0:0:0:0:0:0:1
+2019-10-03 16:24:29,429 [INFO] in scala-execution-context-global-32 - [info] c.jpro - host          localhost:8080
+2019-10-03 16:24:29,429 [INFO] in scala-execution-context-global-32 - [info] c.jpro - uri           /app/0!default
+2019-10-03 16:24:29,983 [INFO] in scala-execution-context-global-32 - TEST: newText is:    0110
+2019-10-03 16:24:29,984 [INFO] in scala-execution-context-global-32 - TEST: newText is:    0000
+2019-10-03 16:24:29,984 [INFO] in scala-execution-context-global-32 - TEST: newText is:    1101
+2019-10-03 16:24:29,984 [INFO] in scala-execution-context-global-32 - TEST: newText is:    1111
+2019-10-03 16:24:29,984 [INFO] in scala-execution-context-global-32 - TEST: newText is:    1010
+2019-10-03 16:24:29,985 [INFO] in scala-execution-context-global-32 - TEST: newText is:    0010
+2019-10-03 16:24:29,985 [INFO] in scala-execution-context-global-32 - TEST: newText is:    1000
+2019-10-03 16:24:29,986 [INFO] in scala-execution-context-global-32 - TEST: newText is:    0100
+2019-10-03 16:24:29,986 [INFO] in scala-execution-context-global-32 - TEST: newText is:    0101
+2019-10-03 16:24:29,986 [INFO] in scala-execution-context-global-32 - TEST: newText is:    0011
+2019-10-03 16:24:30,302 [INFO] in scala-execution-context-global-32 - [info] c.j.i.s.ViewSerializerActor - appdef: AppByMain(default,view.MainMenuController,None,NamedClassLoader(system),false) clientinfo: ClientInfo(http://localhost:8080/,http://localhost:8080/app/default,1536.0,750.0,false,en-US,List(en-US, en),Map())out: Actor[akka://application/system/StreamSupervisor-0/flow-7-2-actorRefSource#-864260318]
+2019-10-03 16:24:30,912 [INFO] in scala-execution-context-global-32 - [info] com.jpro.JS - received msg: new MainID: 768 userid: 1371708436
+2019-10-03 16:26:43,624 [INFO] in scala-execution-context-global-32 - Match found at position: 0
+2019-10-03 16:26:43,628 [INFO] in scala-execution-context-global-32 - Child to change is: 0
+2019-10-03 16:26:48,902 [INFO] in scala-execution-context-global-32 - Match found at position: 1
+2019-10-03 16:26:48,904 [INFO] in scala-execution-context-global-32 - Child to change is: 1
+2019-10-03 16:26:53,894 [INFO] in scala-execution-context-global-32 - Match found at position: 9
+2019-10-03 16:26:53,897 [INFO] in scala-execution-context-global-32 - Child to change is: 9
+2019-10-03 16:27:04,210 [INFO] in scala-execution-context-global-32 - Match found at position: 0
+2019-10-03 16:27:04,213 [INFO] in scala-execution-context-global-32 - Child to change is: 0
+2019-10-03 16:28:01,726 [INFO] in scala-execution-context-global-32 - Match found at position: 0
+2019-10-03 16:28:01,729 [INFO] in scala-execution-context-global-32 - Child to change is: 0
+2019-10-03 16:28:07,455 [INFO] in scala-execution-context-global-32 - Match found at position: 7
+2019-10-03 16:28:07,457 [INFO] in scala-execution-context-global-32 - Child to change is: 7
+2019-10-03 16:28:09,628 [INFO] in scala-execution-context-global-32 - Match found at position: 5
+2019-10-03 16:28:09,630 [INFO] in scala-execution-context-global-32 - Child to change is: 5
+2019-10-03 16:28:12,975 [INFO] in scala-execution-context-global-32 - Match found at position: 8
+2019-10-03 16:28:12,978 [INFO] in scala-execution-context-global-32 - Child to change is: 8
+2019-10-03 16:28:16,196 [INFO] in scala-execution-context-global-32 - Match found at position: 6
+2019-10-03 16:28:16,199 [INFO] in scala-execution-context-global-32 - Child to change is: 6
+2019-10-03 16:28:20,837 [INFO] in scala-execution-context-global-32 - Match found at position: 3
+2019-10-03 16:28:20,840 [INFO] in scala-execution-context-global-32 - Child to change is: 3
+2019-10-03 16:29:07,147 [INFO] in scala-execution-context-global-32 - Match found at position: 4
+2019-10-03 16:29:07,151 [INFO] in scala-execution-context-global-32 - Child to change is: 4
+2019-10-03 16:29:11,478 [INFO] in scala-execution-context-global-32 - Match found at position: 2
+2019-10-03 16:29:11,480 [INFO] in scala-execution-context-global-32 - Child to change is: 2
+2019-10-03 16:35:08,881 [INFO] in scala-execution-context-global-32 - [info] c.j.i.s.ViewInfo$ - 
+2019-10-03 16:35:08,884 [INFO] in scala-execution-context-global-32 - [info] c.j.i.s.ViewInfo$ - Application closed:
+2019-10-03 16:35:08,884 [INFO] in scala-execution-context-global-44 - [info] c.j.i.s.ViewInfo$ - startTime      : Thu Oct 03 16:35:08 MST 2019      
+2019-10-03 16:35:08,887 [INFO] in scala-execution-context-global-44 - [info] c.j.i.s.ViewInfo$ - averageLatency : 00:00:00.019 
+2019-10-03 16:35:08,887 [INFO] in scala-execution-context-global-44 - [info] c.j.i.s.ViewInfo$ - averageJitter  : 00:00:00.000  
+2019-10-03 16:35:08,888 [INFO] in scala-execution-context-global-44 - [info] c.j.i.s.ViewInfo$ - framerateServer: 00:00:00.000
+2019-10-03 16:35:08,888 [INFO] in scala-execution-context-global-44 - [info] c.j.i.s.ViewInfo$ - framerateClient: 00:00:00.000
+2019-10-03 16:35:08,888 [INFO] in scala-execution-context-global-44 - [info] c.j.i.s.ViewInfo$ - raw            : 1306581
+2019-10-03 16:35:08,889 [INFO] in scala-execution-context-global-44 - [info] c.j.i.s.ViewInfo$ - zipped         : 366862
+2019-10-03 16:35:08,889 [INFO] in scala-execution-context-global-44 - [info] c.j.i.s.ViewInfo$ - 
+2019-10-03 16:38:44,780 [INFO] in scala-execution-context-global-58 - [info] c.j.i.c.InstanceImpl - closing window!

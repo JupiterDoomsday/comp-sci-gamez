@@ -649,3 +649,53 @@
 2019-09-24 16:54:00,570 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - zipped         : 12017
 2019-09-24 16:54:00,570 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - 
 2019-09-24 16:54:29,624 [INFO] from com.jpro.internal.communicator.InstanceImpl in JavaFX Application Thread - closing window!
+2019-10-03 16:21:57,689 [INFO] from akka.event.slf4j.Slf4jLogger in application-akka.actor.default-dispatcher-3 - Slf4jLogger started
+2019-10-03 16:21:58,814 [INFO] from com.jpro.activity in Thread-0 - Starting the server
+2019-10-03 16:21:58,814 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 -  *** Starting JPro: https://www.jpro.one/ ***
+2019-10-03 16:21:58,814 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - OS: Windows 10
+2019-10-03 16:21:58,831 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - JPro: 2019.1.2
+2019-10-03 16:21:58,831 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - Java version: 1.8.0_121
+2019-10-03 16:21:58,831 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - JVM: 1.8.0_121 Oracle Corporation
+2019-10-03 16:21:58,865 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - redirected OUT / ERR
+2019-10-03 16:21:58,865 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - installed SLF4JBridge
+2019-10-03 16:21:58,932 [INFO] from com.jpro.internal.server.MonocleInitializer$ in Thread-0 - screen: null
+2019-10-03 16:21:59,669 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - finished init!
+2019-10-03 16:21:59,726 [INFO] from com.jpro.internal.server.Initializer$ in JavaFX Application Thread - JavaFX version: 8.0.121-b13
+2019-10-03 16:21:59,752 [INFO] from com.jpro.internal.chart.model.DynamicDataModel in JavaFX Application Thread - Started Monitoring chart data...
+2019-10-03 16:21:59,963 [INFO] from com.jpro.internal.chart.model.ChartJSONImExporter in JavaFX Application Thread - Imported chart data Thu Oct 03 16:21:59 MST 2019
+2019-10-03 16:22:00,232 [INFO] from play.api.Play in Thread-0 - Application started (Prod)
+2019-10-03 16:22:02,636 [INFO] from play.core.server.AkkaHttpServer in Thread-0 - Listening for HTTP on /0:0:0:0:0:0:0:0:8080
+2019-10-03 16:24:24,378 [INFO] from akka.event.slf4j.Slf4jLogger in application-akka.actor.default-dispatcher-4 - Slf4jLogger started
+2019-10-03 16:24:25,066 [INFO] from com.jpro.activity in Thread-0 - Starting the server
+2019-10-03 16:24:25,069 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 -  *** Starting JPro: https://www.jpro.one/ ***
+2019-10-03 16:24:25,069 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - OS: Windows 10
+2019-10-03 16:24:25,073 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - JPro: 2019.1.2
+2019-10-03 16:24:25,073 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - Java version: 1.8.0_121
+2019-10-03 16:24:25,073 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - JVM: 1.8.0_121 Oracle Corporation
+2019-10-03 16:24:25,104 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - redirected OUT / ERR
+2019-10-03 16:24:25,104 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - installed SLF4JBridge
+2019-10-03 16:24:25,137 [INFO] from com.jpro.internal.server.MonocleInitializer$ in Thread-0 - screen: null
+2019-10-03 16:24:25,607 [INFO] from com.jpro.internal.server.Initializer$ in Thread-0 - finished init!
+2019-10-03 16:24:25,629 [INFO] from com.jpro.internal.server.Initializer$ in JavaFX Application Thread - JavaFX version: 8.0.121-b13
+2019-10-03 16:24:25,661 [INFO] from com.jpro.internal.chart.model.DynamicDataModel in JavaFX Application Thread - Started Monitoring chart data...
+2019-10-03 16:24:25,866 [INFO] from com.jpro.internal.chart.model.ChartJSONImExporter in JavaFX Application Thread - Imported chart data Thu Oct 03 16:24:25 MST 2019
+2019-10-03 16:24:26,084 [INFO] from play.api.Play in Thread-0 - Application started (Prod)
+2019-10-03 16:24:27,375 [INFO] from play.core.server.AkkaHttpServer in Thread-0 - Listening for HTTP on /0:0:0:0:0:0:0:0:8080
+2019-10-03 16:24:29,390 [INFO] from controllers.jpro in application-akka.actor.default-dispatcher-2 - application requested: 0!default
+2019-10-03 16:24:29,425 [INFO] from controllers.jpro in application-akka.actor.default-dispatcher-2 - Creating Application: 0!default
+2019-10-03 16:24:29,428 [INFO] from controllers.jpro in application-akka.actor.default-dispatcher-2 - remoteAddress 0:0:0:0:0:0:0:1
+2019-10-03 16:24:29,428 [INFO] from controllers.jpro in application-akka.actor.default-dispatcher-2 - host          localhost:8080
+2019-10-03 16:24:29,428 [INFO] from controllers.jpro in application-akka.actor.default-dispatcher-2 - uri           /app/0!default
+2019-10-03 16:24:30,302 [INFO] from com.jpro.internal.server.ViewSerializerActor in JavaFX Application Thread - appdef: AppByMain(default,view.MainMenuController,None,NamedClassLoader(system),false) clientinfo: ClientInfo(http://localhost:8080/,http://localhost:8080/app/default,1536.0,750.0,false,en-US,List(en-US, en),Map())out: Actor[akka://application/system/StreamSupervisor-0/flow-7-2-actorRefSource#-864260318]
+2019-10-03 16:24:30,911 [INFO] from com.jpro.JS in JavaFX Application Thread - received msg: new MainID: 768 userid: 1371708436
+2019-10-03 16:35:08,880 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - 
+2019-10-03 16:35:08,880 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - Application closed:
+2019-10-03 16:35:08,881 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - startTime      : Thu Oct 03 16:35:08 MST 2019      
+2019-10-03 16:35:08,881 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - averageLatency : 00:00:00.019 
+2019-10-03 16:35:08,881 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - averageJitter  : 00:00:00.000  
+2019-10-03 16:35:08,883 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - framerateServer: 00:00:00.000
+2019-10-03 16:35:08,886 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - framerateClient: 00:00:00.000
+2019-10-03 16:35:08,886 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - raw            : 1306581
+2019-10-03 16:35:08,886 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - zipped         : 366862
+2019-10-03 16:35:08,886 [INFO] from com.jpro.internal.stats.ViewInfo$ in JavaFX Application Thread - 
+2019-10-03 16:38:44,777 [INFO] from com.jpro.internal.communicator.InstanceImpl in JavaFX Application Thread - closing window!
