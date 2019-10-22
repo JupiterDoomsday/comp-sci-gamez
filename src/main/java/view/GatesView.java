@@ -14,12 +14,13 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Gate;
 
-public class GatesView extends BorderPane implements Observer {
+public class GatesView extends MinigameView implements Observer {
 	private Canvas canvas;
 	private GraphicsContext gc;
 	private Label message;
@@ -29,11 +30,10 @@ public class GatesView extends BorderPane implements Observer {
 	private GridPane testLayOut;
 	public GatesView(Gate gate) {
 		game= gate;
-		canvas= new Canvas(200,200);
+		canvas= new Canvas(1200,200);
 		message=new Label();
 		testLayOut= new GridPane();
 		gc= canvas.getGraphicsContext2D();
-		setBottom(message);
 		message.setFont(new Font("serif", 20));
 		message.setText("AND GATE");
 		w1=new Button();
@@ -58,8 +58,8 @@ public class GatesView extends BorderPane implements Observer {
 		testLayOut.add(w1,0,0);
 		testLayOut.add(w2,0,1);
 		initializePane();
-		setTop(testLayOut);
-		setCenter(canvas);
+		//setTop(testLayOut);
+		//setCenter(canvas);
 	}
 	
 	 private void initializePane() {
@@ -110,4 +110,28 @@ public class GatesView extends BorderPane implements Observer {
 			 gc.strokeLine(0, 25, canvas.getWidth()/2, 25);
 		  
 	  }
+
+	@Override
+	public String settings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void layoutScene() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		
+	}
 }
