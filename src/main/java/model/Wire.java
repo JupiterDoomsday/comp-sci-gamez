@@ -1,14 +1,60 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import com.sun.glass.ui.Application.EventHandler;
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
-public class Wire {
-	public boolean state;
-	public Button button;
-	 public Wire(boolean b) {
+public class Wire extends Button{
+	private boolean state;
+	private Image on;
+	private Image off;
+	private int x, y;
+	 public Wire(boolean b,int x, int y) {
+		 super();
 		 this.state=b;
+		 this.x=x;
+		 this.y=y;
+		 try {
+				on =new Image(new FileInputStream("Image/switch_on.png"));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				off=new Image(new FileInputStream("Image/switch_off.png"));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.exit(-1);
+			}
+		if(state)
+			this.setGraphic(new ImageView(on));
+		else
+			this.setGraphic(new ImageView(off));
+			
+		 this.setOnAction( ae -> {
+				invert();
+				if(state)
+					this.setGraphic(new ImageView(on));
+				else
+					this.setGraphic(new ImageView(off));
+			});
+	 }
+	 public boolean state() {
+		 return state;
+	 }
+	 public int getY() {
+		 return y;
+	 }
+	 public int getX() {
+		 return x;
 	 }
 	 public void invert() {
 		 state=!state;
