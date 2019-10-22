@@ -16,7 +16,7 @@ public class GameTestView extends Application{
 		BorderPane pane = new BorderPane();
 		ArrayAttackView game = new ArrayAttackView();
 		pane.setCenter(game);
-		Scene scene = new Scene(pane, 1000, 600);
+		Scene scene = new Scene(pane, 1200, 900);
 	    stage.setScene(scene);
 	    stage.show();
 	    game.run();
