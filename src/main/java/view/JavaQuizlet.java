@@ -78,6 +78,7 @@ public class JavaQuizlet extends VBox{
 	// returns 0 if no more questions
 	// returns 1 if succesfull
 	private int setQuestion() {
+		int test = 0;
 		gameBox.getChildren().clear();
 		
 		JavaQuizletGame newQuestion = quiz.getNextGame();
