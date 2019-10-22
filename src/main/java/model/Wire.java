@@ -1,5 +1,6 @@
 package model;
 
+<<<<<<< HEAD
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -19,6 +20,16 @@ public class Wire extends Button{
 	 public Wire(boolean b,int x, int y) {
 		 super();
 		 this.setMaxSize(55, 55);
+=======
+import com.sun.glass.ui.Application.EventHandler;
+
+import javafx.scene.control.Button;
+
+public class Wire {
+	public boolean state;
+	public Button button;
+	 public Wire(boolean b) {
+>>>>>>> 8352c94042622a56596949af90ec50dd2e750b05
 		 this.state=b;
 		 this.x=x;
 		 this.y=y;

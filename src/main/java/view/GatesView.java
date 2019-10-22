@@ -28,6 +28,7 @@ import model.TileMap;
 import model.Wire;
 
 public class GatesView extends MinigameView implements Observer {
+<<<<<<< HEAD
 	private Canvas mainCanvas;
 	private GraphicsContext gc;
 	private Image emptyTile;
@@ -63,6 +64,47 @@ public class GatesView extends MinigameView implements Observer {
 			layOut.add(wires.get(i), wires.get(i).getX(), wires.get(i).getY());
 		}
 		this.getChildren().add(layOut);
+=======
+	private Canvas canvas;
+	private GraphicsContext gc;
+	private Label message;
+	private Button w1;
+	private Button w2;
+	private Gate game;
+	private GridPane testLayOut;
+	public GatesView(Gate gate) {
+		game= gate;
+		canvas= new Canvas(1200,200);
+		message=new Label();
+		testLayOut= new GridPane();
+		gc= canvas.getGraphicsContext2D();
+		message.setFont(new Font("serif", 20));
+		message.setText("AND GATE");
+		w1=new Button();
+		w1.setText("Switch 1");
+		w2= new Button();
+		w2.setText("Switch 2");
+		
+		w1.setOnAction(new EventHandler<ActionEvent>() {
+	    	@Override public void handle(ActionEvent e) {
+	    		game.getW1().invert();
+	    		checkGate();
+	    		System.out.println("Switch 1: "+game.getW1().state);
+	    	}
+	    });
+		w2.setOnAction(new EventHandler<ActionEvent>() {
+	    	@Override public void handle(ActionEvent e) {
+	    		game.getW2().invert();
+	    		checkGate();
+	    		System.out.println("Switch 2: "+game.getW1().state);
+	    	}
+	    });
+		testLayOut.add(w1,0,0);
+		testLayOut.add(w2,0,1);
+		initializePane();
+		//setTop(testLayOut);
+		//setCenter(canvas);
+>>>>>>> 8352c94042622a56596949af90ec50dd2e750b05
 	}
 	
 	 /**
@@ -80,23 +122,36 @@ public class GatesView extends MinigameView implements Observer {
 
 	@Override
 	protected void layoutScene() {
+<<<<<<< HEAD
 		mainCanvas = new Canvas(1000, 500);
 		layOut= new GridPane();
+=======
+		// TODO Auto-generated method stub
+		
+>>>>>>> 8352c94042622a56596949af90ec50dd2e750b05
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		  if(boardGame.isFinished()) {
 			  System.out.println("You solved it!");
 			  stop();
 		  }
 		  System.out.println("Keep swimming");
+=======
+		
+>>>>>>> 8352c94042622a56596949af90ec50dd2e750b05
 	}
 
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		System.out.println("You solved it!");
+=======
+		
+>>>>>>> 8352c94042622a56596949af90ec50dd2e750b05
 	}
 }
