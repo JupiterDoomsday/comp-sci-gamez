@@ -2,6 +2,8 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -11,7 +13,9 @@ import model.Difficulties;
 import model.JavaQuizletGame;
 import model.JavaQuizletModel;
 
-public class JavaQuizlet extends VBox{
+public class JavaQuizlet extends MinigameView{
+	private Canvas mainCanvas;
+	private GraphicsContext gc;
 	private JavaQuizletModel quiz = new JavaQuizletModel();
 	private Label welcomeLabel = new Label("Welcome to Java Quizlet!");
 	
@@ -33,8 +37,9 @@ public class JavaQuizlet extends VBox{
 	
 	
 	public JavaQuizlet() {
-		this.getChildren().add(welcomeLabel);
-		this.getChildren().add(mainBox);
+		mainCanvas = new Canvas(1200, 900);
+		this.getChildren().addAll(mainCanvas, mainBox);
+		mainBox.getChildren().add(welcomeLabel);
 		setDifficultyBox();
 	}
 	
@@ -124,5 +129,29 @@ public class JavaQuizlet extends VBox{
 		
 		if (currentSelection.equals(correctChoice))
 			score++;
+	}
+
+	@Override
+	public String settings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void layoutScene() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		
 	}
 }
