@@ -35,29 +35,30 @@ public class ArrayAttackView extends MinigameView {
 		gc.setTextBaseline(VPos.CENTER);
 		model = new ArrayAttackModel(this);
 		VBox view = new VBox();
-		HBox buttBox = new HBox(20);
+		HBox controllerBox = new HBox();
+		HBox quickSortButtBox = new HBox(20);
 		
 		//temporary buttons
-		Button swapButt = new Button("Swap");
-		Button holdButt = new Button("Hold");
+		Button bubbleSwapButt = new Button("Swap");
+		Button bubbleHoldButt = new Button("Hold");
 		
-		swapButt.setPrefSize(100, 50);
-		swapButt.setFont(new Font(20));
-		holdButt.setPrefSize(100, 50);
-		holdButt.setFont(new Font(20));
+		bubbleSwapButt.setPrefSize(100, 50);
+		bubbleSwapButt.setFont(new Font(20));
+		bubbleHoldButt.setPrefSize(100, 50);
+		bubbleHoldButt.setFont(new Font(20));
 		
-		swapButt.setOnAction(ae -> {
+		bubbleSwapButt.setOnAction(ae -> {
 			model.runBubble(true);
 		});
-		holdButt.setOnAction(ae -> {
+		bubbleHoldButt.setOnAction(ae -> {
 			model.runBubble(false);
 		});
 		
-		buttBox.setPadding(new Insets(25));
-		buttBox.setAlignment(Pos.CENTER);
-		buttBox.getChildren().addAll(holdButt, swapButt);
+		quickSortButtBox.setPadding(new Insets(25));
+		quickSortButtBox.setAlignment(Pos.CENTER);
+		quickSortButtBox.getChildren().addAll(bubbleHoldButt, bubbleSwapButt);
 		this.getChildren().add(view);
-		view.getChildren().addAll(mainCanvas, buttBox);
+		view.getChildren().addAll(mainCanvas, controllerBox);
 	}
 
 	@Override
@@ -68,24 +69,26 @@ public class ArrayAttackView extends MinigameView {
 	public void stop() {
 	}
 
-	public void update(ArrayList<Integer> array, int curIndex1, int curIndex2, Integer pivot, int score) {
+	public void update(ArrayList<Integer> array, int curIndex1, int curIndex2, int pivot, int score, int first, int last) {
 		gc.clearRect(0, 0, 1000, 500);
 		gc.setFill(Color.LAVENDER);
 		gc.fillRect(0,0, 1366, 700);
 		for(int i = 0; i < 10; i++)
-			draw(array.get(i), i, i == curIndex1 || i == curIndex2);
+			draw(array.get(i), i, i == curIndex1 || i == curIndex2, i >= first && i <= last);
 		gc.setFill(Color.BLACK);
 		gc.fillText("Score: " + score, 500, 100);
 		
 	}
 
-	private void draw(Integer integer, int index, boolean selected) {
+	private void draw(Integer value, int index, boolean selected, boolean working) {
 		if (selected)
 			gc.setFill(Color.RED);
-		else
+		else if (working)
 			gc.setFill(Color.BLACK);
+		else 
+			gc.setFill(Color.GREY);
 		gc.setFont(new Font(50));
-		gc.fillText(integer.toString(), (index * 90) + 85.0, 250.0);
+		gc.fillText(value.toString(), (index * 90) + 85.0, 250.0);
 		
 	}
 
