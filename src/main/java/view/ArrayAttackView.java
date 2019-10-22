@@ -63,7 +63,7 @@ public class ArrayAttackView extends MinigameView {
 		
 		newGameButtBox.setPadding(new Insets(25));
 		newGameButtBox.setAlignment(Pos.CENTER);
-		newGameButtBox.getChildren().addAll(bubbleButt, mergeButt);
+		newGameButtBox.getChildren().addAll(bubbleButt);//, mergeButt);
 		
 		
 		//Setup the buttons for bubblesort
