@@ -2,6 +2,7 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -14,8 +15,6 @@ import model.JavaQuizletGame;
 import model.JavaQuizletModel;
 
 public class JavaQuizlet extends MinigameView{
-	private Canvas mainCanvas;
-	private GraphicsContext gc;
 	private JavaQuizletModel quiz = new JavaQuizletModel();
 	private Label welcomeLabel = new Label("Welcome to Java Quizlet!");
 	
@@ -37,8 +36,9 @@ public class JavaQuizlet extends MinigameView{
 	
 	
 	public JavaQuizlet() {
-		mainCanvas = new Canvas(1200, 900);
-		this.getChildren().addAll(mainCanvas, mainBox);
+		mainBox.setPadding(new Insets(300,100,100,500));
+		mainBox.setSpacing(10);
+		this.getChildren().addAll(mainBox);
 		mainBox.getChildren().add(welcomeLabel);
 		setDifficultyBox();
 	}
@@ -56,7 +56,7 @@ public class JavaQuizlet extends MinigameView{
 		}
 		
 		difficultyBox.getChildren().add(setDifficultyButton);
-		
+		difficultyBox.setSpacing(10);
 		toggleDifficulty.selectToggle(toggleDifficulty.getToggles().get(0));
 		
 		setDifficultyButton.setOnAction(new EventHandler<ActionEvent>() {
