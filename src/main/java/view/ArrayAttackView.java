@@ -8,6 +8,8 @@ import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -30,6 +32,8 @@ public class ArrayAttackView extends MinigameView {
 
 	@Override
 	protected void layoutScene() {
+		this.setBackground(new Background(new BackgroundFill(Color.LAVENDER, null, null)) );
+		
 		mainCanvas = new Canvas(1200, 700);
 
 		gc = mainCanvas.getGraphicsContext2D();
