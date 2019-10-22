@@ -1,5 +1,8 @@
 package view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,102 +15,110 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Gate;
+import model.TileMap;
+import model.Wire;
 
-public class GatesView extends BorderPane implements Observer {
-	private Canvas canvas;
-	private GraphicsContext gc;
-	private Label message;
-	private Button w1;
-	private Button w2;
-	private Gate game;
-	private GridPane testLayOut;
-	public GatesView(Gate gate) {
-		game= gate;
-		canvas= new Canvas(200,200);
-		message=new Label();
-		testLayOut= new GridPane();
-		gc= canvas.getGraphicsContext2D();
-		setBottom(message);
-		message.setFont(new Font("serif", 20));
-		message.setText("AND GATE");
-		w1=new Button();
-		w1.setText("Switch 1");
-		w2= new Button();
-		w2.setText("Switch 2");
-		
-		w1.setOnAction(new EventHandler<ActionEvent>() {
-	    	@Override public void handle(ActionEvent e) {
-	    		game.getW1().invert();
-	    		checkGate();
-	    		System.out.println("Switch 1: "+game.getW1().state);
-	    	}
-	    });
-		w2.setOnAction(new EventHandler<ActionEvent>() {
-	    	@Override public void handle(ActionEvent e) {
-	    		game.getW2().invert();
-	    		checkGate();
-	    		System.out.println("Switch 2: "+game.getW1().state);
-	    	}
-	    });
-		testLayOut.add(w1,0,0);
-		testLayOut.add(w2,0,1);
-		initializePane();
-		setTop(testLayOut);
-		setCenter(canvas);
-	}
-	
-	 private void initializePane() {
-		 if(game.getW1().state)
-			 gc.setStroke(Color.GREEN);
-		 else
-			 gc.setStroke(Color.RED);
-		 gc.strokeLine(0, 10, 128, 10);
-		 
-		 if(game.getW2().state)
-			 gc.setStroke(Color.GREEN);
-		 else
-			 gc.setStroke(Color.RED);
-		 gc.strokeLine(0, 25, 128, 25);
-		 gc.setStroke(Color.BLUE);
-		 gc.strokeOval(130, 0,40, 40);
-	 }
-	 private void checkGate() {
-		 gc.clearRect(0, 0, 200, 200);
-		 initializePane();
-		 if(game.gateOutput()) {
-			 	message.setText("GATE is true");
-				System.out.println(game.getLogic()+" GATE is true");
-				gc.setFill(Color.YELLOW);
-				gc.fillOval(130, 0,40, 40);
+public class GatesView extends MinigameView implements Observer {
+	private Canvas mainCanvas;
+	//private GraphicsContext gc;
+	private Image emptyTile;
+	private Image lampOn;
+	private Image lampOff;
+	private TileMap boardGame;
+	private GridPane layOut;
+	public GatesView(TileMap tileBoard) {
+		boardGame= tileBoard;ArrayList<Wire>wires= boardGame.getListOfWires();
+
+		for(int i=0;i<boardGame.getHeight();i++) {
+			for(int j=0;j<boardGame.getWidth();j++) {
+				ImageView im;
+				if(boardGame.getTile(i,j)==null) {
+					im=new ImageView(emptyTile);
+					layOut.add(im,i,j);
+				}
+				else {
+					im= new ImageView(boardGame.getTile(i,j).getImg());
+					layOut.add(im,i,j);
+					layOut.add(new  ImageView(lampOff),boardGame.getTile(i,j).getX(),boardGame.getTile(i,j).getY());
+				}
 			}
-		 else {
-			 message.setText("AND GATE");
-		 }
-	 }
+		}
+		
+		for(int i=0;i<wires.size();i++) {
+			Wire w= wires.get(i);
+			w.setOnAction( ae -> {
+				w.invert();
+				if(w.state())
+					w.setGraphic(new ImageView(w.getOnImg()));
+				else
+					w.setGraphic(new ImageView(w.getOffImg()));
+				run();
+			});
+			w.setStyle("-fx-padding: 0 0 0 0; -fx-margin: 0 0 0 0;");
+			layOut.add(w, wires.get(i).getX(), wires.get(i).getY());
+		}
+	}
 	 /**
 	   * This changes and updates the view every game sate change
 	   */
-	  @Override
-	  public void update(Observable o, Object arg) {
-		  //gc.clearRect(0,0,200,200);
-			 if(game.getW1().state)
-				 gc.setFill(Color.GREEN);
-			 else
-				 gc.setFill(Color.RED);
-			 gc.strokeLine(0, 0, canvas.getWidth()/2, 0);
-			 if(game.getW2().state)
-				 gc.setFill(Color.GREEN);
-			 else
-				 gc.setFill(Color.RED);
-			 gc.setFill(Color.BLUE);
-			 gc.fillOval(64, 0,64, 0);
-			 gc.strokeLine(0, 25, canvas.getWidth()/2, 25);
-		  
+	  public void update(Wire w) {
+			  System.out.println("Button pressed");
 	  }
+
+	@Override
+	public String settings() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void layoutScene() {
+		mainCanvas = new Canvas(1000, 500);
+		layOut= new GridPane();
+		try {
+			emptyTile=new Image(new FileInputStream("Image/empty.png"));
+			lampOff=new Image(new FileInputStream("Image/lightbulb.png"));
+			lampOn=new Image(new FileInputStream("Image/lightbulb_lit.png"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		this.getChildren().add(layOut);
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		ArrayList<Gate> gates= boardGame.getListOfGates();
+		for(int i=0;i< gates.size();i++) {
+			if(gates.get(i).gateOutput())
+				layOut.add(new  ImageView(lampOn), gates.get(i).getX(), gates.get(i).getY());
+			else 
+				layOut.add(new  ImageView(lampOff), gates.get(i).getX(), gates.get(i).getY());
+		}
+	}
+
+	@Override
+	public void stop() {
+		// TODO Auto-generated method stub
+		System.out.println("You solved it!");
+		
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		System.out.println("Button pressed");
+	}
 }
