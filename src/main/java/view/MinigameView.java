@@ -10,7 +10,7 @@ public abstract class MinigameView extends Pane {
 	}
 	
 	public void updateLeadboard(String game, String username, int score, String mode) {
-		//TODO: Implement
+		
 	}
 	
 	/**
