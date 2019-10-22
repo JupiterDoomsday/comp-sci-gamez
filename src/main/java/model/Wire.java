@@ -18,6 +18,7 @@ public class Wire extends Button{
 	private int x, y;
 	 public Wire(boolean b,int x, int y) {
 		 super();
+		 this.setMaxSize(55, 55);
 		 this.state=b;
 		 this.x=x;
 		 this.y=y;

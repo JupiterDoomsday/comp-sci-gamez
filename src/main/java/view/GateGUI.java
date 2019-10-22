@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Gate;
+import model.TileMap;
 import model.Wire;
 
 public class GateGUI extends Application {
@@ -16,12 +17,14 @@ public class GateGUI extends Application {
 	     
 	    BorderPane sprint1 = new BorderPane();
 	    sprint1.setTop(new Heading());
-	    Gate gate= new Gate(new Wire(false),new Wire(true),"AND");
-	    selector=new GatesView(gate);
+	    Gate gate= new Gate(new Wire(false,1,1),new Wire(true,1,3),"AND");
+	    TileMap map= new TileMap(18,14);
+	    map.setTile(5, 2, gate);
+	    selector=new GatesView(map);
 	    sprint1.setCenter(selector);
 	    
 	    // Add a BorderPane to the Scene
-	    Scene scene = new Scene(sprint1, 1400, 800);
+	    Scene scene = new Scene(sprint1, 1200, 900);
 	    primaryStage.setScene(scene);
 	    // Don't forget to show the running application:
 	    primaryStage.show();

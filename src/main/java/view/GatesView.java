@@ -34,7 +34,28 @@ public class GatesView extends MinigameView implements Observer {
 	private TileMap boardGame;
 	private GridPane layOut;
 	public GatesView(TileMap tileBoard) {
-		boardGame= tileBoard;
+		boardGame= tileBoard;ArrayList<Wire>wires= boardGame.getListOfWires();
+		try {
+			emptyTile=new Image(new FileInputStream("Image/empty.png"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		for(int i=0;i<boardGame.getHeight();i++) {
+			for(int j=0;j<boardGame.getWidth();j++) {
+				if(boardGame.getTile(i,j)==null) {
+					layOut.add(new ImageView(emptyTile),i,j);
+				}
+				else
+					layOut.add(new ImageView(boardGame.getTile(i,j).getImg()),i,j);
+			}
+		}
+		
+		for(int i=0;i<wires.size();i++) {
+			layOut.add(wires.get(i), wires.get(i).getX(), wires.get(i).getY());
+		}
+		this.getChildren().add(layOut);
 	}
 	
 	 /**
@@ -42,7 +63,6 @@ public class GatesView extends MinigameView implements Observer {
 	   */
 	  @Override
 	  public void update(Observable o, Object arg) {
-		  
 	  }
 
 	@Override
@@ -55,36 +75,20 @@ public class GatesView extends MinigameView implements Observer {
 	protected void layoutScene() {
 		mainCanvas = new Canvas(1000, 500);
 		layOut= new GridPane();
-		try {
-			emptyTile=new Image(new FileInputStream("Image/empty.png"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		ArrayList<Wire>wires= boardGame.getListOfWires();
-		for(int i=0;i<boardGame.getWidth();i++) {
-			for(int j=0;j<boardGame.getHeight();j++) {
-				if(boardGame.getTile(i,j)==null) {
-				}
-			}
-		}
-		
-		for(int i=0;i<wires.size();i++) {
-			layOut.add(wires.get(i), wires.get(i).getX(), wires.get(i).getY());
-		}
-		this.getChildren().add(layOut);
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		  if(boardGame.isFinished()) {
+			  System.out.println("You solved it!");
+			  stop();
+		  }
 	}
 
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("You solved it!");
 	}
 }
