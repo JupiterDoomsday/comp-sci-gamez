@@ -19,6 +19,8 @@ import model.ArrayAttackModel;
 
 public class ArrayAttackView extends MinigameView {
 
+	private static int CANVAS_WIDTH = 1200, CANVAS_HEIGHT = 700;
+	
 	private Canvas mainCanvas;
 	private GraphicsContext gc;
 	private ArrayAttackModel model;
@@ -34,7 +36,7 @@ public class ArrayAttackView extends MinigameView {
 	protected void layoutScene() {
 		this.setBackground(new Background(new BackgroundFill(Color.LAVENDER, null, null)) );
 		
-		mainCanvas = new Canvas(1200, 700);
+		mainCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 		gc = mainCanvas.getGraphicsContext2D();
 		gc.setTextAlign(TextAlignment.CENTER);
@@ -97,13 +99,11 @@ public class ArrayAttackView extends MinigameView {
 		
 		this.getChildren().add(view);
 		view.getChildren().addAll(mainCanvas, controllerBox);
+		gc.setFont(new Font(50));
 		newGame();
 	}
 
 	private void newGame() {
-		gc.clearRect(0, 0, 1200, 700);
-		gc.setFill(Color.LAVENDER);
-		gc.fillRect(0,0, 1200, 700);
 		controllerBox.getChildren().clear();
 		controllerBox.getChildren().add(newGameButtBox);
 	}
@@ -118,14 +118,9 @@ public class ArrayAttackView extends MinigameView {
 	}
 
 	public void updateBubble(ArrayList<Integer> array, int curIndex1, int curIndex2, int score) {
-		gc.clearRect(0, 0, 1200, 700);
-		gc.setFill(Color.LAVENDER);
-		gc.fillRect(0,0, 1200, 700);
+		drawBackground(score);
 		for(int i = 0; i < 8; i++)
 			drawBubble(array.get(i), i, i == curIndex1 || i == curIndex2);
-		gc.setFill(Color.BLACK);
-		gc.fillText("Score: " + score, 500, 100);
-		
 	}
 
 	private void drawBubble(Integer value, int index, boolean selected) {
@@ -133,8 +128,7 @@ public class ArrayAttackView extends MinigameView {
 			gc.setFill(Color.RED);
 		else 
 			gc.setFill(Color.BLACK);
-		gc.setFont(new Font(50));
-		gc.fillText(value.toString(), (index * 90) + 85.0, 250.0);
+		gc.fillText(value.toString(), (index * CANVAS_WIDTH/8) + CANVAS_WIDTH/16, CANVAS_HEIGHT/2);
 		
 	}
 	
@@ -144,6 +138,21 @@ public class ArrayAttackView extends MinigameView {
 	
 	private void drawMerge() {
 		
+	}
+
+	public void updateQuick() {
+				
+	}
+	
+	private void drawQuick() {
+		
+	}
+	
+	private void drawBackground(int score) {
+		gc.setFill(Color.LAVENDER);
+		gc.fillRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		gc.setFill(Color.BLACK);
+		gc.fillText("Score: " + score, CANVAS_WIDTH/2, CANVAS_HEIGHT/6);
 	}
 
 }

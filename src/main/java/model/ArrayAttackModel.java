@@ -70,6 +70,12 @@ public class ArrayAttackModel {
 		generateRandomUnsorted();
 		view.updateMerge();	
 	}
+	
+	//Quick sort methods
+	public void startQuick() {
+		generateRandomUnsorted();
+		view.updateQuick();
+	}
 
 
 }
