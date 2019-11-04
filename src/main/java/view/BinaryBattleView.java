@@ -35,7 +35,6 @@ public class BinaryBattleView extends VBox{
 		beginBinaryGame();
 		
 		layoutView();
-		
 	}
 	
 	private void beginBinaryGame() {
