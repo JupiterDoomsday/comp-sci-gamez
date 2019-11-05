@@ -60,12 +60,15 @@ public class JavaQuizlet extends MinigameView {
 	private int finalScore = 0;
 
 	public JavaQuizlet() {
+		// set background
 		Image image = new Image("file:resources/image/quizlet-background.png");
 		BackgroundImage bImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		Background background = new Background(bImage);
 		bPane.setBackground(background);
 		bPane.setPrefSize(1197, 873);
+		
+		//start
 		welcomeScreen();
 		
 		setDifficultyLabel();
@@ -73,6 +76,9 @@ public class JavaQuizlet extends MinigameView {
 		this.getChildren().add(bPane);
 	}
 
+	/*
+	 * This method will set up the difficulty label on top
+	 */
 	private void setDifficultyLabel() {
 		VBox difficultyLabelBox = new VBox();
 		difficultyLabelBox.getChildren().add(difficultyLabel);
@@ -81,6 +87,9 @@ public class JavaQuizlet extends MinigameView {
 		difficultyLabel.setStyle("-fx-font-size: 64px;-fx-text-fill: gray;");
 	}
 
+	/*
+	 * This method will set up the welcome screen and level difficulty
+	 */
 	private void welcomeScreen() {
 		bPane.setCenter(welcomeScreen);
 		Label welcomeLabel = new Label("Welcome to Java Quizlet!");
@@ -224,7 +233,8 @@ public class JavaQuizlet extends MinigameView {
 
 		if (!nextQuestion.getQuestion()[1].equals("")) {
 			currQuestionCode.setText(nextQuestion.getQuestion()[1]);
-			currQuestionCode.setStyle("-fx-text-fill: turquoise; -fx-font-size: " + font_size + "px;");
+			currQuestionCode.setStyle("-fx-text-fill: turquoise; -fx-font-size: 20px;"
+					+ "-fx-font-family: 'Courier New';");
 			gameBox.getChildren().add(currQuestionCode);
 		}
 
