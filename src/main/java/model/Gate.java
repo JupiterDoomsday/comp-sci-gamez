@@ -73,7 +73,7 @@ public class Gate{
 		case OR:
 			return wire1.state() || wire2.state();
 		case XOR:
-			return (wire1.state() != wire2.state()) && (wire1.state() || wire2.state());
+			return (!(wire1.state() && wire2.state()) && (wire1.state() || wire2.state()));
 		default:
 			return false;
 		}

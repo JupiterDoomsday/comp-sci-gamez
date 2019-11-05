@@ -58,13 +58,13 @@ public abstract class GatesGame extends Observable{
 		if(gates.size()==numOfGates)
 			return;
 		tileset[h][w]=g;
+		gates.add(g);
 		if(wires.contains(g.getW1())==false) {
 			wires.add(g.getW1());
 		}
 		if(wires.contains(g.getW2())==false) {
 			wires.add(g.getW2());
 		}
-		gates.add(g);
 	}
 	
 }

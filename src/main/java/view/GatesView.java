@@ -29,6 +29,7 @@ import model.Gate;
 import model.GatesGame;
 import model.ORGatesGame;
 import model.Wire;
+import model.XORGateGame;
 
 public class GatesView extends MinigameView {
 	private Canvas mainCanvas;
@@ -38,6 +39,7 @@ public class GatesView extends MinigameView {
 	private GridPane layOut;
 	private ANDGateGame and;
 	private ORGatesGame or;
+	private XORGateGame xor;
 	private Button ORButton;
 	private Button ANDButton;
 	private Button XORButton;
@@ -66,7 +68,10 @@ public class GatesView extends MinigameView {
 					Gate g= game.getTile(j,i);
 					im= new ImageView(g.getImg());
 					layOut.add(im,j,i);
-					layOut.add(new  ImageView(lampOff),g.getX(),g.getY());
+					if(g.gateOutput())
+						layOut.add(new  ImageView(lampOn),g.getX(),g.getY());
+					else
+						layOut.add(new  ImageView(lampOff),g.getX(),g.getY());
 				}
 			}
 		}
@@ -94,7 +99,7 @@ public class GatesView extends MinigameView {
 			  System.out.println("Button pressed");
 			  if(w.state())
 					w.setGraphic(new ImageView(w.getOnImg()));
-				else
+			 else
 					w.setGraphic(new ImageView(w.getOffImg()));
 	  }
 
@@ -110,6 +115,7 @@ public class GatesView extends MinigameView {
 		layOut= new GridPane();
 		and = new ANDGateGame();
 		or= new ORGatesGame();
+		xor= new XORGateGame();
 		ORButton=new Button("OR Gate");
 		ANDButton=new Button("AND Gate");
 		XORButton=new Button("XOR Gate");
@@ -125,6 +131,10 @@ public class GatesView extends MinigameView {
 		ORButton.setOnAction( ae -> {
 			this.getChildren().clear();
 			setGatesView(or);
+		});
+		XORButton.setOnAction( ae -> {
+			this.getChildren().clear();
+			setGatesView(xor);
 		});
 		try {
 			emptyTile=new Image(new FileInputStream("Image/empty.png"));
