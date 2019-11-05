@@ -7,7 +7,7 @@ public class JavaQuizletModel {
 	private Queue<JavaQuizletGame> questions = new LinkedList();
 	
 	public JavaQuizletModel() {
-		setAllQuestions();
+		
 	}
 	
 	public Difficulties[] getDifficulties() {
@@ -20,17 +20,39 @@ public class JavaQuizletModel {
 		return questions.poll();
 	}
 	
-	// Setting questions!!!!!
-	private void setAllQuestions() {
-		setQuestion1();
-		setQuestion2();
-		setQuestion3();
-		setQuestion4();
+	public void setDifficultyLevel(String chosen) {
+		if (chosen.equals("easy")) {
+			setAllQuestionsEasy();
+		}
+		else if (chosen.equals("medium")) {
+			setAllQuestionsMedium();
+		}
+		else if (chosen.equals("hard")) {
+			setAllQuestionsHard();
+		}
 	}
 	
-	private void setQuestion1() {
+	// Setting questions!!!!!
+	private void setAllQuestionsEasy() {
+		setQuestion1Easy();
+		setQuestion2Easy();
+		setQuestion3Easy();
+		setQuestion4Easy();
+	}
+	
+	private void setAllQuestionsMedium() {
+		setQuestion1Medium();
+	}
+	
+	private void setAllQuestionsHard() {
+		setQuestion1Hard();
+	}
+	
+	private void setQuestion1Easy() {
 		int questionType = 1;
-		String question = "What year was Java developed?\n\n";
+		String[] question = {"",""};
+		question[0] = "What year was Java developed?\n\n";
+		question[1] = "";
 		String[] options = new String[] {"1996", "1998", "2000", "2002"};
 		int correctChoice = 0;
 		
@@ -39,15 +61,16 @@ public class JavaQuizletModel {
 		questions.add(newGame);
 	}
 	
-	private void setQuestion2() {
+	private void setQuestion2Easy() {
 		int questionType = 1;
-		String question = "What is the output of the following:\n\n";
-		question += "Class Equals{\n";
-		question += "\tpublic static void main(String[] args){\n";
-		question += "\t\tString s1 = \"Hello\";\n";
-		question += "\t\tString s2 = new String(s1);\n";
-		question += "\t\tSystem.out.pritnln(s1==s2);\n";
-		question += "\t}\n}\n\n";
+		String[] question = {"",""};
+		question[0] = "What is the output of the following:\n\n";
+		question[1] = "Class Equals{\n";
+		question[1] += "\tpublic static void main(String[] args){\n";
+		question[1] += "\t\tString s1 = \"Hello\";\n";
+		question[1] += "\t\tString s2 = new String(s1);\n";
+		question[1] += "\t\tSystem.out.pritnln(s1==s2);\n";
+		question[1] += "\t}\n}\n\n";
 		String[] options = new String[] {"true", "false", "0", "Hello"};
 		int correctChoice = 1;
 		
@@ -56,13 +79,14 @@ public class JavaQuizletModel {
 		questions.add(newGame);
 	}
 	
-	private void setQuestion3() {
+	private void setQuestion3Easy() {
 		int questionType = 1;
-		String question = "Use the following declaration and initialization to evaluate the java expression:\n\n";
-		question += "int a = 2, b = 3, c = 4, d = 5;\n";
-		question += "float k = 4.3f;\n";
-		question += "System.out.println( b * a + c * d * k);\n\n";
-		String[] options = new String[] {"135", "135.0", "36", "36.0"};
+		String[] question = {"",""};
+		question[0] = "Use the following declaration and initialization\n to evaluate the java expression:\n\n";
+		question[1] = "int a = 2, b = 3, c = 4, d = 5;\n";
+		question[1] += "float k = 4.3f;\n";
+		question[1] += "System.out.println( b * a + c * d * k);\n\n";
+		String[] options = new String[] {"135", "135.0", "92", "92.0"};
 		int correctChoice = 3;
 		
 		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question,options, correctChoice);
@@ -70,11 +94,36 @@ public class JavaQuizletModel {
 		questions.add(newGame);
 	}
 	
-	private void setQuestion4() {
+	private void setQuestion4Easy() {
 		int questionType = 1;
-		String question = "The default value of a static integer variable in Java is:\n\n";
+		String[] question = {"",""};
+		question[0] = "The default value of a static integer variable \nin Java is:\n\n";
 		String[] options = new String[] {"true", "false", "0", "1", "Null"};
 		int correctChoice = 2;
+		
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question,options, correctChoice);
+		
+		questions.add(newGame);
+	}
+	
+	private void setQuestion1Medium() {
+		int questionType = 1;
+		String[] question = {"",""};
+		question[0] = "This is medium level difficulty:\n\n";
+		String[] options = new String[] {"incorrect", "correct", "incorrect", "incorrect"};
+		int correctChoice = 1;
+		
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question,options, correctChoice);
+		
+		questions.add(newGame);
+	}
+	
+	private void setQuestion1Hard() {
+		int questionType = 1;
+		String[] question = {"",""};
+		question[0] = "This is hard level difficulty:\n\n";
+		String[] options = new String[] {"incorrect", "incorrect", "incorrect", "correct"};
+		int correctChoice = 3;
 		
 		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question,options, correctChoice);
 		
