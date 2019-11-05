@@ -32,6 +32,7 @@ public class JavaQuizlet extends MinigameView {
 	JavaQuizletModel quiz = new JavaQuizletModel();
 	JavaQuizletGame nextQuestion;
 	int font_size = 32;
+	Label difficultyLabel = new Label();
 
 	//rules + difficulty
 	HBox diffRulesBox = new HBox();
@@ -52,7 +53,11 @@ public class JavaQuizlet extends MinigameView {
 	private Label currQuestionCode = new Label();
 	private ToggleGroup toggleQuestion = new ToggleGroup();
 	private Button gameSelectorButton = new Button("Select");
-	private int score = 0;
+	
+	//scores
+	private int totalCorrect = 0;
+	private int totalIncorrect = 0;
+	private int finalScore = 0;
 
 	public JavaQuizlet() {
 		Image image = new Image("file:resources/image/quizlet-background.png");
@@ -62,8 +67,18 @@ public class JavaQuizlet extends MinigameView {
 		bPane.setBackground(background);
 		bPane.setPrefSize(1197, 873);
 		welcomeScreen();
-
+		
+		setDifficultyLabel();
+		
 		this.getChildren().add(bPane);
+	}
+
+	private void setDifficultyLabel() {
+		VBox difficultyLabelBox = new VBox();
+		difficultyLabelBox.getChildren().add(difficultyLabel);
+		bPane.setTop(difficultyLabelBox);
+		difficultyLabelBox.setAlignment(Pos.CENTER);
+		difficultyLabel.setStyle("-fx-font-size: 64px;-fx-text-fill: gray;");
 	}
 
 	private void welcomeScreen() {
@@ -101,7 +116,7 @@ public class JavaQuizlet extends MinigameView {
 				RadioButton selected = (RadioButton) toggleDifficulty.getSelectedToggle();
 				chosenDifficulty = selected.getText().toLowerCase();
 				quiz.setDifficultyLevel(chosenDifficulty);
-				
+				difficultyLabel.setText(((RadioButton) toggleDifficulty.getSelectedToggle()).getText() + " Mode");
 				setUpScreenForNewQuestion();
 			}
 		});
@@ -148,11 +163,16 @@ public class JavaQuizlet extends MinigameView {
 			results.setAlignment(Pos.CENTER);
 			bPane.setCenter(results);
 
-			Label lastQuestion = new Label("That was the last question!");
+			Label lastQuestion = new Label("That was the last question! This are your statistics:");
+			Label correctScoreLabel = new Label("You had " + totalCorrect + " correct answers.");
+			Label incorrectScoreLabel = new Label("You had " + totalIncorrect + " wrong answers.");
+			Label finalScoreLabel = new Label("Your final score is:  " + finalScore + ".");
 			lastQuestion.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
-			Label scoreLabel = new Label("Your score is " + score);
-			scoreLabel.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
-			results.getChildren().addAll(lastQuestion, scoreLabel);
+			correctScoreLabel.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
+			incorrectScoreLabel.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
+			finalScoreLabel.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
+
+			results.getChildren().addAll(lastQuestion, correctScoreLabel,incorrectScoreLabel,finalScoreLabel);
 			Button retry = new Button("Want to try again?");
 			results.getChildren().add(retry);
 			
@@ -169,13 +189,16 @@ public class JavaQuizlet extends MinigameView {
 	}
 
 	private void clearEverything() {
-		score = 0;
+		finalScore = 0;
+		totalCorrect = 0;
+		totalIncorrect = 0;
 		welcomeScreen.getChildren().clear();
 		difficultyBox.getChildren().clear();
 		toggleDifficulty.getToggles().clear();
 		gameBox.getChildren().clear();
 		toggleQuestion.getToggles().clear();
 		diffRulesBox.getChildren().clear();
+		difficultyLabel.setText("");
 	}
 	
 	// returns 0 if no more questions
@@ -190,7 +213,7 @@ public class JavaQuizlet extends MinigameView {
 		if (nextQuestion == null)
 			return 0;
 
-		scoreLabel.setText("Current Score: " + score);
+		scoreLabel.setText("Current Score: " + finalScore);
 		scoreLabel.setStyle("-fx-text-fill: white;");
 		gameBox.getChildren().add(scoreLabel);
 
@@ -242,6 +265,7 @@ public class JavaQuizlet extends MinigameView {
 			@Override
 			public void handle(ActionEvent event) {
 				// checkIfCorrectAnswer(nextQuestion.getCorrectChoice());
+				gameSelectorButton.setStyle(null);
 				setUpScreenForNewQuestion();
 			}
 		});
@@ -259,22 +283,26 @@ public class JavaQuizlet extends MinigameView {
 
 		if (currentSelection.equals(correctChoice)) {
 			gameSelectorButton.setText("Correct!");
+			gameSelectorButton.setStyle("-fx-background-color: green");
 			
 			if (chosenDifficulty.equals("easy")) {
-				score = score + 1;
+				finalScore = finalScore + 1;
 			}
 			else if (chosenDifficulty.equals("medium")) {
-				score = score + 2;
+				finalScore = finalScore + 2;
 			}
 			else if (chosenDifficulty.equals("hard")) {
-				score = score + 3;
+				finalScore = finalScore + 3;
 			}
+			totalCorrect += 1;
 		} else {
 			gameSelectorButton.setText("Incorrect");
-			score -= 1;
+			gameSelectorButton.setStyle("-fx-background-color: red");
+			finalScore -= 1;
+			totalIncorrect += 1;
 		}
 
-		scoreLabel.setText("Current Score: " + score);
+		scoreLabel.setText("Current Score: " + finalScore);
 	}
 
 	@Override
