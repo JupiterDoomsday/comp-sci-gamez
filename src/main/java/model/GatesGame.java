@@ -45,6 +45,9 @@ public abstract class GatesGame extends Observable{
 	public Gate getTile(int h, int w) {
 		return tileset[h][w];
 	}
+	public Image getTileMap(int h, int w) {
+		return tilemap[h][w];
+	}
 	public void setTile(int h, int w, Image o) {
 		tilemap[h][w]= o;
 	}

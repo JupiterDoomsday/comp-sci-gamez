@@ -5,10 +5,10 @@ import java.io.FileNotFoundException;
 
 import javafx.scene.image.Image;
 
-public class ANDGateGame extends GatesGame {
-	public ANDGateGame() {
+public class ORGatesGame extends GatesGame {
+	public ORGatesGame() {
 		super(1,18,14);
-		Gate gate= new Gate(new Wire(false,1,1),new Wire(false,1,3),"AND",5,0);
+		Gate gate= new Gate(new Wire(false,1,1),new Wire(false,1,3),"OR",5,0);
 		setTile(5, 2, gate);
 		try {
 			setTile(2,1,new Image(new FileInputStream("Image/wire.png")));
@@ -22,6 +22,5 @@ public class ANDGateGame extends GatesGame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 }

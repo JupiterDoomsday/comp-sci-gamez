@@ -24,13 +24,13 @@ public class Gate{
 		gateType=Logic.valueOf(state);
 		String path="";
 		if(gateType.equals(Logic.valueOf("AND"))) {
-			path="Image/and_gate.png";
+			path="Image/AND.png";
 		}
 		else if(gateType.equals(Logic.valueOf("OR"))) {
-			path="Image/or_gate.png";
+			path="Image/or.png";
 		}
 		else if(gateType.equals(Logic.valueOf("XOR"))) {
-			path="Image/or_gate.png";
+			path="Image/xor.png";
 		}
 		try {
 			img= new Image(new FileInputStream(path));

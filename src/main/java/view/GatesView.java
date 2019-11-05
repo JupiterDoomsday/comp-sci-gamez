@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import model.ANDGateGame;
 import model.Gate;
 import model.GatesGame;
+import model.ORGatesGame;
 import model.Wire;
 
 public class GatesView extends MinigameView {
@@ -36,21 +37,29 @@ public class GatesView extends MinigameView {
 	private Image lampOff;
 	private GridPane layOut;
 	private ANDGateGame and;
+	private ORGatesGame or;
 	private Button ORButton;
 	private Button ANDButton;
 	private Button XORButton;
 	private Button back;
 	GatesGame curGame;
-	
-	private void  setGatesView(GatesGame game) {
+	public GatesView() {
 		
+	}
+	private void  setGatesView(GatesGame game) {
+		curGame=game;
+		layOut.getChildren().clear();
 		ArrayList<Wire>wires= game.getListOfWires();
 
 		for(int i=0;i<game.getHeight();i++) {
 			for(int j=0;j<game.getWidth();j++) {
 				ImageView im;
 				if(game.getTile(j,i)==null) {
-					im=new ImageView(emptyTile);
+					
+					if(game.getTileMap(j,i)==null)
+						im=new ImageView(emptyTile);
+					else
+						im=new ImageView(game.getTileMap(j,i));
 					layOut.add(im,j,i);
 				}
 				else {
@@ -100,19 +109,22 @@ public class GatesView extends MinigameView {
 		mainCanvas = new Canvas(1000, 500);
 		layOut= new GridPane();
 		and = new ANDGateGame();
+		or= new ORGatesGame();
 		ORButton=new Button("OR Gate");
 		ANDButton=new Button("AND Gate");
 		XORButton=new Button("XOR Gate");
 		back = new Button("Back");
 		back.setOnAction( ae -> {
 			this.getChildren().clear();
-			layOut.getChildren().clear();
 			setMenu();
 		});
 		ANDButton.setOnAction( ae -> {
 			this.getChildren().clear();
-			curGame=and;
 			setGatesView(and);
+		});
+		ORButton.setOnAction( ae -> {
+			this.getChildren().clear();
+			setGatesView(or);
 		});
 		try {
 			emptyTile=new Image(new FileInputStream("Image/empty.png"));
