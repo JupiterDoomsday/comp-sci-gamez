@@ -30,7 +30,8 @@ public class JavaQuizlet extends MinigameView {
 	VBox welcomeScreen = new VBox();
 	JavaQuizletModel quiz = new JavaQuizletModel();
 	JavaQuizletGame nextQuestion;
-
+	int font_size = 24;
+	
 	// difficulty level
 	int difficulty = 0;
 	VBox difficultyBox = new VBox();
@@ -63,9 +64,9 @@ public class JavaQuizlet extends MinigameView {
 	private void welcomeScreen() {
 		bPane.setCenter(welcomeScreen);
 		Label welcomeLabel = new Label("Welcome to Java Quizlet!");
-		welcomeLabel.setStyle("-fx-text-fill: white;");
+		welcomeLabel.setStyle("-fx-font-size: " + font_size + "px;-fx-text-fill: white;");
 		Label difLabel = new Label("Please Choose Difficulty Level:");
-		difLabel.setStyle("-fx-text-fill: white;");
+		difLabel.setStyle("-fx-font-size: " + font_size + "px;-fx-text-fill: white;");
 		welcomeScreen.getChildren().addAll(welcomeLabel, difLabel);
 		welcomeScreen.getChildren().add(difficultyBox);
 		welcomeScreen.setAlignment(Pos.CENTER);
@@ -107,9 +108,9 @@ public class JavaQuizlet extends MinigameView {
 			bPane.setCenter(results);
 			
 			Label lastQuestion = new Label("That was the last question!");
-			lastQuestion.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+			lastQuestion.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
 			Label scoreLabel = new Label("Your score is " + score);
-			scoreLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+			scoreLabel.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
 			results.getChildren().addAll(lastQuestion, scoreLabel);
 			
 		}
@@ -134,9 +135,9 @@ public class JavaQuizlet extends MinigameView {
 		
 		// set question
 		currQuestion.setText(nextQuestion.getQuestion()[0]);
-		currQuestion.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+		currQuestion.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
 		currQuestionCode.setText(nextQuestion.getQuestion()[1]);
-		currQuestionCode.setStyle("-fx-text-fill: blue; -fx-font-size: 16px;");
+		currQuestionCode.setStyle("-fx-text-fill: turquoise; -fx-font-size: " + font_size + "px;");
 		gameBox.getChildren().add(currQuestion);
 		gameBox.getChildren().add(currQuestionCode);
 		
