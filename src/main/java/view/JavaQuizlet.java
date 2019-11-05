@@ -20,6 +20,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.Difficulties;
 import model.JavaQuizletGame;
@@ -30,13 +31,17 @@ public class JavaQuizlet extends MinigameView {
 	VBox welcomeScreen = new VBox();
 	JavaQuizletModel quiz = new JavaQuizletModel();
 	JavaQuizletGame nextQuestion;
-	int font_size = 24;
+	int font_size = 32;
+
+	//rules + difficulty
+	HBox diffRulesBox = new HBox();
 	
 	// difficulty level
 	int difficulty = 0;
 	VBox difficultyBox = new VBox();
 	ToggleGroup toggleDifficulty = new ToggleGroup();
 	Button setDifficultyButton = new Button("Select");
+	String chosenDifficulty = "";
 
 	// current Question
 	Label scoreLabel = new Label();
@@ -45,7 +50,7 @@ public class JavaQuizlet extends MinigameView {
 	private VBox gameBox = new VBox();
 	private Label currQuestion = new Label();
 	private Label currQuestionCode = new Label();
-	private ToggleGroup toggleQuestion;
+	private ToggleGroup toggleQuestion = new ToggleGroup();
 	private Button gameSelectorButton = new Button("Select");
 	private int score = 0;
 
@@ -72,24 +77,60 @@ public class JavaQuizlet extends MinigameView {
 		welcomeScreen.setAlignment(Pos.CENTER);
 		difficultyBox.setAlignment(Pos.CENTER);
 
-		
 		Difficulties[] difficulties = quiz.getDifficulties();
 
 		for (int i = 0; i < difficulties.length; i++) {
 			RadioButton newRadio = new RadioButton(difficulties[i].name());
-			newRadio.setStyle("-fx-text-fill: white;");
+			newRadio.setStyle("-fx-text-fill: white;-fx-font-size: 18;");
 			toggleDifficulty.getToggles().add(newRadio);
 			difficultyBox.getChildren().add(newRadio);
 		}
 
-		difficultyBox.getChildren().add(setDifficultyButton);
+		Button rulesButton = new Button ("Rules");
+		diffRulesBox.getChildren().addAll(setDifficultyButton, rulesButton);
+		diffRulesBox.setSpacing(20);
+		diffRulesBox.setAlignment(Pos.CENTER);
+		
+		difficultyBox.getChildren().add(diffRulesBox);
 		difficultyBox.setSpacing(10);
 		toggleDifficulty.selectToggle(toggleDifficulty.getToggles().get(0));
 
 		setDifficultyButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				RadioButton selected = (RadioButton) toggleDifficulty.getSelectedToggle();
+				chosenDifficulty = selected.getText().toLowerCase();
+				quiz.setDifficultyLevel(chosenDifficulty);
+				
 				setUpScreenForNewQuestion();
+			}
+		});
+		
+		// Rules
+		rulesButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				clearEverything();
+				VBox expl = new VBox();
+				String explanationStr = "Easy Mode = 1 point per correct answer.\n"
+									  + "Medium Mode = 2 points per correct answer.\n"
+									  + "Hard Mode = 3 points per correct answer.\n\n"
+									  + "All = -1 points per incorrect answer!";
+				Label explanation = new Label(explanationStr);
+				explanation.setStyle("-fx-font-size: " + font_size + "px;-fx-text-fill: white;");
+				Button goBackButton = new Button("Go Back");
+				
+				bPane.setCenter(expl);
+				expl.getChildren().addAll(explanation, goBackButton);
+				expl.setAlignment(Pos.CENTER);
+				
+				goBackButton.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						clearEverything();
+							welcomeScreen();
+						}
+				});
 			}
 		});
 	}
@@ -106,22 +147,42 @@ public class JavaQuizlet extends MinigameView {
 			VBox results = new VBox();
 			results.setAlignment(Pos.CENTER);
 			bPane.setCenter(results);
-			
+
 			Label lastQuestion = new Label("That was the last question!");
 			lastQuestion.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
 			Label scoreLabel = new Label("Your score is " + score);
 			scoreLabel.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
 			results.getChildren().addAll(lastQuestion, scoreLabel);
+			Button retry = new Button("Want to try again?");
+			results.getChildren().add(retry);
 			
+			retry.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					clearEverything();
+					welcomeScreen();
+				}
+			});
 		}
 
 		// bPane.setCenter(new Label("New Question!"));
 	}
 
+	private void clearEverything() {
+		score = 0;
+		welcomeScreen.getChildren().clear();
+		difficultyBox.getChildren().clear();
+		toggleDifficulty.getToggles().clear();
+		gameBox.getChildren().clear();
+		toggleQuestion.getToggles().clear();
+		diffRulesBox.getChildren().clear();
+	}
+	
 	// returns 0 if no more questions
 	// returns 1 if succesfull
 	private int setQuestion() {
 		gameBox.setAlignment(Pos.CENTER);
+		gameBox.setSpacing(5);
 		int test = 0;
 		gameBox.getChildren().clear();
 		nextQuestion = quiz.getNextGame();
@@ -132,15 +193,17 @@ public class JavaQuizlet extends MinigameView {
 		scoreLabel.setText("Current Score: " + score);
 		scoreLabel.setStyle("-fx-text-fill: white;");
 		gameBox.getChildren().add(scoreLabel);
-		
+
 		// set question
 		currQuestion.setText(nextQuestion.getQuestion()[0]);
 		currQuestion.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
-		currQuestionCode.setText(nextQuestion.getQuestion()[1]);
-		currQuestionCode.setStyle("-fx-text-fill: turquoise; -fx-font-size: " + font_size + "px;");
 		gameBox.getChildren().add(currQuestion);
-		gameBox.getChildren().add(currQuestionCode);
-		
+
+		if (!nextQuestion.getQuestion()[1].equals("")) {
+			currQuestionCode.setText(nextQuestion.getQuestion()[1]);
+			currQuestionCode.setStyle("-fx-text-fill: turquoise; -fx-font-size: " + font_size + "px;");
+			gameBox.getChildren().add(currQuestionCode);
+		}
 
 		// set options
 		String[] options = nextQuestion.getOptions();
@@ -148,7 +211,7 @@ public class JavaQuizlet extends MinigameView {
 
 		for (int i = 0; i < options.length; i++) {
 			RadioButton newOption = new RadioButton(options[i]);
-			newOption.setStyle("-fx-text-fill: white;");
+			newOption.setStyle("-fx-text-fill: white;-fx-font-size: 18;");
 			toggleQuestion.getToggles().add(newOption);
 			gameBox.getChildren().add(newOption);
 		}
@@ -162,7 +225,6 @@ public class JavaQuizlet extends MinigameView {
 			public void handle(ActionEvent event) {
 				gameSelectorButton.setText("Select Choice");
 				checkIfCorrectAnswer(nextQuestion.getCorrectChoice());
-				//setUpScreenForNewQuestion();
 			}
 		});
 
@@ -171,42 +233,50 @@ public class JavaQuizlet extends MinigameView {
 
 		return 1;
 	}
-	
+
 	public void checkIfCorrectAnswer(String correctChoice) {
-		RadioButton selected = (RadioButton)toggleQuestion.getSelectedToggle();
+		RadioButton selected = (RadioButton) toggleQuestion.getSelectedToggle();
 		String currentSelection = selected.getText();
-		
+
 		gameSelectorButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				//checkIfCorrectAnswer(nextQuestion.getCorrectChoice());
+				// checkIfCorrectAnswer(nextQuestion.getCorrectChoice());
 				setUpScreenForNewQuestion();
 			}
 		});
-		
+
 		toggleQuestion.getToggles().forEach(toggle -> {
-		    RadioButton node = (RadioButton) toggle ;
-		    node.setDisable(true);
-		    
-		    if (node.getText().equals(nextQuestion.getCorrectChoice())) {
-		    	node.setStyle("-fx-text-fill: green;");
-		    }
-		    else {
-		    	node.setStyle("-fx-text-fill: red;");
-		    }
+			RadioButton node = (RadioButton) toggle;
+			node.setDisable(true);
+
+			if (node.getText().equals(nextQuestion.getCorrectChoice())) {
+				node.setStyle("-fx-text-fill: green;-fx-font-size: 18;");
+			} else {
+				node.setStyle("-fx-text-fill: red;-fx-font-size: 18;");
+			}
 		});
-		
+
 		if (currentSelection.equals(correctChoice)) {
 			gameSelectorButton.setText("Correct!");
-			score++;
-		}
-		else {
+			
+			if (chosenDifficulty.equals("easy")) {
+				score = score + 1;
+			}
+			else if (chosenDifficulty.equals("medium")) {
+				score = score + 2;
+			}
+			else if (chosenDifficulty.equals("hard")) {
+				score = score + 3;
+			}
+		} else {
 			gameSelectorButton.setText("Incorrect");
+			score -= 1;
 		}
-		
+
 		scoreLabel.setText("Current Score: " + score);
 	}
-	
+
 	@Override
 	public String settings() {
 		// TODO Auto-generated method stub

@@ -7,7 +7,7 @@ public class JavaQuizletModel {
 	private Queue<JavaQuizletGame> questions = new LinkedList();
 	
 	public JavaQuizletModel() {
-		setAllQuestions();
+		
 	}
 	
 	public Difficulties[] getDifficulties() {
@@ -20,15 +20,35 @@ public class JavaQuizletModel {
 		return questions.poll();
 	}
 	
-	// Setting questions!!!!!
-	private void setAllQuestions() {
-		setQuestion1();
-		setQuestion2();
-		setQuestion3();
-		setQuestion4();
+	public void setDifficultyLevel(String chosen) {
+		if (chosen.equals("easy")) {
+			setAllQuestionsEasy();
+		}
+		else if (chosen.equals("medium")) {
+			setAllQuestionsMedium();
+		}
+		else if (chosen.equals("hard")) {
+			setAllQuestionsHard();
+		}
 	}
 	
-	private void setQuestion1() {
+	// Setting questions!!!!!
+	private void setAllQuestionsEasy() {
+		setQuestion1Easy();
+		setQuestion2Easy();
+		setQuestion3Easy();
+		setQuestion4Easy();
+	}
+	
+	private void setAllQuestionsMedium() {
+		setQuestion1Medium();
+	}
+	
+	private void setAllQuestionsHard() {
+		setQuestion1Hard();
+	}
+	
+	private void setQuestion1Easy() {
 		int questionType = 1;
 		String[] question = {"",""};
 		question[0] = "What year was Java developed?\n\n";
@@ -41,7 +61,7 @@ public class JavaQuizletModel {
 		questions.add(newGame);
 	}
 	
-	private void setQuestion2() {
+	private void setQuestion2Easy() {
 		int questionType = 1;
 		String[] question = {"",""};
 		question[0] = "What is the output of the following:\n\n";
@@ -59,7 +79,7 @@ public class JavaQuizletModel {
 		questions.add(newGame);
 	}
 	
-	private void setQuestion3() {
+	private void setQuestion3Easy() {
 		int questionType = 1;
 		String[] question = {"",""};
 		question[0] = "Use the following declaration and initialization\n to evaluate the java expression:\n\n";
@@ -74,12 +94,36 @@ public class JavaQuizletModel {
 		questions.add(newGame);
 	}
 	
-	private void setQuestion4() {
+	private void setQuestion4Easy() {
 		int questionType = 1;
 		String[] question = {"",""};
 		question[0] = "The default value of a static integer variable \nin Java is:\n\n";
 		String[] options = new String[] {"true", "false", "0", "1", "Null"};
 		int correctChoice = 2;
+		
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question,options, correctChoice);
+		
+		questions.add(newGame);
+	}
+	
+	private void setQuestion1Medium() {
+		int questionType = 1;
+		String[] question = {"",""};
+		question[0] = "This is medium level difficulty:\n\n";
+		String[] options = new String[] {"incorrect", "correct", "incorrect", "incorrect"};
+		int correctChoice = 1;
+		
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question,options, correctChoice);
+		
+		questions.add(newGame);
+	}
+	
+	private void setQuestion1Hard() {
+		int questionType = 1;
+		String[] question = {"",""};
+		question[0] = "This is hard level difficulty:\n\n";
+		String[] options = new String[] {"incorrect", "incorrect", "incorrect", "correct"};
+		int correctChoice = 3;
 		
 		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question,options, correctChoice);
 		
