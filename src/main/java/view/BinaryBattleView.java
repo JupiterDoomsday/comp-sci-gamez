@@ -11,7 +11,15 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -68,10 +76,78 @@ public class BinaryBattleView extends VBox{
 	}
 	private void layoutView() {
 		
+		Image image = new Image("file:resources/image/binarybackground.png");
+		BackgroundImage bImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		Background background = new Background(bImage);
+		this.setBackground(background);
+		
+		
+		this.setMinWidth(1200);
+		this.setMinHeight(900);
+		VBox vBox = new VBox();
+		//this.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)) );
+		Text welcomeMessage = new Text("Welcome to Binary Battle!");
+		Text selectLevelMessage = new Text("Select the level you wish to play.");
+		welcomeMessage.setFill(Color.WHITE);
+		welcomeMessage.setFont(new Font("Sans-serif", 72));
+		selectLevelMessage.setFill(Color.WHITE);
+		selectLevelMessage.setFont(new Font("Sans-serif", 40));
+		vBox.getChildren().add(welcomeMessage);
+		vBox.getChildren().add(selectLevelMessage);
+		
+		String buttonStyle = "-fx-background-color: #007505;-fx-background-radius:25px;-fx-text-fill: white";
+		String hoverStyle = "-fx-background-color: #00A207;-fx-background-radius:25px;-fx-text-fill: white";
+		
+		Button tutorialButton = new Button("Tutorial");
+		tutorialButton.setMinHeight(150);
+		tutorialButton.setMinWidth(500);
+		tutorialButton.setFont(new Font("Sans-serif", 40));
+		tutorialButton.setStyle(buttonStyle);
+		tutorialButton.setOnMouseEntered(e -> {
+			tutorialButton.setStyle(hoverStyle);
+		});
+		tutorialButton.setOnMouseExited(e -> {
+			tutorialButton.setStyle(buttonStyle);
+		});
+		Button nimbleNibbles = new Button("Nimble Nibbles");
+		nimbleNibbles.setMinHeight(150);
+		nimbleNibbles.setMinWidth(500);
+		nimbleNibbles.setFont(new Font("Sans-serif", 40));
+		nimbleNibbles.setStyle(buttonStyle);
+		nimbleNibbles.setOnMouseEntered(e -> {
+			nimbleNibbles.setStyle(hoverStyle);
+		});
+		nimbleNibbles.setOnMouseExited(e -> {
+			nimbleNibbles.setStyle(buttonStyle);
+		});
+		Button bulletBytes = new Button("Bullet Bytes");
+		bulletBytes.setMinHeight(150);
+		bulletBytes.setMinWidth(500);
+		bulletBytes.setFont(new Font("Sans-serif", 40));
+		bulletBytes.setStyle(buttonStyle);
+		bulletBytes.setOnMouseEntered(e -> {
+			bulletBytes.setStyle(hoverStyle);
+		});
+		bulletBytes.setOnMouseExited(e -> {
+			bulletBytes.setStyle(buttonStyle);
+		});
+		
+		
+		vBox.getChildren().add(tutorialButton);
+		vBox.getChildren().add(nimbleNibbles);
+		vBox.getChildren().add(bulletBytes);
+		vBox.setAlignment(Pos.CENTER);
+		VBox.setMargin(welcomeMessage, new Insets(20, 20, 20, 20));
+		VBox.setMargin(tutorialButton, new Insets(20, 20, 20, 20));
+		VBox.setMargin(nimbleNibbles, new Insets(20, 20, 20, 20));
+		VBox.setMargin(bulletBytes, new Insets(20, 20, 20, 20));
+		this.getChildren().add(vBox);
+		
 		Text startMessage = new Text("Enter the base-10 values of the following numbers: ");
 		startMessage.setFont(Font.font("Sans-serif", FontWeight.BOLD, 28));
-		startMessage.setFill(Color.BLACK);
-		this.getChildren().add(startMessage);
+		startMessage.setFill(Color.WHITE);
+		//this.getChildren().add(startMessage);
 		
 		/*
 		Text lineBreak = new Text("");
@@ -120,11 +196,11 @@ public class BinaryBattleView extends VBox{
 		
 		for(int i = 0;i < listOfNumbers.size();i++) {
 			Text newText = new Text("   " + binaryStrings.get(i));
-			System.out.println("TEST: newText is: " + newText.getText());
+			//System.out.println("TEST: newText is: " + newText.getText());
 			newText.setFont(Font.font("Sans-serif", 20));
-			newText.setFill(Color.BLACK);
+			newText.setFill(Color.WHITE);
 			textList.add(newText);
-			this.getChildren().add(newText);
+			//this.getChildren().add(newText);
 		}
 		
 		
@@ -138,7 +214,7 @@ public class BinaryBattleView extends VBox{
 		gp.add(userGuess, 0, 0);
 		GridPane.setMargin(userGuess, new Insets(20, 20, 20, 20));
 		gp.add(checkButton, 1, 0);
-		this.getChildren().add(gp);
+		//this.getChildren().add(gp);
 	
 		checkButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -159,6 +235,9 @@ public class BinaryBattleView extends VBox{
 				userGuess.clear();
 			}
 		});
+		
+
+		
 		
 		
 		
