@@ -19,6 +19,8 @@ import model.ArrayAttackModel;
 
 public class ArrayAttackView extends MinigameView {
 
+	private static int CANVAS_WIDTH = 1200, CANVAS_HEIGHT = 700;
+	
 	private Canvas mainCanvas;
 	private GraphicsContext gc;
 	private ArrayAttackModel model;
@@ -34,7 +36,7 @@ public class ArrayAttackView extends MinigameView {
 	protected void layoutScene() {
 		this.setBackground(new Background(new BackgroundFill(Color.LAVENDER, null, null)) );
 		
-		mainCanvas = new Canvas(1200, 700);
+		mainCanvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 
 		gc = mainCanvas.getGraphicsContext2D();
 		gc.setTextAlign(TextAlignment.CENTER);
@@ -67,7 +69,7 @@ public class ArrayAttackView extends MinigameView {
 		
 		newGameButtBox.setPadding(new Insets(25));
 		newGameButtBox.setAlignment(Pos.CENTER);
-		newGameButtBox.getChildren().addAll(bubbleButt);//, mergeButt);
+		newGameButtBox.getChildren().addAll(bubbleButt, mergeButt);
 		
 		
 		//Setup the buttons for bubblesort
@@ -92,18 +94,35 @@ public class ArrayAttackView extends MinigameView {
 		bubbleSortButtBox.setAlignment(Pos.CENTER);
 		bubbleSortButtBox.getChildren().addAll(bubbleHoldButt, bubbleSwapButt);
 		
+		//Setup the buttons for mergesort
+		mergeSortButtBox = new HBox(20);
 		
+		Button mergeLeftButt = new Button("Left");
+		Button mergeRightButt = new Button("Right");
 		
+		mergeLeftButt.setPrefSize(100, 50);
+		mergeLeftButt.setFont(new Font(20));
+		mergeRightButt.setPrefSize(100, 50);
+		mergeRightButt.setFont(new Font(20));
+		
+		mergeLeftButt.setOnAction(ae -> {
+			model.runMerge(true);
+		});
+		mergeRightButt.setOnAction(ae -> {
+			model.runMerge(false);
+		});
+		
+		mergeSortButtBox.setPadding(new Insets(25));
+		mergeSortButtBox.setAlignment(Pos.CENTER);
+		mergeSortButtBox.getChildren().addAll(mergeLeftButt, mergeRightButt);
 		
 		this.getChildren().add(view);
 		view.getChildren().addAll(mainCanvas, controllerBox);
+		gc.setFont(new Font(50));
 		newGame();
 	}
 
 	private void newGame() {
-		gc.clearRect(0, 0, 1200, 700);
-		gc.setFill(Color.LAVENDER);
-		gc.fillRect(0,0, 1200, 700);
 		controllerBox.getChildren().clear();
 		controllerBox.getChildren().add(newGameButtBox);
 	}
@@ -118,14 +137,9 @@ public class ArrayAttackView extends MinigameView {
 	}
 
 	public void updateBubble(ArrayList<Integer> array, int curIndex1, int curIndex2, int score) {
-		gc.clearRect(0, 0, 1200, 700);
-		gc.setFill(Color.LAVENDER);
-		gc.fillRect(0,0, 1200, 700);
+		drawBackground(score);
 		for(int i = 0; i < 8; i++)
 			drawBubble(array.get(i), i, i == curIndex1 || i == curIndex2);
-		gc.setFill(Color.BLACK);
-		gc.fillText("Score: " + score, 500, 100);
-		
 	}
 
 	private void drawBubble(Integer value, int index, boolean selected) {
@@ -133,17 +147,55 @@ public class ArrayAttackView extends MinigameView {
 			gc.setFill(Color.RED);
 		else 
 			gc.setFill(Color.BLACK);
-		gc.setFont(new Font(50));
-		gc.fillText(value.toString(), (index * 90) + 85.0, 250.0);
+		gc.fillText(value.toString(), (index * CANVAS_WIDTH/8) + CANVAS_WIDTH/16, CANVAS_HEIGHT/2);
 		
 	}
 	
-	public void updateMerge() {
+	public void updateMerge(ArrayList<Integer> array1, ArrayList<Integer> array2, int s1i1, int s1i2, int s2i1, int s2i2, int score) {
+		drawBackground(score);
+		for(int i = 0; i < 8; i++)
+			drawMerge(array1.get(i), array2.get(i), i, s1i2 - s1i1 + 1, (i >= s1i1 && i <= s1i2), (i >= s2i1 && i <= s2i2));
+	}
+	
+	private void drawMerge(Integer value1, Integer value2, int index, int selectionSize, boolean selected1, boolean selected2) {
+		if (selected1)
+			gc.setFill(Color.RED);
+		else if (selected2)
+			gc.setFill(Color.GREEN);
+		else 
+			gc.setFill(Color.BLACK);
+		
+		int topPos = getPosition(index, selectionSize);
+		int bottomPos = getPosition(index, selectionSize * 2);
+		
+		if (value1 != null)
+			gc.fillText(value1.toString(), topPos , CANVAS_HEIGHT/2); // (index * CANVAS_WIDTH/8) + CANVAS_WIDTH/16;
+		gc.setFill(Color.BLACK);
+		if (value2 != null)
+			gc.fillText(value2.toString(), bottomPos, CANVAS_HEIGHT/2 + CANVAS_HEIGHT/4);
+	}
+	
+	private int getPosition(int index, int selectionSize) {
+		int blocks =  16/selectionSize;
+		int curBlock = index / selectionSize;
+		int indInBlock = index % selectionSize;
+		int blockMid = (2 * curBlock * CANVAS_WIDTH/blocks) + CANVAS_WIDTH/(blocks);
+		return blockMid + (indInBlock - selectionSize/2)*75;
+	}
+
+	public void updateQuick() {
+				
+	}
+	
+	private void drawQuick() {
 		
 	}
 	
-	private void drawMerge() {
-		
+	private void drawBackground(int score) {
+		gc.setFill(Color.LAVENDER);
+		gc.fillRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		gc.setFill(Color.BLACK);
+		gc.fillText("Score: " + score, CANVAS_WIDTH/2, CANVAS_HEIGHT/6);
 	}
 
 }
