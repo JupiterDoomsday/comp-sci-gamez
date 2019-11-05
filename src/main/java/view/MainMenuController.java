@@ -1,5 +1,8 @@
 package view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +28,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Gate;
-import model.TileMap;
 import model.Wire;
 
 public class MainMenuController extends Application {
@@ -223,10 +225,14 @@ public class MainMenuController extends Application {
 				bPane.getChildren().clear();
 				bPane.setBackground(null);
 				bPane.setTop(menuBar);
-				Gate gate= new Gate(new Wire(false,1,1),new Wire(true,1,3),"AND",5,0);
-			    TileMap map= new TileMap(18,14);
-			    map.setTile(5, 2, gate);
-				GatesView gatesView = new GatesView(map);
+				
+			    //try {
+				//	map.setTile(5, 3, new Image (new FileInputStream("Image/wire.png")));
+				//} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+				//	e.printStackTrace();
+				//}
+				GatesView gatesView = new GatesView();
 				sPane.setContent(gatesView);
 				bPane.setCenter(sPane);
 			}

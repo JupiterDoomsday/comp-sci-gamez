@@ -1,14 +1,67 @@
 package model;
 
-public class GatesGame {
+import java.util.ArrayList;
+import java.util.Observable;
+
+import javafx.scene.image.Image;
+
+public abstract class GatesGame extends Observable{
 	private int numOfGates;
-	public Gate gate;
-	private Gate [] gates;
-	private TileMap board;
-	public GatesGame(Gate game, int i) {
-		gate=game;
+	private ArrayList<Gate> gates;
+	private ArrayList<Wire> wires;
+	private int w;
+	private int h;
+	private Gate [][] tileset;
+	private Image [][] tilemap;
+	public GatesGame( int i, int x, int y) {
 		numOfGates=i;
-		gates=new Gate[i];
+		wires=new ArrayList<Wire>();
+		gates=new ArrayList<Gate>();
+		this.w=x;
+		this.h=y;
+		tileset=new Gate[x][y];
+		tilemap=new Image[x][y];
+	}
+	public boolean isFinished() {
+		for(int i=0;i< gates.size();i++) {
+			if(gates.get(i).gateOutput()==false)
+				return false;
+		}
+		return true;
+		
+	}
+	public ArrayList <Wire> getListOfWires() {
+		return wires;
+	}
+	public ArrayList <Gate> getListOfGates() {
+		return gates;
+	}
+	public int getHeight() {
+		return h;
+	}
+	public int getWidth() {
+		return w;
+	}
+	public Gate getTile(int h, int w) {
+		return tileset[h][w];
+	}
+	public void setTile(int h, int w, Image o) {
+		tilemap[h][w]= o;
+	}
+	public Gate[][] getBoard(){
+		return tileset;
+	}
+	public void setTile(int h, int w, Gate g) {
+		if(gates.size()==numOfGates)
+			return;
+		tileset[h][w]=g;
+		if(wires.contains(g.getW1())==false) {
+			wires.add(g.getW1());
+		}
+		if(wires.contains(g.getW2())==false) {
+			wires.add(g.getW2());
+		}
+		gates.add(g);
 	}
 	
 }

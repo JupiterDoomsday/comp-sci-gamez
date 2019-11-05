@@ -20,35 +20,44 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.ANDGateGame;
 import model.Gate;
-import model.TileMap;
+import model.GatesGame;
 import model.Wire;
 
-public class GatesView extends MinigameView implements Observer {
+public class GatesView extends MinigameView {
 	private Canvas mainCanvas;
-	//private GraphicsContext gc;
 	private Image emptyTile;
 	private Image lampOn;
 	private Image lampOff;
-	private TileMap boardGame;
 	private GridPane layOut;
-	public GatesView(TileMap tileBoard) {
-		boardGame= tileBoard;ArrayList<Wire>wires= boardGame.getListOfWires();
+	private ANDGateGame and;
+	private Button ORButton;
+	private Button ANDButton;
+	private Button XORButton;
+	private Button back;
+	GatesGame curGame;
+	
+	private void  setGatesView(GatesGame game) {
+		
+		ArrayList<Wire>wires= game.getListOfWires();
 
-		for(int i=0;i<boardGame.getHeight();i++) {
-			for(int j=0;j<boardGame.getWidth();j++) {
+		for(int i=0;i<game.getHeight();i++) {
+			for(int j=0;j<game.getWidth();j++) {
 				ImageView im;
-				if(boardGame.getTile(i,j)==null) {
+				if(game.getTile(j,i)==null) {
 					im=new ImageView(emptyTile);
-					layOut.add(im,i,j);
+					layOut.add(im,j,i);
 				}
 				else {
-					im= new ImageView(boardGame.getTile(i,j).getImg());
-					layOut.add(im,i,j);
-					layOut.add(new  ImageView(lampOff),boardGame.getTile(i,j).getX(),boardGame.getTile(i,j).getY());
+					Gate g= game.getTile(j,i);
+					im= new ImageView(g.getImg());
+					layOut.add(im,j,i);
+					layOut.add(new  ImageView(lampOff),g.getX(),g.getY());
 				}
 			}
 		}
@@ -57,21 +66,27 @@ public class GatesView extends MinigameView implements Observer {
 			Wire w= wires.get(i);
 			w.setOnAction( ae -> {
 				w.invert();
-				if(w.state())
-					w.setGraphic(new ImageView(w.getOnImg()));
-				else
-					w.setGraphic(new ImageView(w.getOffImg()));
-				run();
+				 if(w.state())
+						w.setGraphic(new ImageView(w.getOnImg()));
+					else
+						w.setGraphic(new ImageView(w.getOffImg()));
+				checkState();
 			});
 			w.setStyle("-fx-padding: 0 0 0 0; -fx-margin: 0 0 0 0;");
 			layOut.add(w, wires.get(i).getX(), wires.get(i).getY());
 		}
+		this.getChildren().add(layOut);
+		this.getChildren().add(back);
 	}
 	 /**
 	   * This changes and updates the view every game sate change
 	   */
 	  public void update(Wire w) {
 			  System.out.println("Button pressed");
+			  if(w.state())
+					w.setGraphic(new ImageView(w.getOnImg()));
+				else
+					w.setGraphic(new ImageView(w.getOffImg()));
 	  }
 
 	@Override
@@ -84,6 +99,21 @@ public class GatesView extends MinigameView implements Observer {
 	protected void layoutScene() {
 		mainCanvas = new Canvas(1000, 500);
 		layOut= new GridPane();
+		and = new ANDGateGame();
+		ORButton=new Button("OR Gate");
+		ANDButton=new Button("AND Gate");
+		XORButton=new Button("XOR Gate");
+		back = new Button("Back");
+		back.setOnAction( ae -> {
+			this.getChildren().clear();
+			layOut.getChildren().clear();
+			setMenu();
+		});
+		ANDButton.setOnAction( ae -> {
+			this.getChildren().clear();
+			curGame=and;
+			setGatesView(and);
+		});
 		try {
 			emptyTile=new Image(new FileInputStream("Image/empty.png"));
 			lampOff=new Image(new FileInputStream("Image/lightbulb.png"));
@@ -93,15 +123,21 @@ public class GatesView extends MinigameView implements Observer {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		this.getChildren().add(layOut);
+		setMenu();
+		//
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		ArrayList<Gate> gates= boardGame.getListOfGates();
+	public void setMenu() {
+		VBox vbox= new VBox();
+		vbox.getChildren().add(new Label("Choose your level"));
+		vbox.getChildren().add(ANDButton);
+		vbox.getChildren().add(ORButton);
+		vbox.getChildren().add(XORButton);
+		this.getChildren().add(vbox);
+	}
+	private void checkState() {
+		ArrayList<Gate> gates= curGame.getListOfGates();
 		for(int i=0;i< gates.size();i++) {
 			if(gates.get(i).gateOutput())
 				layOut.add(new  ImageView(lampOn), gates.get(i).getX(), gates.get(i).getY());
@@ -111,14 +147,15 @@ public class GatesView extends MinigameView implements Observer {
 	}
 
 	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
 		System.out.println("You solved it!");
 		
-	}
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		System.out.println("Button pressed");
 	}
 }

@@ -6,7 +6,7 @@ import java.util.Observable;
 
 import javafx.scene.image.Image;
 
-public class Gate extends Observable{
+public class Gate{
 	enum Logic{
 		XOR,OR,AND;
 	}
@@ -27,6 +27,9 @@ public class Gate extends Observable{
 			path="Image/and_gate.png";
 		}
 		else if(gateType.equals(Logic.valueOf("OR"))) {
+			path="Image/or_gate.png";
+		}
+		else if(gateType.equals(Logic.valueOf("XOR"))) {
 			path="Image/or_gate.png";
 		}
 		try {
@@ -70,7 +73,7 @@ public class Gate extends Observable{
 		case OR:
 			return wire1.state() || wire2.state();
 		case XOR:
-			return wire1.state() != wire2.state();
+			return (wire1.state() != wire2.state()) && (wire1.state() || wire2.state());
 		default:
 			return false;
 		}
