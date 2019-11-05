@@ -62,7 +62,7 @@ public class JavaQuizletModel {
 	private void setQuestion3() {
 		int questionType = 1;
 		String[] question = {"",""};
-		question[0] = "Use the following declaration and initialization to evaluate the java expression:\n\n";
+		question[0] = "Use the following declaration and initialization\n to evaluate the java expression:\n\n";
 		question[1] = "int a = 2, b = 3, c = 4, d = 5;\n";
 		question[1] += "float k = 4.3f;\n";
 		question[1] += "System.out.println( b * a + c * d * k);\n\n";
@@ -77,7 +77,7 @@ public class JavaQuizletModel {
 	private void setQuestion4() {
 		int questionType = 1;
 		String[] question = {"",""};
-		question[0] = "The default value of a static integer variable in Java is:\n\n";
+		question[0] = "The default value of a static integer variable \nin Java is:\n\n";
 		String[] options = new String[] {"true", "false", "0", "1", "Null"};
 		int correctChoice = 2;
 		

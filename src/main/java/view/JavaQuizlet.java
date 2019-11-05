@@ -1,10 +1,10 @@
 package view;
 
 import com.sun.prism.paint.Color;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -49,7 +49,12 @@ public class JavaQuizlet extends MinigameView {
 	private int score = 0;
 
 	public JavaQuizlet() {
-
+		Image image = new Image("file:resources/image/quizlet-background.png");
+		BackgroundImage bImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		Background background = new Background(bImage);
+		bPane.setBackground(background);
+		bPane.setPrefSize(1197, 873);
 		welcomeScreen();
 
 		this.getChildren().add(bPane);
@@ -57,15 +62,21 @@ public class JavaQuizlet extends MinigameView {
 
 	private void welcomeScreen() {
 		bPane.setCenter(welcomeScreen);
-		welcomeScreen.getChildren().add(new Label("Welcome to Java Quizlet!"));
-		welcomeScreen.getChildren().add(new Label("Please Choose Difficulty Level:"));
-
+		Label welcomeLabel = new Label("Welcome to Java Quizlet!");
+		welcomeLabel.setStyle("-fx-text-fill: white;");
+		Label difLabel = new Label("Please Choose Difficulty Level:");
+		difLabel.setStyle("-fx-text-fill: white;");
+		welcomeScreen.getChildren().addAll(welcomeLabel, difLabel);
 		welcomeScreen.getChildren().add(difficultyBox);
+		welcomeScreen.setAlignment(Pos.CENTER);
+		difficultyBox.setAlignment(Pos.CENTER);
 
+		
 		Difficulties[] difficulties = quiz.getDifficulties();
 
 		for (int i = 0; i < difficulties.length; i++) {
 			RadioButton newRadio = new RadioButton(difficulties[i].name());
+			newRadio.setStyle("-fx-text-fill: white;");
 			toggleDifficulty.getToggles().add(newRadio);
 			difficultyBox.getChildren().add(newRadio);
 		}
@@ -91,7 +102,16 @@ public class JavaQuizlet extends MinigameView {
 
 		if (returnCode == 0) {
 			bPane.setCenter(null);
-			this.getChildren().add(new Label("That was the last question!\nYour score is " + score));
+			VBox results = new VBox();
+			results.setAlignment(Pos.CENTER);
+			bPane.setCenter(results);
+			
+			Label lastQuestion = new Label("That was the last question!");
+			lastQuestion.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+			Label scoreLabel = new Label("Your score is " + score);
+			scoreLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
+			results.getChildren().addAll(lastQuestion, scoreLabel);
+			
 		}
 
 		// bPane.setCenter(new Label("New Question!"));
@@ -100,20 +120,21 @@ public class JavaQuizlet extends MinigameView {
 	// returns 0 if no more questions
 	// returns 1 if succesfull
 	private int setQuestion() {
+		gameBox.setAlignment(Pos.CENTER);
 		int test = 0;
 		gameBox.getChildren().clear();
-
 		nextQuestion = quiz.getNextGame();
 
 		if (nextQuestion == null)
 			return 0;
 
 		scoreLabel.setText("Current Score: " + score);
+		scoreLabel.setStyle("-fx-text-fill: white;");
 		gameBox.getChildren().add(scoreLabel);
 		
 		// set question
 		currQuestion.setText(nextQuestion.getQuestion()[0]);
-		currQuestion.setStyle("-fx-font-size: 16px;");
+		currQuestion.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
 		currQuestionCode.setText(nextQuestion.getQuestion()[1]);
 		currQuestionCode.setStyle("-fx-text-fill: blue; -fx-font-size: 16px;");
 		gameBox.getChildren().add(currQuestion);
@@ -126,6 +147,7 @@ public class JavaQuizlet extends MinigameView {
 
 		for (int i = 0; i < options.length; i++) {
 			RadioButton newOption = new RadioButton(options[i]);
+			newOption.setStyle("-fx-text-fill: white;");
 			toggleQuestion.getToggles().add(newOption);
 			gameBox.getChildren().add(newOption);
 		}
