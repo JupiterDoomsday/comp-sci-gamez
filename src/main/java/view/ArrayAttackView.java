@@ -147,7 +147,7 @@ public class ArrayAttackView extends MinigameView {
 			gc.setFill(Color.RED);
 		else 
 			gc.setFill(Color.BLACK);
-		gc.fillText(value.toString(), (index * CANVAS_WIDTH/8) + CANVAS_WIDTH/16, CANVAS_HEIGHT/2);
+		gc.fillText(value.toString(), (index * CANVAS_WIDTH/8.0) + CANVAS_WIDTH/16.0, CANVAS_HEIGHT/2.0);
 		
 	}
 	
@@ -169,7 +169,7 @@ public class ArrayAttackView extends MinigameView {
 		int bottomPos = getPosition(index, selectionSize * 2);
 		
 		if (value1 != null)
-			gc.fillText(value1.toString(), topPos , CANVAS_HEIGHT/2); // (index * CANVAS_WIDTH/8) + CANVAS_WIDTH/16;
+			gc.fillText(value1.toString(), topPos , CANVAS_HEIGHT/2.0); // (index * CANVAS_WIDTH/8) + CANVAS_WIDTH/16;
 		gc.setFill(Color.BLACK);
 		if (value2 != null)
 			gc.fillText(value2.toString(), bottomPos, CANVAS_HEIGHT/2 + CANVAS_HEIGHT/4);
@@ -195,7 +195,7 @@ public class ArrayAttackView extends MinigameView {
 		gc.setFill(Color.LAVENDER);
 		gc.fillRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc.setFill(Color.BLACK);
-		gc.fillText("Score: " + score, CANVAS_WIDTH/2, CANVAS_HEIGHT/6);
+		gc.fillText("Score: " + score, CANVAS_WIDTH/2.0, CANVAS_HEIGHT/6.0);
 	}
 
 }

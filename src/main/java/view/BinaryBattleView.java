@@ -41,10 +41,10 @@ public class BinaryBattleView extends VBox{
 	private ArrayList<Integer> listOfNumbers;
 	private ArrayList<String> binaryStrings;
 	private ArrayList<Text> textList;
-	private int childToChange = 0;
+	//private int childToChange = 0;
 	private VBox vBox;
 	private int interval = 3;
-	private int score = 0;
+	//private int score = 0;
 	
 	public BinaryBattleView() {
 		

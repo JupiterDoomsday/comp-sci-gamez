@@ -1,0 +1,860 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>FindBugs Report</title>
+<style type="text/css">
+		.tablerow0 {
+			background: #EEEEEE;
+		}
+
+		.tablerow1 {
+			background: white;
+		}
+
+		.detailrow0 {
+			background: #EEEEEE;
+		}
+
+		.detailrow1 {
+			background: white;
+		}
+
+		.tableheader {
+			background: #b9b9fe;
+			font-size: larger;
+		}
+
+		.tablerow0:hover, .tablerow1:hover {
+			background: #aaffaa;
+		}
+
+		.priority-1 {
+		    color: red;
+		    font-weight: bold;
+		}
+		.priority-2 {
+		    color: orange;
+		    font-weight: bold;
+		}
+		.priority-3 {
+		    color: green;
+		    font-weight: bold;
+		}
+		.priority-4 {
+		    color: blue;
+		    font-weight: bold;
+		}
+		</style>
+<script type="text/javascript">
+			function toggleRow(elid) {
+				if (document.getElementById) {
+					element = document.getElementById(elid);
+					if (element) {
+						if (element.style.display == 'none') {
+							element.style.display = 'block';
+							//window.status = 'Toggle on!';
+						} else {
+							element.style.display = 'none';
+							//window.status = 'Toggle off!';
+						}
+					}
+				}
+			}
+		</script>
+</head>
+<body>
+<h1>
+<a href="http://findbugs.sourceforge.net">FindBugs</a> Report</h1>
+<h2>Project Information</h2>
+<p>Project: 
+		</p>
+<p>FindBugs version: 3.0.1</p>
+<p>Code analyzed:</p>
+<ul>
+<li>C:\Users\Tyler\Documents\gitrepos\starter-team-comp-sci-gamez\build\classes\java\main</li>
+</ul>
+<p>
+<br/>
+<br/>
+</p>
+<h2>Metrics</h2>
+<p>1907 lines of code analyzed,
+	in 49 classes, 
+	in 2 packages.</p>
+<table width="500" cellpadding="5" cellspacing="2">
+<tr class="tableheader">
+<th align="left">Metric</th>
+<th align="right">Total</th>
+<th align="right">Density*</th>
+</tr>
+<tr class="tablerow0">
+<td>High Priority Warnings</td>
+<td align="right">4</td>
+<td align="right">2.10</td>
+</tr>
+<tr class="tablerow1">
+<td>Medium Priority Warnings</td>
+<td align="right">25</td>
+<td align="right">13.11</td>
+</tr>
+<tr class="$totalClass">
+<td>
+<b>Total Warnings</b>
+</td>
+<td align="right">
+<b>29</b>
+</td>
+<td align="right">
+<b>15.21</b>
+</td>
+</tr>
+</table>
+<p>
+<i>(* Defects per Thousand lines of non-commenting source statements)</i>
+</p>
+<p>
+<br/>
+<br/>
+</p>
+<h2>Contents</h2>
+<ul>
+<li>
+<a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</li>
+<li>
+<a href="#Warnings_EXPERIMENTAL">Experimental Warnings</a>
+</li>
+<li>
+<a href="#Warnings_I18N">Internationalization Warnings</a>
+</li>
+<li>
+<a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</li>
+<li>
+<a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+</li>
+<li>
+<a href="#Warnings_SECURITY">Security Warnings</a>
+</li>
+<li>
+<a href="#Warnings_STYLE">Dodgy code Warnings</a>
+</li>
+<li>
+<a href="#Details">Details</a>
+</li>
+</ul>
+<h1>Summary</h1>
+<table width="500" cellpadding="5" cellspacing="2">
+<tr class="tableheader">
+<th align="left">Warning Type</th>
+<th align="right">Number</th>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</td>
+<td align="right">8</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_EXPERIMENTAL">Experimental Warnings</a>
+</td>
+<td align="right">4</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_I18N">Internationalization Warnings</a>
+</td>
+<td align="right">3</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</td>
+<td align="right">5</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+</td>
+<td align="right">5</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<a href="#Warnings_SECURITY">Security Warnings</a>
+</td>
+<td align="right">3</td>
+</tr>
+<tr class="tablerow0">
+<td>
+<a href="#Warnings_STYLE">Dodgy code Warnings</a>
+</td>
+<td align="right">1</td>
+</tr>
+<tr class="tablerow1">
+<td>
+<b>Total</b>
+</td>
+<td align="right">
+<b>29</b>
+</td>
+</tr>
+</table>
+<h1>Warnings</h1>
+<p>Click on a warning row to see full context information.</p>
+<h2>
+<a name="Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66766');">
+<td>
+<span class="priority-2">Dm</span>
+</td>
+<td>new model.Gate(Wire, Wire, String, int, int) invokes System.exit(...), which shuts down the entire virtual machine</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66766" style="display: none;">
+<a href="#DM_EXIT">Bug type DM_EXIT (click for details)</a>
+<br/>In class model.Gate<br/>In method new model.Gate(Wire, Wire, String, int, int)<br/>At Gate.java:[line 39]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N67381');">
+<td>
+<span class="priority-2">Dm</span>
+</td>
+<td>new model.Wire(boolean, int, int) invokes System.exit(...), which shuts down the entire virtual machine</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N67381" style="display: none;">
+<a href="#DM_EXIT">Bug type DM_EXIT (click for details)</a>
+<br/>In class model.Wire<br/>In method new model.Wire(boolean, int, int)<br/>At Wire.java:[line 36]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N67537');">
+<td>
+<span class="priority-2">Dm</span>
+</td>
+<td>view.GatesView.layoutScene() invokes System.exit(...), which shuts down the entire virtual machine</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N67537" style="display: none;">
+<a href="#DM_EXIT">Bug type DM_EXIT (click for details)</a>
+<br/>In class view.GatesView<br/>In method view.GatesView.layoutScene()<br/>At GatesView.java:[line 146]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N65911');">
+<td>
+<span class="priority-2">ODR</span>
+</td>
+<td>model.BuildADataBaseWith1Table3Records.main(String[]) may fail to close Connection</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N65911" style="display: none;">
+<a href="#ODR_OPEN_DATABASE_RESOURCE">Bug type ODR_OPEN_DATABASE_RESOURCE (click for details)</a>
+<br/>In class model.BuildADataBaseWith1Table3Records<br/>In method model.BuildADataBaseWith1Table3Records.main(String[])<br/>Need to close java.sql.Connection <br/>At BuildADataBaseWith1Table3Records.java:[line 28]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N65975');">
+<td>
+<span class="priority-2">ODR</span>
+</td>
+<td>model.BuildADataBaseWith1Table3Records.main(String[]) may fail to close Statement</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N65975" style="display: none;">
+<a href="#ODR_OPEN_DATABASE_RESOURCE">Bug type ODR_OPEN_DATABASE_RESOURCE (click for details)</a>
+<br/>In class model.BuildADataBaseWith1Table3Records<br/>In method model.BuildADataBaseWith1Table3Records.main(String[])<br/>Need to close java.sql.Statement <br/>At BuildADataBaseWith1Table3Records.java:[line 29]<br/>Another occurrence at BuildADataBaseWith1Table3Records.java:[line 33]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66447');">
+<td>
+<span class="priority-2">ODR</span>
+</td>
+<td>model.DataBaseAdapter.addAccount(String, String, String, String) may fail to close Statement</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66447" style="display: none;">
+<a href="#ODR_OPEN_DATABASE_RESOURCE">Bug type ODR_OPEN_DATABASE_RESOURCE (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.addAccount(String, String, String, String)<br/>Need to close java.sql.Statement <br/>At DataBaseAdapter.java:[line 78]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66513');">
+<td>
+<span class="priority-2">ODR</span>
+</td>
+<td>model.DataBaseAdapter.dropDatabase(String) may fail to close Statement</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66513" style="display: none;">
+<a href="#ODR_OPEN_DATABASE_RESOURCE">Bug type ODR_OPEN_DATABASE_RESOURCE (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.dropDatabase(String)<br/>Need to close java.sql.Statement <br/>At DataBaseAdapter.java:[line 89]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66579');">
+<td>
+<span class="priority-2">ODR</span>
+</td>
+<td>model.DataBaseAdapter.getAllAccounts() may fail to close Statement</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66579" style="display: none;">
+<a href="#ODR_OPEN_DATABASE_RESOURCE">Bug type ODR_OPEN_DATABASE_RESOURCE (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.getAllAccounts()<br/>Need to close java.sql.Statement <br/>At DataBaseAdapter.java:[line 60]</p>
+</td>
+</tr>
+</table>
+<h2>
+<a name="Warnings_EXPERIMENTAL">Experimental Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N65658');">
+<td>
+<span class="priority-2">OBL</span>
+</td>
+<td>model.BuildADataBaseWith1Table3Records.main(String[]) may fail to clean up java.sql.Statement</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N65658" style="display: none;">
+<a href="#OBL_UNSATISFIED_OBLIGATION">Bug type OBL_UNSATISFIED_OBLIGATION (click for details)</a>
+<br/>In class model.BuildADataBaseWith1Table3Records<br/>In method model.BuildADataBaseWith1Table3Records.main(String[])<br/>Reference type java.sql.Statement<br/>2 instances of obligation remaining<br/>Obligation to clean up resource created at BuildADataBaseWith1Table3Records.java:[line 29] is not discharged<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 30]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 31]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 33]<br/>Obligation to clean up resource created at BuildADataBaseWith1Table3Records.java:[line 33] is not discharged<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 34]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 35]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 37]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 38]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 39]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 43]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 49]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 51]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 52]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 53]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 54]<br/>Path continues at BuildADataBaseWith1Table3Records.java:[line 55]<br/>Remaining obligations: {Statement x 2}</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66106');">
+<td>
+<span class="priority-2">OBL</span>
+</td>
+<td>model.DataBaseAdapter.addAccount(String, String, String, String) may fail to clean up java.sql.Statement</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66106" style="display: none;">
+<a href="#OBL_UNSATISFIED_OBLIGATION">Bug type OBL_UNSATISFIED_OBLIGATION (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.addAccount(String, String, String, String)<br/>Reference type java.sql.Statement<br/>1 instances of obligation remaining<br/>Obligation to clean up resource created at DataBaseAdapter.java:[line 78] is not discharged<br/>Path continues at DataBaseAdapter.java:[line 79]<br/>Path continues at DataBaseAdapter.java:[line 82]<br/>Path continues at DataBaseAdapter.java:[line 83]<br/>Remaining obligations: {Statement x 1}</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66216');">
+<td>
+<span class="priority-2">OBL</span>
+</td>
+<td>model.DataBaseAdapter.dropDatabase(String) may fail to clean up java.sql.Statement</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66216" style="display: none;">
+<a href="#OBL_UNSATISFIED_OBLIGATION">Bug type OBL_UNSATISFIED_OBLIGATION (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.dropDatabase(String)<br/>Reference type java.sql.Statement<br/>1 instances of obligation remaining<br/>Obligation to clean up resource created at DataBaseAdapter.java:[line 89] is not discharged<br/>Path continues at DataBaseAdapter.java:[line 90]<br/>Path continues at DataBaseAdapter.java:[line 94]<br/>Path continues at DataBaseAdapter.java:[line 95]<br/>Remaining obligations: {Statement x 1}</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66326');">
+<td>
+<span class="priority-2">OBL</span>
+</td>
+<td>model.DataBaseAdapter.getAllAccounts() may fail to clean up java.sql.Statement on checked exception</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66326" style="display: none;">
+<a href="#OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE">Bug type OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.getAllAccounts()<br/>Reference type java.sql.Statement<br/>1 instances of obligation remaining<br/>Obligation to clean up resource created at DataBaseAdapter.java:[line 60] is not discharged<br/>Path continues at DataBaseAdapter.java:[line 62]<br/>Path continues at DataBaseAdapter.java:[line 64]<br/>Path continues at DataBaseAdapter.java:[line 66]<br/>Path continues at DataBaseAdapter.java:[line 68]<br/>Remaining obligations: {Statement x 1}</p>
+</td>
+</tr>
+</table>
+<h2>
+<a name="Warnings_I18N">Internationalization Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N67174');">
+<td>
+<span class="priority-1">Dm</span>
+</td>
+<td>Found reliance on default encoding in model.SecureIt.decrypt(String): new String(byte[])</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N67174" style="display: none;">
+<a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
+<br/>In class model.SecureIt<br/>In method model.SecureIt.decrypt(String)<br/>Called method new String(byte[])<br/>At SecureIt.java:[line 55]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N67243');">
+<td>
+<span class="priority-1">Dm</span>
+</td>
+<td>Found reliance on default encoding in model.SecureIt.decrypt(String): String.getBytes()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N67243" style="display: none;">
+<a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
+<br/>In class model.SecureIt<br/>In method model.SecureIt.decrypt(String)<br/>Called method String.getBytes()<br/>At SecureIt.java:[line 49]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N67312');">
+<td>
+<span class="priority-1">Dm</span>
+</td>
+<td>Found reliance on default encoding in model.SecureIt.encrypt(String): String.getBytes()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N67312" style="display: none;">
+<a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
+<br/>In class model.SecureIt<br/>In method model.SecureIt.encrypt(String)<br/>Called method String.getBytes()<br/>At SecureIt.java:[line 30]</p>
+</td>
+</tr>
+</table>
+<h2>
+<a name="Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66820');">
+<td>
+<span class="priority-2">EI</span>
+</td>
+<td>model.GatesGame.getBoard() may expose internal representation by returning GatesGame.tileset</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66820" style="display: none;">
+<a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+<br/>In class model.GatesGame<br/>In method model.GatesGame.getBoard()<br/>Field model.GatesGame.tileset<br/>At GatesGame.java:[line 55]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66888');">
+<td>
+<span class="priority-2">EI</span>
+</td>
+<td>model.JavaQuizletGame.getOptions() may expose internal representation by returning JavaQuizletGame.options</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66888" style="display: none;">
+<a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+<br/>In class model.JavaQuizletGame<br/>In method model.JavaQuizletGame.getOptions()<br/>Field model.JavaQuizletGame.options<br/>At JavaQuizletGame.java:[line 20]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66956');">
+<td>
+<span class="priority-2">EI</span>
+</td>
+<td>model.JavaQuizletGame.getQuestion() may expose internal representation by returning JavaQuizletGame.question</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66956" style="display: none;">
+<a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
+<br/>In class model.JavaQuizletGame<br/>In method model.JavaQuizletGame.getQuestion()<br/>Field model.JavaQuizletGame.question<br/>At JavaQuizletGame.java:[line 16]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N67024');">
+<td>
+<span class="priority-2">EI2</span>
+</td>
+<td>new model.JavaQuizletGame(int, String[], String[], int) may expose internal representation by storing an externally mutable object into JavaQuizletGame.options</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N67024" style="display: none;">
+<a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+<br/>In class model.JavaQuizletGame<br/>In method new model.JavaQuizletGame(int, String[], String[], int)<br/>Field model.JavaQuizletGame.options<br/>Local variable named newOptions<br/>At JavaQuizletGame.java:[line 10]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N67099');">
+<td>
+<span class="priority-2">EI2</span>
+</td>
+<td>new model.JavaQuizletGame(int, String[], String[], int) may expose internal representation by storing an externally mutable object into JavaQuizletGame.question</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N67099" style="display: none;">
+<a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+<br/>In class model.JavaQuizletGame<br/>In method new model.JavaQuizletGame(int, String[], String[], int)<br/>Field model.JavaQuizletGame.question<br/>Local variable named newQuestion<br/>At JavaQuizletGame.java:[line 9]</p>
+</td>
+</tr>
+</table>
+<h2>
+<a name="Warnings_PERFORMANCE">Performance Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N67435');">
+<td>
+<span class="priority-2">UrF</span>
+</td>
+<td>Unread field: view.BinaryBattleView.childToChange</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N67435" style="display: none;">
+<a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+<br/>In class view.BinaryBattleView<br/>Field view.BinaryBattleView.childToChange<br/>At BinaryBattleView.java:[line 44]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N67486');">
+<td>
+<span class="priority-2">UrF</span>
+</td>
+<td>Unread field: view.BinaryBattleView.score</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N67486" style="display: none;">
+<a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+<br/>In class view.BinaryBattleView<br/>Field view.BinaryBattleView.score<br/>At BinaryBattleView.java:[line 47]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N67591');">
+<td>
+<span class="priority-2">UrF</span>
+</td>
+<td>Unread field: view.GatesView.mainCanvas</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N67591" style="display: none;">
+<a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+<br/>In class view.GatesView<br/>Field view.GatesView.mainCanvas<br/>At GatesView.java:[line 114]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N67642');">
+<td>
+<span class="priority-2">UrF</span>
+</td>
+<td>Unread field: view.JavaQuizlet.difficulty</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N67642" style="display: none;">
+<a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+<br/>In class view.JavaQuizlet<br/>Field view.JavaQuizlet.difficulty<br/>At JavaQuizlet.java:[line 41]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N67693');">
+<td>
+<span class="priority-2">UrF</span>
+</td>
+<td>Unread field: view.Spike1View.selector</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N67693" style="display: none;">
+<a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+<br/>In class view.Spike1View<br/>Field view.Spike1View.selector<br/>At Spike1View.java:[line 38]</p>
+</td>
+</tr>
+</table>
+<h2>
+<a name="Warnings_SECURITY">Security Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N65604');">
+<td>
+<span class="priority-2">Dm</span>
+</td>
+<td>Hardcoded constant database password in model.BuildADataBaseWith1Table3Records.main(String[])</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N65604" style="display: none;">
+<a href="#DMI_CONSTANT_DB_PASSWORD">Bug type DMI_CONSTANT_DB_PASSWORD (click for details)</a>
+<br/>In class model.BuildADataBaseWith1Table3Records<br/>In method model.BuildADataBaseWith1Table3Records.main(String[])<br/>At BuildADataBaseWith1Table3Records.java:[line 28]</p>
+</td>
+</tr>
+<tr class="tablerow0" onclick="toggleRow('N66052');">
+<td>
+<span class="priority-2">Dm</span>
+</td>
+<td>Hardcoded constant database password in new model.DataBaseAdapter()</td>
+</tr>
+<tr class="detailrow0">
+<td/>
+<td>
+<p id="N66052" style="display: none;">
+<a href="#DMI_CONSTANT_DB_PASSWORD">Bug type DMI_CONSTANT_DB_PASSWORD (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method new model.DataBaseAdapter()<br/>At DataBaseAdapter.java:[line 47]</p>
+</td>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66645');">
+<td>
+<span class="priority-1">SQL</span>
+</td>
+<td>model.DataBaseAdapter.addAccount(String, String, String, String) passes a nonconstant String to an execute or addBatch method on an SQL statement</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66645" style="display: none;">
+<a href="#SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE">Bug type SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.addAccount(String, String, String, String)<br/>At DataBaseAdapter.java:[line 79]</p>
+</td>
+</tr>
+</table>
+<h2>
+<a name="Warnings_STYLE">Dodgy code Warnings</a>
+</h2>
+<table class="warningtable" width="100%" cellspacing="0">
+<tr class="tableheader">
+<th align="left">Code</th>
+<th align="left">Warning</th>
+</tr>
+<tr class="tablerow1" onclick="toggleRow('N66699');">
+<td>
+<span class="priority-2">ST</span>
+</td>
+<td>Write to static field model.DataBaseAdapter.conn from instance method new model.DataBaseAdapter()</td>
+</tr>
+<tr class="detailrow1">
+<td/>
+<td>
+<p id="N66699" style="display: none;">
+<a href="#ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">Bug type ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD (click for details)</a>
+<br/>In class model.DataBaseAdapter<br/>In method new model.DataBaseAdapter()<br/>Field model.DataBaseAdapter.conn<br/>At DataBaseAdapter.java:[line 47]</p>
+</td>
+</tr>
+</table>
+<h1>
+<a name="Details">Details</a>
+</h1>
+<h2>
+<a name="DMI_CONSTANT_DB_PASSWORD">DMI_CONSTANT_DB_PASSWORD: Hardcoded constant database password</a>
+</h2>
+      
+    <p>This code creates a database connect using a hardcoded, constant password. Anyone with access to either the source code or the compiled code can
+    easily learn the password.
+</p>
+
+
+    
+<h2>
+<a name="DM_EXIT">DM_EXIT: Method invokes System.exit(...)</a>
+</h2>
+
+  <p> Invoking System.exit shuts down the entire Java virtual machine. This
+   should only been done when it is appropriate. Such calls make it
+   hard or impossible for your code to be invoked by other code.
+   Consider throwing a RuntimeException instead.</p>
+
+    
+<h2>
+<a name="DM_DEFAULT_ENCODING">DM_DEFAULT_ENCODING: Reliance on default encoding</a>
+</h2>
+
+<p> Found a call to a method which will perform a byte to String (or String to byte) conversion, and will assume that the default platform encoding is suitable. This will cause the application behaviour to vary between platforms. Use an alternative API and specify a charset name or Charset object explicitly.  </p>
+
+      
+<h2>
+<a name="EI_EXPOSE_REP">EI_EXPOSE_REP: May expose internal representation by returning reference to mutable object</a>
+</h2>
+
+  <p> Returning a reference to a mutable object value stored in one of the object's fields
+  exposes the internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Returning a new copy of the object is better approach in many situations.</p>
+
+    
+<h2>
+<a name="EI_EXPOSE_REP2">EI_EXPOSE_REP2: May expose internal representation by incorporating reference to mutable object</a>
+</h2>
+
+  <p> This code stores a reference to an externally mutable object into the
+  internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Storing a copy of the object is better approach in many situations.</p>
+
+    
+<h2>
+<a name="OBL_UNSATISFIED_OBLIGATION">OBL_UNSATISFIED_OBLIGATION: Method may fail to clean up stream or resource</a>
+</h2>
+          
+          <p>
+          This method may fail to clean up (close, dispose of) a stream,
+          database object, or other
+          resource requiring an explicit cleanup operation.
+          </p>
+
+          <p>
+          In general, if a method opens a stream or other resource,
+          the method should use a try/finally block to ensure that
+          the stream or resource is cleaned up before the method
+          returns.
+          </p>
+
+          <p>
+          This bug pattern is essentially the same as the
+          OS_OPEN_STREAM and ODR_OPEN_DATABASE_RESOURCE
+          bug patterns, but is based on a different
+          (and hopefully better) static analysis technique.
+          We are interested is getting feedback about the
+          usefulness of this bug pattern.
+          To send feedback, either:
+          </p>
+          <ul>
+            <li>send email to findbugs@cs.umd.edu</li>
+            <li>file a bug report: <a href="http://findbugs.sourceforge.net/reportingBugs.html">http://findbugs.sourceforge.net/reportingBugs.html</a></li>
+          </ul>
+
+          <p>
+          In particular,
+          the false-positive suppression heuristics for this
+          bug pattern have not been extensively tuned, so
+          reports about false positives are helpful to us.
+          </p>
+
+          <p>
+          See Weimer and Necula, <i>Finding and Preventing Run-Time Error Handling Mistakes</i>, for
+          a description of the analysis technique.
+          </p>
+          
+      
+<h2>
+<a name="OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE">OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE: Method may fail to clean up stream or resource on checked exception</a>
+</h2>
+          
+          <p>
+          This method may fail to clean up (close, dispose of) a stream,
+          database object, or other
+          resource requiring an explicit cleanup operation.
+          </p>
+
+          <p>
+          In general, if a method opens a stream or other resource,
+          the method should use a try/finally block to ensure that
+          the stream or resource is cleaned up before the method
+          returns.
+          </p>
+
+          <p>
+          This bug pattern is essentially the same as the
+          OS_OPEN_STREAM and ODR_OPEN_DATABASE_RESOURCE
+          bug patterns, but is based on a different
+          (and hopefully better) static analysis technique.
+          We are interested is getting feedback about the
+          usefulness of this bug pattern.
+          To send feedback, either:
+          </p>
+          <ul>
+            <li>send email to findbugs@cs.umd.edu</li>
+            <li>file a bug report: <a href="http://findbugs.sourceforge.net/reportingBugs.html">http://findbugs.sourceforge.net/reportingBugs.html</a></li>
+          </ul>
+
+          <p>
+          In particular,
+          the false-positive suppression heuristics for this
+          bug pattern have not been extensively tuned, so
+          reports about false positives are helpful to us.
+          </p>
+
+          <p>
+          See Weimer and Necula, <i>Finding and Preventing Run-Time Error Handling Mistakes</i>, for
+          a description of the analysis technique.
+          </p>
+          
+      
+<h2>
+<a name="ODR_OPEN_DATABASE_RESOURCE">ODR_OPEN_DATABASE_RESOURCE: Method may fail to close database resource</a>
+</h2>
+
+<p> The method creates a database resource (such as a database connection
+or row set), does not assign it to any
+fields, pass it to other methods, or return it, and does not appear to close
+the object on all paths out of the method.&nbsp; Failure to
+close database resources on all paths out of a method may
+result in poor performance, and could cause the application to
+have problems communicating with the database.
+</p>
+
+    
+<h2>
+<a name="SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE">SQL_NONCONSTANT_STRING_PASSED_TO_EXECUTE: Nonconstant string passed to execute or addBatch method on an SQL statement</a>
+</h2>
+
+  <p>The method invokes the execute or addBatch method on an SQL statement with a String that seems
+to be dynamically generated. Consider using
+a prepared statement instead. It is more efficient and less vulnerable to
+SQL injection attacks.
+</p>
+
+    
+<h2>
+<a name="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD">ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD: Write to static field from instance method</a>
+</h2>
+
+  <p> This instance method writes to a static field. This is tricky to get
+correct if multiple instances are being manipulated,
+and generally bad practice.
+</p>
+
+    
+<h2>
+<a name="URF_UNREAD_FIELD">URF_UNREAD_FIELD: Unread field</a>
+</h2>
+
+  <p> This field is never read.&nbsp; Consider removing it from the class.</p>
+
+    </body>
+</html>
