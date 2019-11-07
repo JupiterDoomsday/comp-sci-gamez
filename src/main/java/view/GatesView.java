@@ -143,7 +143,6 @@ public class GatesView extends MinigameView {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.exit(-1);
 		}
 		setMenu();
 		//

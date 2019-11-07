@@ -78,7 +78,7 @@
 <br/>
 </p>
 <h2>Metrics</h2>
-<p>1907 lines of code analyzed,
+<p>1898 lines of code analyzed,
 	in 49 classes, 
 	in 2 packages.</p>
 <table width="500" cellpadding="5" cellspacing="2">
@@ -90,22 +90,22 @@
 <tr class="tablerow0">
 <td>High Priority Warnings</td>
 <td align="right">4</td>
-<td align="right">2.10</td>
+<td align="right">2.11</td>
 </tr>
 <tr class="tablerow1">
 <td>Medium Priority Warnings</td>
-<td align="right">25</td>
-<td align="right">13.11</td>
+<td align="right">19</td>
+<td align="right">10.01</td>
 </tr>
 <tr class="$totalClass">
 <td>
 <b>Total Warnings</b>
 </td>
 <td align="right">
-<b>29</b>
+<b>23</b>
 </td>
 <td align="right">
-<b>15.21</b>
+<b>12.12</b>
 </td>
 </tr>
 </table>
@@ -153,7 +153,7 @@
 <td>
 <a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
 </td>
-<td align="right">8</td>
+<td align="right">6</td>
 </tr>
 <tr class="tablerow1">
 <td>
@@ -171,13 +171,13 @@
 <td>
 <a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
 </td>
-<td align="right">5</td>
+<td align="right">4</td>
 </tr>
 <tr class="tablerow0">
 <td>
 <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
 </td>
-<td align="right">5</td>
+<td align="right">2</td>
 </tr>
 <tr class="tablerow1">
 <td>
@@ -196,7 +196,7 @@
 <b>Total</b>
 </td>
 <td align="right">
-<b>29</b>
+<b>23</b>
 </td>
 </tr>
 </table>
@@ -210,35 +210,7 @@
 <th align="left">Code</th>
 <th align="left">Warning</th>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N66766');">
-<td>
-<span class="priority-2">Dm</span>
-</td>
-<td>new model.Gate(Wire, Wire, String, int, int) invokes System.exit(...), which shuts down the entire virtual machine</td>
-</tr>
-<tr class="detailrow1">
-<td/>
-<td>
-<p id="N66766" style="display: none;">
-<a href="#DM_EXIT">Bug type DM_EXIT (click for details)</a>
-<br/>In class model.Gate<br/>In method new model.Gate(Wire, Wire, String, int, int)<br/>At Gate.java:[line 39]</p>
-</td>
-</tr>
-<tr class="tablerow0" onclick="toggleRow('N67381');">
-<td>
-<span class="priority-2">Dm</span>
-</td>
-<td>new model.Wire(boolean, int, int) invokes System.exit(...), which shuts down the entire virtual machine</td>
-</tr>
-<tr class="detailrow0">
-<td/>
-<td>
-<p id="N67381" style="display: none;">
-<a href="#DM_EXIT">Bug type DM_EXIT (click for details)</a>
-<br/>In class model.Wire<br/>In method new model.Wire(boolean, int, int)<br/>At Wire.java:[line 36]</p>
-</td>
-</tr>
-<tr class="tablerow1" onclick="toggleRow('N67537');">
+<tr class="tablerow1" onclick="toggleRow('N67259');">
 <td>
 <span class="priority-2">Dm</span>
 </td>
@@ -247,7 +219,7 @@
 <tr class="detailrow1">
 <td/>
 <td>
-<p id="N67537" style="display: none;">
+<p id="N67259" style="display: none;">
 <a href="#DM_EXIT">Bug type DM_EXIT (click for details)</a>
 <br/>In class view.GatesView<br/>In method view.GatesView.layoutScene()<br/>At GatesView.java:[line 146]</p>
 </td>
@@ -396,7 +368,7 @@
 <th align="left">Code</th>
 <th align="left">Warning</th>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N67174');">
+<tr class="tablerow1" onclick="toggleRow('N67052');">
 <td>
 <span class="priority-1">Dm</span>
 </td>
@@ -405,12 +377,12 @@
 <tr class="detailrow1">
 <td/>
 <td>
-<p id="N67174" style="display: none;">
+<p id="N67052" style="display: none;">
 <a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
 <br/>In class model.SecureIt<br/>In method model.SecureIt.decrypt(String)<br/>Called method new String(byte[])<br/>At SecureIt.java:[line 55]</p>
 </td>
 </tr>
-<tr class="tablerow0" onclick="toggleRow('N67243');">
+<tr class="tablerow0" onclick="toggleRow('N67121');">
 <td>
 <span class="priority-1">Dm</span>
 </td>
@@ -419,12 +391,12 @@
 <tr class="detailrow0">
 <td/>
 <td>
-<p id="N67243" style="display: none;">
+<p id="N67121" style="display: none;">
 <a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
 <br/>In class model.SecureIt<br/>In method model.SecureIt.decrypt(String)<br/>Called method String.getBytes()<br/>At SecureIt.java:[line 49]</p>
 </td>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N67312');">
+<tr class="tablerow1" onclick="toggleRow('N67190');">
 <td>
 <span class="priority-1">Dm</span>
 </td>
@@ -433,7 +405,7 @@
 <tr class="detailrow1">
 <td/>
 <td>
-<p id="N67312" style="display: none;">
+<p id="N67190" style="display: none;">
 <a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
 <br/>In class model.SecureIt<br/>In method model.SecureIt.encrypt(String)<br/>Called method String.getBytes()<br/>At SecureIt.java:[line 30]</p>
 </td>
@@ -447,72 +419,58 @@
 <th align="left">Code</th>
 <th align="left">Warning</th>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N66820');">
-<td>
-<span class="priority-2">EI</span>
-</td>
-<td>model.GatesGame.getBoard() may expose internal representation by returning GatesGame.tileset</td>
-</tr>
-<tr class="detailrow1">
-<td/>
-<td>
-<p id="N66820" style="display: none;">
-<a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
-<br/>In class model.GatesGame<br/>In method model.GatesGame.getBoard()<br/>Field model.GatesGame.tileset<br/>At GatesGame.java:[line 55]</p>
-</td>
-</tr>
-<tr class="tablerow0" onclick="toggleRow('N66888');">
+<tr class="tablerow1" onclick="toggleRow('N66766');">
 <td>
 <span class="priority-2">EI</span>
 </td>
 <td>model.JavaQuizletGame.getOptions() may expose internal representation by returning JavaQuizletGame.options</td>
 </tr>
-<tr class="detailrow0">
+<tr class="detailrow1">
 <td/>
 <td>
-<p id="N66888" style="display: none;">
+<p id="N66766" style="display: none;">
 <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
 <br/>In class model.JavaQuizletGame<br/>In method model.JavaQuizletGame.getOptions()<br/>Field model.JavaQuizletGame.options<br/>At JavaQuizletGame.java:[line 20]</p>
 </td>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N66956');">
+<tr class="tablerow0" onclick="toggleRow('N66834');">
 <td>
 <span class="priority-2">EI</span>
 </td>
 <td>model.JavaQuizletGame.getQuestion() may expose internal representation by returning JavaQuizletGame.question</td>
 </tr>
-<tr class="detailrow1">
+<tr class="detailrow0">
 <td/>
 <td>
-<p id="N66956" style="display: none;">
+<p id="N66834" style="display: none;">
 <a href="#EI_EXPOSE_REP">Bug type EI_EXPOSE_REP (click for details)</a>
 <br/>In class model.JavaQuizletGame<br/>In method model.JavaQuizletGame.getQuestion()<br/>Field model.JavaQuizletGame.question<br/>At JavaQuizletGame.java:[line 16]</p>
 </td>
 </tr>
-<tr class="tablerow0" onclick="toggleRow('N67024');">
+<tr class="tablerow1" onclick="toggleRow('N66902');">
 <td>
 <span class="priority-2">EI2</span>
 </td>
 <td>new model.JavaQuizletGame(int, String[], String[], int) may expose internal representation by storing an externally mutable object into JavaQuizletGame.options</td>
 </tr>
-<tr class="detailrow0">
+<tr class="detailrow1">
 <td/>
 <td>
-<p id="N67024" style="display: none;">
+<p id="N66902" style="display: none;">
 <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
 <br/>In class model.JavaQuizletGame<br/>In method new model.JavaQuizletGame(int, String[], String[], int)<br/>Field model.JavaQuizletGame.options<br/>Local variable named newOptions<br/>At JavaQuizletGame.java:[line 10]</p>
 </td>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N67099');">
+<tr class="tablerow0" onclick="toggleRow('N66977');">
 <td>
 <span class="priority-2">EI2</span>
 </td>
 <td>new model.JavaQuizletGame(int, String[], String[], int) may expose internal representation by storing an externally mutable object into JavaQuizletGame.question</td>
 </tr>
-<tr class="detailrow1">
+<tr class="detailrow0">
 <td/>
 <td>
-<p id="N67099" style="display: none;">
+<p id="N66977" style="display: none;">
 <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
 <br/>In class model.JavaQuizletGame<br/>In method new model.JavaQuizletGame(int, String[], String[], int)<br/>Field model.JavaQuizletGame.question<br/>Local variable named newQuestion<br/>At JavaQuizletGame.java:[line 9]</p>
 </td>
@@ -526,72 +484,30 @@
 <th align="left">Code</th>
 <th align="left">Warning</th>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N67435');">
-<td>
-<span class="priority-2">UrF</span>
-</td>
-<td>Unread field: view.BinaryBattleView.childToChange</td>
-</tr>
-<tr class="detailrow1">
-<td/>
-<td>
-<p id="N67435" style="display: none;">
-<a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
-<br/>In class view.BinaryBattleView<br/>Field view.BinaryBattleView.childToChange<br/>At BinaryBattleView.java:[line 44]</p>
-</td>
-</tr>
-<tr class="tablerow0" onclick="toggleRow('N67486');">
-<td>
-<span class="priority-2">UrF</span>
-</td>
-<td>Unread field: view.BinaryBattleView.score</td>
-</tr>
-<tr class="detailrow0">
-<td/>
-<td>
-<p id="N67486" style="display: none;">
-<a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
-<br/>In class view.BinaryBattleView<br/>Field view.BinaryBattleView.score<br/>At BinaryBattleView.java:[line 47]</p>
-</td>
-</tr>
-<tr class="tablerow1" onclick="toggleRow('N67591');">
-<td>
-<span class="priority-2">UrF</span>
-</td>
-<td>Unread field: view.GatesView.mainCanvas</td>
-</tr>
-<tr class="detailrow1">
-<td/>
-<td>
-<p id="N67591" style="display: none;">
-<a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
-<br/>In class view.GatesView<br/>Field view.GatesView.mainCanvas<br/>At GatesView.java:[line 114]</p>
-</td>
-</tr>
-<tr class="tablerow0" onclick="toggleRow('N67642');">
+<tr class="tablerow1" onclick="toggleRow('N67313');">
 <td>
 <span class="priority-2">UrF</span>
 </td>
 <td>Unread field: view.JavaQuizlet.difficulty</td>
 </tr>
-<tr class="detailrow0">
+<tr class="detailrow1">
 <td/>
 <td>
-<p id="N67642" style="display: none;">
+<p id="N67313" style="display: none;">
 <a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
 <br/>In class view.JavaQuizlet<br/>Field view.JavaQuizlet.difficulty<br/>At JavaQuizlet.java:[line 41]</p>
 </td>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N67693');">
+<tr class="tablerow0" onclick="toggleRow('N67364');">
 <td>
 <span class="priority-2">UrF</span>
 </td>
 <td>Unread field: view.Spike1View.selector</td>
 </tr>
-<tr class="detailrow1">
+<tr class="detailrow0">
 <td/>
 <td>
-<p id="N67693" style="display: none;">
+<p id="N67364" style="display: none;">
 <a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
 <br/>In class view.Spike1View<br/>Field view.Spike1View.selector<br/>At Spike1View.java:[line 38]</p>
 </td>
