@@ -51,9 +51,6 @@ public abstract class GatesGame extends Observable{
 	public void setTile(int h, int w, Image o) {
 		tilemap[h][w]= o;
 	}
-	public Gate[][] getBoard(){
-		return tileset;
-	}
 	public void setTile(int h, int w, Gate g) {
 		if(gates.size()==numOfGates)
 			return;
