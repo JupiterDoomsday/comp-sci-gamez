@@ -32,7 +32,6 @@ import model.Wire;
 import model.XORGateGame;
 
 public class GatesView extends MinigameView {
-	private Canvas mainCanvas;
 	private Image emptyTile;
 	private Image lampOn;
 	private Image lampOff;
@@ -111,7 +110,8 @@ public class GatesView extends MinigameView {
 
 	@Override
 	protected void layoutScene() {
-		mainCanvas = new Canvas(1000, 500);
+		this.setMinWidth(1200);
+		this.setMinHeight(900);
 		layOut= new GridPane();
 		and = new ANDGateGame();
 		or= new ORGatesGame();

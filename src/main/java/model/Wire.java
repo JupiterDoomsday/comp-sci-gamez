@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class Wire extends Button{
 	private boolean state;
@@ -24,16 +25,11 @@ public class Wire extends Button{
 		 this.y=y;
 		 try {
 				on =new Image(new FileInputStream("Image/switch_on.png"));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
 				off=new Image(new FileInputStream("Image/switch_off.png"));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.exit(-1);
+				System.out.println("Error Images is missing from the Image folder");
 			}
 		if(state)
 			this.setGraphic(new ImageView(on));

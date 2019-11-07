@@ -36,7 +36,7 @@ public class Gate{
 			img= new Image(new FileInputStream(path));
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
-			System.exit(-1);
+			System.out.println("Error Images is missing from the Image folder");
 		}
 	}
 	 public int getY() {
