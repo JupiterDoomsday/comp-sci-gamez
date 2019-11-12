@@ -13,7 +13,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -26,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Gate;
 import model.Wire;
@@ -40,6 +43,8 @@ public class MainMenuController extends Application {
 	 * 3. Add credits-clickable button instead of menubar?
 	 * 4. Create backgrounds for game buttons 
 	 */
+	
+	private Stage loginWindow, registerWindow;
 	
 
 	public static void main(String[] args) {
@@ -94,8 +99,25 @@ public class MainMenuController extends Application {
 		menuBar.getMenus().add(profile);
 		MenuItem login = new MenuItem("Login");
 		profile.getItems().add(login);
+		login.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Login button clicked - loginPopup() called in SongLibraryView");
+				loginPopup();
+			}
+		});
+		
 		MenuItem register = new MenuItem("Register");
 		profile.getItems().add(register);
+		// When create account button is clicked, we want to open the create account
+				// popup window.
+				register.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						System.out.println("Create Account button clicked - createAccount() called in SongLibraryView");
+						registerPopup();
+					}
+				});
 
 		// Add a leaderboards menu (overall + leaderboard for each game)
 		Menu leaderboards = new Menu("Leaderboards");
@@ -260,6 +282,241 @@ public class MainMenuController extends Application {
 		// Start the application
 		primaryStage.setTitle("Computer Crash Course");
 		primaryStage.show();
+	}
+	
+	private void registerPopup() {
+		// This is just for creating the create account popup.
+		registerWindow = new Stage();
+		registerWindow.initModality(Modality.APPLICATION_MODAL);
+
+		// Create a VBox/Gridpane to hold our elements.
+		VBox createAccountVbox = new VBox(20);
+		GridPane createAccountGP = new GridPane();
+
+		// Create a username field
+		Text username = new Text("Username");
+		username.setFont(new Font("Arial", 16));
+		createAccountGP.add(username, 0, 0);
+		GridPane.setMargin(username, new Insets(40, 20, 20, 25));
+
+		// Create a password field
+		Text password = new Text("Password");
+		password.setFont(new Font("Arial", 16));
+		GridPane.setMargin(password, new Insets(0, 20, 20, 25));
+		createAccountGP.add(password, 0, 1);
+
+		// Create a verify-password field
+		Text reenterPassword = new Text("Re-enter Password");
+		reenterPassword.setFont(new Font("Arial", 16));
+		GridPane.setMargin(reenterPassword, new Insets(0, 20, 20, 25));
+		createAccountGP.add(reenterPassword, 0, 2);
+
+		// Create a text field for the username
+		TextField userField = new TextField();
+		userField.setPromptText("Enter username here");
+		GridPane.setMargin(userField, new Insets(20, 0, 0, 0));
+		userField.setFont(new Font("Arial", 14));
+		userField.setMaxWidth(150);
+		createAccountGP.add(userField, 1, 0);
+
+		// Create a password field for the username
+		PasswordField passwordField = new PasswordField();
+		passwordField.setPromptText("Enter password here");
+		GridPane.setMargin(passwordField, new Insets(-25, 0, 0, 0));
+		passwordField.setFont(new Font("Arial", 14));
+		passwordField.setMaxWidth(150);
+		createAccountGP.add(passwordField, 1, 1);
+
+		// Create another password field to verify it
+		PasswordField reenterPasswordField = new PasswordField();
+		reenterPasswordField.setPromptText("Verify password");
+		GridPane.setMargin(reenterPasswordField, new Insets(-25, 0, 0, 0));
+		reenterPasswordField.setFont(new Font("Arial", 14));
+		reenterPasswordField.setMaxWidth(150);
+		createAccountGP.add(reenterPasswordField, 1, 2);
+
+		// Create a button to register an account
+		Button register = new Button("Register");
+		register.setPadding(new Insets(10, 40, 10, 40));
+		register.setFont(new Font("Arial", 16));
+		VBox.setMargin(register, new Insets(0, 20, 20, 110));
+
+		// When the register button is clicked, call the createAccount() method.
+		register.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("- Register new account - createAccount() called in SongLibraryView");
+
+				if (createAccount(userField.getText(), passwordField.getText(), reenterPasswordField.getText())) {
+					// If this is true, need to update a message somewhere saying 'Account created!'
+					System.out.println("  - Account successfully created!");
+				} else {
+					// Add a message stating what went wrong on the popup.
+					System.out.println("  - Something went wrong when attempting to create the account.");
+				}
+			}
+		});
+
+		// Finally, add the gridpane/register button to our main vbox and show the
+		// scene.
+		createAccountVbox.getChildren().add(createAccountGP);
+		createAccountVbox.getChildren().add(register);
+		Scene loginScene = new Scene(createAccountVbox, 375, 250);
+		registerWindow.setScene(loginScene);
+		registerWindow.setTitle("Register");
+		registerWindow.show();
+	}
+
+	private boolean createAccount(String username, String password, String reenterPassword) {
+		// This handles attempting to create an account.
+		// It would call usernameAvailable() and registerCredentials().
+
+		System.out.println("- Attempting to register a new user (" + username + ") and password (" + password + ")");
+
+		/*
+		// Check if the username is available for registration
+		if (!library.usernameAvailable(username)) {
+			System.out.println("Error - username already taken.");
+			return false;
+		}
+
+		// Check if the passwords correctly match each other
+		if (!password.equals(reenterPassword)) {
+			System.out.println("Error - passwords don't match during account creation.");
+			return false;
+		}
+		
+		*/
+
+		// If all error checks are passed, create the account and return true.
+		//library.registerCredentials(username, password);
+		registerWindow.close();
+		return true;
+	}
+	
+	private void loginPopup() {
+		// Start by making a new stage
+		loginWindow = new Stage();
+		loginWindow.initModality(Modality.APPLICATION_MODAL);
+
+		// Create a VBox and GridPane to hold our elements.
+		VBox loginVbox = new VBox(20);
+		GridPane loginGP = new GridPane();
+
+		// Add a username field
+		Text username = new Text("Username");
+		username.setFont(new Font("Arial", 16));
+		loginGP.add(username, 0, 0);
+		GridPane.setMargin(username, new Insets(40, 20, 20, 25));
+
+		// Add a password field
+		Text password = new Text("Password");
+		password.setFont(new Font("Arial", 16));
+		GridPane.setMargin(password, new Insets(0, 20, 20, 25));
+		loginGP.add(password, 0, 1);
+
+		// Add a text field for the username
+		TextField userField = new TextField();
+		userField.setPromptText("Enter username here");
+		GridPane.setMargin(userField, new Insets(20, 0, 0, 0));
+		userField.setFont(new Font("Arial", 14));
+		userField.setMaxWidth(150);
+		loginGP.add(userField, 1, 0);
+
+		// Add a password field for the password
+		PasswordField passwordField = new PasswordField();
+		passwordField.setPromptText("Enter password here");
+		GridPane.setMargin(passwordField, new Insets(-25, 0, 0, 0));
+		passwordField.setFont(new Font("Arial", 14));
+		passwordField.setMaxWidth(150);
+		loginGP.add(passwordField, 1, 1);
+
+		// Add a button to confirm logging in.
+		Button loginButton = new Button("Login");
+		loginButton.setPadding(new Insets(10, 40, 10, 40));
+		loginButton.setFont(new Font("Arial", 16));
+		VBox.setMargin(loginButton, new Insets(0, 20, 20, 90));
+
+		// When login button is clicked, call loginAccount()
+		loginButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Attempting to login with account - loginAccount() called in SongLibraryView");
+				loginAccount(userField.getText(), passwordField.getText());
+			}
+		});
+
+		// Finally, add the login gridpane and login button to our main VBox, and start
+		// the scene.
+		loginVbox.getChildren().add(loginGP);
+		loginVbox.getChildren().add(loginButton);
+		Scene loginScene = new Scene(loginVbox, 300, 200);
+		loginWindow.setScene(loginScene);
+		loginWindow.setTitle("Login");
+		loginWindow.show();
+	}
+
+	private void loginAccount(String username, String password) {
+		// This handles attempting to actually log into the account.
+		// It would call verifyCredentials() from SongLibrary.
+
+		System.out.println("- Login with user (" + username + ") and password (" + password + ")");
+		/*
+		if (library.verifyCredentials(username, password)) {
+			// Successfully logged in, update windows
+			System.out.println("  - Successfully logged in!");
+			this.username = username;
+		} else {
+			// State why login failed (incorrect username/password, etc.)
+			System.out.println("  - Error when attempting to login.");
+			return;
+		}
+
+		System.out.println("  - Clearing login pane");
+		loginPane.getChildren().clear();
+		
+		*/
+		
+		
+		loginWindow.close();
+		/*
+		Button logout = new Button("Logout");
+		logout.setPadding(new Insets(10, 50, 10, 50));
+		logout.setFont(new Font("Arial", 14));
+
+		// When login button is clicked, we want to open the login popup window.
+		logout.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Logout button clicked");
+				clearUser();
+				loginPane.getChildren().clear();
+				observableListLayout();
+				System.out.println("About to clean the song queue");
+				songQueue.clearSongQueue();
+				System.out.println("Song queue cleared");
+			}
+		});
+
+		loginPane.add(logout, 0, 0);
+		GridPane.setMargin(logout, new Insets(0, 20, 20, 120));
+
+		Button songHistory = new Button("Song History");
+		songHistory.setPadding(new Insets(10, 10, 10, 10));
+
+		// When create account button is clicked, we want to open the create account
+		// popup window.
+		songHistory.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Song History button clicked");
+				songHistoryPopup();
+			}
+		});
+
+		loginPane.add(songHistory, 0, 1);
+		GridPane.setMargin(songHistory, new Insets(0, 0, 0, 130));
+		*/
 	}
 
 }

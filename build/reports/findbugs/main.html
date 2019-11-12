@@ -78,7 +78,7 @@
 <br/>
 </p>
 <h2>Metrics</h2>
-<p>1898 lines of code analyzed,
+<p>1897 lines of code analyzed,
 	in 49 classes, 
 	in 2 packages.</p>
 <table width="500" cellpadding="5" cellspacing="2">
@@ -94,18 +94,18 @@
 </tr>
 <tr class="tablerow1">
 <td>Medium Priority Warnings</td>
-<td align="right">19</td>
-<td align="right">10.01</td>
+<td align="right">18</td>
+<td align="right">9.49</td>
 </tr>
 <tr class="$totalClass">
 <td>
 <b>Total Warnings</b>
 </td>
 <td align="right">
-<b>23</b>
+<b>22</b>
 </td>
 <td align="right">
-<b>12.12</b>
+<b>11.60</b>
 </td>
 </tr>
 </table>
@@ -153,7 +153,7 @@
 <td>
 <a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
 </td>
-<td align="right">6</td>
+<td align="right">5</td>
 </tr>
 <tr class="tablerow1">
 <td>
@@ -196,7 +196,7 @@
 <b>Total</b>
 </td>
 <td align="right">
-<b>23</b>
+<b>22</b>
 </td>
 </tr>
 </table>
@@ -210,27 +210,13 @@
 <th align="left">Code</th>
 <th align="left">Warning</th>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N67259');">
-<td>
-<span class="priority-2">Dm</span>
-</td>
-<td>view.GatesView.layoutScene() invokes System.exit(...), which shuts down the entire virtual machine</td>
-</tr>
-<tr class="detailrow1">
-<td/>
-<td>
-<p id="N67259" style="display: none;">
-<a href="#DM_EXIT">Bug type DM_EXIT (click for details)</a>
-<br/>In class view.GatesView<br/>In method view.GatesView.layoutScene()<br/>At GatesView.java:[line 146]</p>
-</td>
-</tr>
-<tr class="tablerow0" onclick="toggleRow('N65911');">
+<tr class="tablerow1" onclick="toggleRow('N65911');">
 <td>
 <span class="priority-2">ODR</span>
 </td>
 <td>model.BuildADataBaseWith1Table3Records.main(String[]) may fail to close Connection</td>
 </tr>
-<tr class="detailrow0">
+<tr class="detailrow1">
 <td/>
 <td>
 <p id="N65911" style="display: none;">
@@ -238,13 +224,13 @@
 <br/>In class model.BuildADataBaseWith1Table3Records<br/>In method model.BuildADataBaseWith1Table3Records.main(String[])<br/>Need to close java.sql.Connection <br/>At BuildADataBaseWith1Table3Records.java:[line 28]</p>
 </td>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N65975');">
+<tr class="tablerow0" onclick="toggleRow('N65975');">
 <td>
 <span class="priority-2">ODR</span>
 </td>
 <td>model.BuildADataBaseWith1Table3Records.main(String[]) may fail to close Statement</td>
 </tr>
-<tr class="detailrow1">
+<tr class="detailrow0">
 <td/>
 <td>
 <p id="N65975" style="display: none;">
@@ -252,13 +238,13 @@
 <br/>In class model.BuildADataBaseWith1Table3Records<br/>In method model.BuildADataBaseWith1Table3Records.main(String[])<br/>Need to close java.sql.Statement <br/>At BuildADataBaseWith1Table3Records.java:[line 29]<br/>Another occurrence at BuildADataBaseWith1Table3Records.java:[line 33]</p>
 </td>
 </tr>
-<tr class="tablerow0" onclick="toggleRow('N66447');">
+<tr class="tablerow1" onclick="toggleRow('N66447');">
 <td>
 <span class="priority-2">ODR</span>
 </td>
 <td>model.DataBaseAdapter.addAccount(String, String, String, String) may fail to close Statement</td>
 </tr>
-<tr class="detailrow0">
+<tr class="detailrow1">
 <td/>
 <td>
 <p id="N66447" style="display: none;">
@@ -266,13 +252,13 @@
 <br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.addAccount(String, String, String, String)<br/>Need to close java.sql.Statement <br/>At DataBaseAdapter.java:[line 78]</p>
 </td>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N66513');">
+<tr class="tablerow0" onclick="toggleRow('N66513');">
 <td>
 <span class="priority-2">ODR</span>
 </td>
 <td>model.DataBaseAdapter.dropDatabase(String) may fail to close Statement</td>
 </tr>
-<tr class="detailrow1">
+<tr class="detailrow0">
 <td/>
 <td>
 <p id="N66513" style="display: none;">
@@ -280,13 +266,13 @@
 <br/>In class model.DataBaseAdapter<br/>In method model.DataBaseAdapter.dropDatabase(String)<br/>Need to close java.sql.Statement <br/>At DataBaseAdapter.java:[line 89]</p>
 </td>
 </tr>
-<tr class="tablerow0" onclick="toggleRow('N66579');">
+<tr class="tablerow1" onclick="toggleRow('N66579');">
 <td>
 <span class="priority-2">ODR</span>
 </td>
 <td>model.DataBaseAdapter.getAllAccounts() may fail to close Statement</td>
 </tr>
-<tr class="detailrow0">
+<tr class="detailrow1">
 <td/>
 <td>
 <p id="N66579" style="display: none;">
@@ -484,7 +470,7 @@
 <th align="left">Code</th>
 <th align="left">Warning</th>
 </tr>
-<tr class="tablerow1" onclick="toggleRow('N67313');">
+<tr class="tablerow1" onclick="toggleRow('N67259');">
 <td>
 <span class="priority-2">UrF</span>
 </td>
@@ -493,12 +479,12 @@
 <tr class="detailrow1">
 <td/>
 <td>
-<p id="N67313" style="display: none;">
+<p id="N67259" style="display: none;">
 <a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
 <br/>In class view.JavaQuizlet<br/>Field view.JavaQuizlet.difficulty<br/>At JavaQuizlet.java:[line 41]</p>
 </td>
 </tr>
-<tr class="tablerow0" onclick="toggleRow('N67364');">
+<tr class="tablerow0" onclick="toggleRow('N67310');">
 <td>
 <span class="priority-2">UrF</span>
 </td>
@@ -507,7 +493,7 @@
 <tr class="detailrow0">
 <td/>
 <td>
-<p id="N67364" style="display: none;">
+<p id="N67310" style="display: none;">
 <a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
 <br/>In class view.Spike1View<br/>Field view.Spike1View.selector<br/>At Spike1View.java:[line 38]</p>
 </td>
@@ -598,16 +584,6 @@
     easily learn the password.
 </p>
 
-
-    
-<h2>
-<a name="DM_EXIT">DM_EXIT: Method invokes System.exit(...)</a>
-</h2>
-
-  <p> Invoking System.exit shuts down the entire Java virtual machine. This
-   should only been done when it is appropriate. Such calls make it
-   hard or impossible for your code to be invoked by other code.
-   Consider throwing a RuntimeException instead.</p>
 
     
 <h2>
