@@ -1,5 +1,7 @@
 package view;
 
+import java.io.File;
+
 import com.sun.prism.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +24,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import model.Difficulties;
 import model.JavaQuizletGame;
 import model.JavaQuizletModel;
@@ -185,6 +189,13 @@ public class JavaQuizlet extends MinigameView {
 			Button retry = new Button("Want to try again?");
 			results.getChildren().add(retry);
 			
+			if (finalScore <= 0) {
+				playSound("./resources./java_quizlet_sounds/level_failed_javaquizlet.mp3");
+			}
+			else {
+				playSound("./resources./java_quizlet_sounds/level_passed_javaquizlet.mp3");
+			}
+			
 			retry.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -291,6 +302,10 @@ public class JavaQuizlet extends MinigameView {
 			}
 		});
 
+		Label explanation = new Label(nextQuestion.getExplanation());
+		explanation.setStyle("-fx-font-size: " + font_size + "px;-fx-text-fill: white");
+		gameBox.getChildren().add(explanation);
+		
 		if (currentSelection.equals(correctChoice)) {
 			gameSelectorButton.setText("Correct!");
 			gameSelectorButton.setStyle("-fx-background-color: green");
@@ -305,16 +320,25 @@ public class JavaQuizlet extends MinigameView {
 				finalScore = finalScore + 3;
 			}
 			totalCorrect += 1;
+			playSound("./resources./java_quizlet_sounds/correct_answer_javaquizlet.mp3");
 		} else {
 			gameSelectorButton.setText("Incorrect");
 			gameSelectorButton.setStyle("-fx-background-color: red");
 			finalScore -= 1;
 			totalIncorrect += 1;
+			playSound("./resources./java_quizlet_sounds/incorrect_answer_javaquizlet.mp3");
 		}
 
 		scoreLabel.setText("Current Score: " + finalScore);
 	}
 
+	private void playSound(String file) {
+
+		Media sound = new Media(new File(file).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
+	}
+	
 	@Override
 	public String settings() {
 		// TODO Auto-generated method stub
