@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javafx.animation.Animation;
+import javafx.animation.Transition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -17,14 +20,20 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.ANDGateGame;
+import model.Challenge3GatesGame;
 import model.Gate;
 import model.GatesGame;
 import model.ORGatesGame;
@@ -32,21 +41,23 @@ import model.Wire;
 import model.XORGateGame;
 
 public class GatesView extends MinigameView {
+	private StackPane stackPane;
 	private Image emptyTile;
 	private Image lampOn;
 	private Image lampOff;
+	private Label text;
 	private GridPane layOut;
 	private ANDGateGame and;
 	private ORGatesGame or;
 	private XORGateGame xor;
+	private Challenge3GatesGame ch3;
 	private Button ORButton;
 	private Button ANDButton;
 	private Button XORButton;
+	private Button challenge3;
+	private Button tutorial;
 	private Button back;
 	GatesGame curGame;
-	public GatesView() {
-		
-	}
 	private void  setGatesView(GatesGame game) {
 		curGame=game;
 		layOut.getChildren().clear();
@@ -95,7 +106,7 @@ public class GatesView extends MinigameView {
 	   * This changes and updates the view every game sate change
 	   */
 	  public void update(Wire w) {
-			  System.out.println("Button pressed");
+			 // System.out.println("Button pressed");
 			  if(w.state())
 					w.setGraphic(new ImageView(w.getOnImg()));
 			 else
@@ -110,15 +121,21 @@ public class GatesView extends MinigameView {
 
 	@Override
 	protected void layoutScene() {
+		BackgroundFill background_fill = new BackgroundFill(Color.rgb(8,20,30),CornerRadii.EMPTY, Insets.EMPTY);
+		Background background = new Background(background_fill); 
 		this.setMinWidth(1200);
 		this.setMinHeight(900);
 		layOut= new GridPane();
 		and = new ANDGateGame();
 		or= new ORGatesGame();
 		xor= new XORGateGame();
+		ch3= new Challenge3GatesGame();
+		text=new Label();
 		ORButton=new Button("OR Gate");
 		ANDButton=new Button("AND Gate");
 		XORButton=new Button("XOR Gate");
+		challenge3= new Button("Challenge 3");
+		tutorial= new Button("Tutorial");
 		back = new Button("Back");
 		back.setOnAction( ae -> {
 			this.getChildren().clear();
@@ -136,6 +153,14 @@ public class GatesView extends MinigameView {
 			this.getChildren().clear();
 			setGatesView(xor);
 		});
+		challenge3.setOnAction( ae -> {
+			this.getChildren().clear();
+			setGatesView(ch3);
+		});
+		tutorial.setOnAction( ae -> {
+			//this.getChildren().clear();
+			setTutorial();
+		});
 		try {
 			emptyTile=new Image(new FileInputStream("Image/empty.png"));
 			lampOff=new Image(new FileInputStream("Image/lightbulb.png"));
@@ -145,8 +170,15 @@ public class GatesView extends MinigameView {
 			e.printStackTrace();
 		}
 		setMenu();
+		
 		//
 		// TODO Auto-generated method stub
+		
+	}
+	public void setTutorial() {
+		this.getChildren().clear();
+		BackgroundFill background_fill = new BackgroundFill(Color.rgb(8,20,30),CornerRadii.EMPTY, Insets.EMPTY);
+		Background background = new Background(background_fill); 
 		
 	}
 	public void setMenu() {
@@ -155,7 +187,9 @@ public class GatesView extends MinigameView {
 		vbox.getChildren().add(ANDButton);
 		vbox.getChildren().add(ORButton);
 		vbox.getChildren().add(XORButton);
+		vbox.getChildren().add(challenge3);
 		this.getChildren().add(vbox);
+		
 	}
 	private void checkState() {
 		ArrayList<Gate> gates= curGame.getListOfGates();
@@ -165,6 +199,22 @@ public class GatesView extends MinigameView {
 			else 
 				layOut.add(new  ImageView(lampOff), gates.get(i).getX(), gates.get(i).getY());
 		}
+	}
+	public void AnimateText(Label lbl, String descImp) {
+	    String content = descImp;
+	    final Animation animation = new Transition() {
+	        {
+	            setCycleDuration(Duration.millis(2000));
+	        }
+
+	        protected void interpolate(double frac) {
+	            final int length = content.length();
+	            final int n = Math.round(length * (float) frac);
+	            lbl.setText(content.substring(0, n));
+	        }
+	    };
+	    animation.play();
+
 	}
 
 	@Override
