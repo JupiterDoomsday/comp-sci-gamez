@@ -5,7 +5,7 @@ import java.util.Observable;
 
 import javafx.scene.image.Image;
 
-public abstract class GatesGame extends Observable{
+public abstract class GatesGame{
 	private int numOfGates;
 	private ArrayList<Gate> gates;
 	private ArrayList<Wire> wires;

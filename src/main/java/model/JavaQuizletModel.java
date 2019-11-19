@@ -2,13 +2,15 @@ package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class JavaQuizletModel {
 	private Queue<JavaQuizletGame> questions = new LinkedList();
-
+	private ArrayList<JavaQuizletGame> allQuestions = new ArrayList<>();
+	
 	public JavaQuizletModel() {
 
 	}
@@ -378,7 +380,11 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "25", "Error", "-25", "none" };
 		int correctChoice = 1;
 
-		String explanation = "byte variables cannot be added.";
+		String explanation = "If we apply any arithmetic operator between\n"
+				+ "two variables x and y, then the result type is\n"
+				+ "max(int, type of x, type of y). Therefore,\n"
+				+ "here the compiler will give the error possible lossy\n"
+				+ "conversion int to byte.";
 		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
 		
 		questions.add(newGame);
@@ -428,4 +434,29 @@ public class JavaQuizletModel {
 		
 		questions.add(newGame);
 	}
+	
+//	private void setRandomQuestions() {
+//		int questionType = 1;
+//		String[] question = { "", "" };
+//		question[0] = "All Java keywords are written in lower case.";
+//		String[] options = new String[] { "false", "true"};
+//		int correctChoice = 1;
+//
+//		String explanation = "No keywords in Java start with a capital letter.";
+//		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question.clone(), options.clone(), correctChoice, explanation);
+//		
+//		allQuestions.add(newGame);
+//		
+//		//===============================================================
+//		
+//		question = new String[]{ "", "" };
+//		question[0] = "A method name can start with a number.";
+//		options = new String[] { "true", "false"};
+//		correctChoice = 0;
+//
+//		explanation = "No keywords in Java start with a capital letter.";
+//		newGame = new JavaQuizletGame(questionType, question.clone(), options.clone(), correctChoice, explanation);
+//		
+//		allQuestions.add(newGame);
+//	}
 }

@@ -250,13 +250,6 @@ public class MainMenuController extends Application {
 				bPane.getChildren().clear();
 				bPane.setBackground(null);
 				bPane.setTop(menuBar);
-				
-			    //try {
-				//	map.setTile(5, 3, new Image (new FileInputStream("Image/wire.png")));
-				//} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-				//	e.printStackTrace();
-				//}
 				GatesView gatesView = new GatesView();
 				sPane.setContent(gatesView);
 				bPane.setCenter(sPane);

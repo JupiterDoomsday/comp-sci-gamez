@@ -106,14 +106,17 @@ public class JavaQuizlet extends MinigameView {
 		difficultyBox.setAlignment(Pos.CENTER);
 
 		Difficulties[] difficulties = quiz.getDifficulties();
-
+		VBox difficultyRadioBox = new VBox();
+		difficultyRadioBox.setAlignment(Pos.CENTER_LEFT);
+		difficultyRadioBox.setPadding(new Insets(0,0,0,550));
+		
 		for (int i = 0; i < difficulties.length; i++) {
 			RadioButton newRadio = new RadioButton(difficulties[i].name());
 			newRadio.setStyle("-fx-text-fill: white;-fx-font-size: 18;");
 			toggleDifficulty.getToggles().add(newRadio);
-			difficultyBox.getChildren().add(newRadio);
+			difficultyRadioBox.getChildren().add(newRadio);
 		}
-
+		difficultyBox.getChildren().add(difficultyRadioBox);
 		Button rulesButton = new Button ("Rules");
 		diffRulesBox.getChildren().addAll(setDifficultyButton, rulesButton);
 		diffRulesBox.setSpacing(20);
@@ -253,14 +256,18 @@ public class JavaQuizlet extends MinigameView {
 		String[] options = nextQuestion.getOptions();
 		toggleQuestion = new ToggleGroup();
 
+		VBox radioButtonsBox = new VBox();
+		radioButtonsBox.setAlignment(Pos.CENTER_LEFT);
+		radioButtonsBox.setPadding(new Insets(0,0,0,550));
+		
 		for (int i = 0; i < options.length; i++) {
 			RadioButton newOption = new RadioButton(options[i]);
 			newOption.setStyle("-fx-text-fill: white;-fx-font-size: 18;");
+			radioButtonsBox.getChildren().add(newOption);
 			toggleQuestion.getToggles().add(newOption);
-			gameBox.getChildren().add(newOption);
 		}
 		toggleQuestion.selectToggle(toggleQuestion.getToggles().get(0));
-
+		gameBox.getChildren().add(radioButtonsBox);
 		// set button selector
 		gameBox.getChildren().add(gameSelectorButton);
 
