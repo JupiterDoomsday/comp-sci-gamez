@@ -35,12 +35,14 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.ANDGateGame;
+import model.Challenge2GatesGame;
 import model.Challenge3GatesGame;
 import model.Gate;
 import model.GatesGame;
 import model.ORGatesGame;
 import model.Wire;
 import model.XORGateGame;
+import model.challenge1GatesGame;
 
 public class GatesView extends MinigameView {
 	private Image emptyTile;
@@ -52,11 +54,15 @@ public class GatesView extends MinigameView {
 	private ANDGateGame and;
 	private ORGatesGame or;
 	private XORGateGame xor;
+	private challenge1GatesGame ch1;
+	private Challenge2GatesGame ch2;
 	private Challenge3GatesGame ch3;
 	private Button ORButton;
 	private Button ANDButton;
 	private Button XORButton;
+	private Button challenge1;
 	private Button challenge3;
+	private Button challenge2;
 	private Button tutorial;
 	private Button back;
 	private Background background;
@@ -136,6 +142,8 @@ public class GatesView extends MinigameView {
 		and = new ANDGateGame();
 		or= new ORGatesGame();
 		xor= new XORGateGame();
+		ch1 = new challenge1GatesGame();
+		ch2= new Challenge2GatesGame();
 		ch3= new Challenge3GatesGame();
 		text=new Label();
 		
@@ -143,7 +151,9 @@ public class GatesView extends MinigameView {
 		ORButton=new Button("OR Gate");
 		ANDButton=new Button("AND Gate");
 		XORButton=new Button("XOR Gate");
+		challenge1= new Button("Challenge 1");
 		challenge3= new Button("Challenge 3");
+		challenge2= new Button("Challenge 2");
 		tutorial= new Button("Tutorial");
 		back = new Button("Back");
 		setButtons();
@@ -163,6 +173,14 @@ public class GatesView extends MinigameView {
 		XORButton.setOnAction( ae -> {
 			this.getChildren().clear();
 			setGatesView(xor);
+		});
+		challenge1.setOnAction( ae -> {
+			this.getChildren().clear();
+			setGatesView(ch1);
+		});
+		challenge2.setOnAction( ae -> {
+			this.getChildren().clear();
+			setGatesView(ch2);
 		});
 		challenge3.setOnAction( ae -> {
 			this.getChildren().clear();
@@ -232,6 +250,26 @@ public class GatesView extends MinigameView {
 		ANDButton.setOnMouseExited(e -> {
 			ANDButton.setStyle(buttonStyle);
 		});
+		//challenge1 button style
+		challenge1.setMinHeight(50);
+		challenge1.setMinWidth(125);
+		challenge1.setStyle(buttonStyle);
+		challenge1.setOnMouseEntered(e -> {
+			challenge1.setStyle(hoverStyle);
+		});
+		challenge1.setOnMouseExited(e -> {
+			challenge1.setStyle(buttonStyle);
+		});
+		//challenge2 button style
+				challenge2.setMinHeight(50);
+				challenge2.setMinWidth(125);
+				challenge2.setStyle(buttonStyle);
+				challenge2.setOnMouseEntered(e -> {
+					challenge2.setStyle(hoverStyle);
+				});
+				challenge2.setOnMouseExited(e -> {
+					challenge2.setStyle(buttonStyle);
+				});
 		//challenge3 button style
 		challenge3.setMinHeight(50);
 		challenge3.setMinWidth(125);
@@ -247,13 +285,15 @@ public class GatesView extends MinigameView {
 	public void setMenu() {
 		this.setBackground(background);
 		VBox vBox = new VBox();
-		Label l= new Label("Choose your level");
+		Label l= new Label("Level Select");
 		l.setFont(new Font("Sans-serif", 40));
 		l.setTextFill(Color.WHITE);
 		vBox.getChildren().add(l);
 		vBox.getChildren().add(ANDButton);
 		vBox.getChildren().add(ORButton);
 		vBox.getChildren().add(XORButton);
+		vBox.getChildren().add(challenge1);
+		vBox.getChildren().add(challenge2);
 		vBox.getChildren().add(challenge3);
 		vBox.setAlignment(Pos.CENTER);
 		vBox.prefHeight(900);
@@ -261,6 +301,8 @@ public class GatesView extends MinigameView {
 		VBox.setMargin(ANDButton, new Insets(20, 20, 20, 20));
 		VBox.setMargin(ORButton, new Insets(20, 20, 20, 20));
 		VBox.setMargin(XORButton, new Insets(20, 20, 20, 20));
+		VBox.setMargin(challenge1, new Insets(20, 20, 20, 20));
+		VBox.setMargin(challenge2, new Insets(20, 20, 20, 20));
 		VBox.setMargin(challenge3, new Insets(20, 20, 20, 20));
 		this.getChildren().add(vBox);
 		
