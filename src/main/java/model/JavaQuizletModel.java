@@ -380,7 +380,11 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "25", "Error", "-25", "none" };
 		int correctChoice = 1;
 
-		String explanation = "byte variables cannot be added.";
+		String explanation = "If we apply any arithmetic operator between\n"
+				+ "two variables x and y, then the result type is\n"
+				+ "max(int, type of x, type of y). Therefore,\n"
+				+ "here the compiler will give the error possible lossy\n"
+				+ "conversion int to byte.";
 		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
 		
 		questions.add(newGame);
