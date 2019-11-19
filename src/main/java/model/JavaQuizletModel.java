@@ -1,7 +1,10 @@
 package model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class JavaQuizletModel {
 	private Queue<JavaQuizletGame> questions = new LinkedList();
@@ -55,15 +58,104 @@ public class JavaQuizletModel {
 		setQuestion5Hard();
 
 	}
-
+	
+//	private static void setAllQuestions() {
+//		File questions_file = new File("./resources/questions/java_quizlet_questions.txt");
+//		Scanner scanner = null;
+//		try {
+//			scanner = new Scanner(questions_file);
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		int currQue = 0, currCorr = 0, currInc = 0, currExpl = 0;
+//		
+//		int questionType = 1;
+//		String[] question = { "", "" };
+//		String[] options = {};
+//		int correctChoice = 0;
+//		
+//		while (scanner.hasNextLine()) {
+//		   String line = scanner.nextLine();
+//		   if (line.equals(""))
+//			   continue;
+//		   
+//		   if (line.contains("Question #")) {
+//			   line = scanner.nextLine();
+//			   currQue = 1;
+//			   currCorr = 0;
+//			   currInc = 0;
+//			   currExpl = 0;
+//		   }
+//		   else if (line.contains("Correct answer")) {
+//			   line = scanner.nextLine();
+//			   currQue = 0;
+//			   currCorr = 1;
+//			   currInc = 0;
+//			   currExpl = 0;
+//		   }
+//		   else if (line.contains("Incorrect answer")) {
+//			   line = scanner.nextLine();
+//			   currQue = 0;
+//			   currCorr = 0;
+//			   currInc = 1;
+//			   currExpl = 0;
+//		   }
+//		   else if (line.contains("Explanation")) {
+//			   line = scanner.nextLine();
+//			   currQue = 0;
+//			   currCorr = 0;
+//			   currInc = 0;
+//			   currExpl = 1;
+//		   }
+//		   
+//		   if (currQue == 1) {
+//			   System.out.println(line);
+//		   }
+//		   else if(currCorr == 1) {
+//			   
+//		   }
+//		   else if(currInc == 1) {
+//			   
+//		   }
+//		   else if (currExpl == 1) {
+//			   
+//		   }
+//		}
+//	}
+	
+//	public static void main(String[] args) {
+//		setAllQuestions();
+//	}
+//
+//	// Function to add x in arr 
+//    private String[] addX(int n, String arr[], String x) 
+//    { 
+//        int i; 
+//  
+//        // create a new array of size n+1 
+//        String newarr[] = new String[n + 1]; 
+//  
+//        // insert the elements from 
+//        // the old array into the new array 
+//        // insert all elements till n 
+//        // then insert x at n+1 
+//        for (i = 0; i < n; i++) 
+//            newarr[i] = arr[i]; 
+//  
+//        newarr[n] = x; 
+//  
+//        return newarr; 
+//    }
+	
 	// EASY QUESTIONS
 	private void setQuestion1Easy() {
 		int questionType = 1;
 		String[] question = { "", "" };
-		question[0] = "What year was Java developed?\n\n";
+		question[0] = "What values can a boolean expression have in Java?\n\n";
 		question[1] = "";
-		String[] options = new String[] { "1996", "1998", "2000", "2002" };
-		int correctChoice = 0;
+		String[] options = new String[] { "true, false, 0, 1", "true, false", "TRUE, FALSE", "TRUE, FALSE, 0, 1" };
+		int correctChoice = 1;
 
 		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
 
@@ -76,12 +168,13 @@ public class JavaQuizletModel {
 		question[0] = "What is the output of the following:\n\n";
 		question[1] = "Class Equals{\n";
 		question[1] += "\tpublic static void main(String[] args){\n";
-		question[1] += "\t\tString s1 = \"Hello\";\n";
-		question[1] += "\t\tString s2 = new String(s1);\n";
-		question[1] += "\t\tSystem.out.pritnln(s1==s2);\n";
+		question[1] += "\t\tString s1 = \"Fizz\";\n";
+		question[1] += "\t\tString s2 = \"Bar\";\n";
+		question[1] += "\t\ts2 += s2;\n";
+		question[1] += "\t\tSystem.out.pritnln(s1);\n";
 		question[1] += "\t}\n}\n\n";
-		String[] options = new String[] { "true", "false", "0", "Hello" };
-		int correctChoice = 1;
+		String[] options = new String[] { "Fizz", "Bar", "FizzBar", "BarFizz" };
+		int correctChoice = 2;
 
 		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
 
@@ -118,9 +211,10 @@ public class JavaQuizletModel {
 	private void setQuestion5Easy() {
 		int questionType = 1;
 		String[] question = { "", "" };
-		question[0] = "Java technology is both a programming language\n" + "and a platform.";
-		String[] options = new String[] { "True", "False" };
-		int correctChoice = 0;
+		question[0] = "What is the output of the following code:";
+		question[1] = "System.out.pritnln(Math.ceil(-3.22));";
+		String[] options = new String[] { "-3", "-4", "-3.0", "-4.0" };
+		int correctChoice = 2;
 
 		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
 
