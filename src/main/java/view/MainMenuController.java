@@ -30,6 +30,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.GameDatabaseHandler;
 import model.Gate;
 import model.Wire;
 
@@ -45,7 +46,8 @@ public class MainMenuController extends Application {
 	 */
 	
 	private Stage loginWindow, registerWindow;
-	
+
+	private GameDatabaseHandler database;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -53,6 +55,7 @@ public class MainMenuController extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		database = GameDatabaseHandler.getInstance();
 		BorderPane bPane = new BorderPane();
 		ScrollPane sPane = new ScrollPane();
 		// Add a background image for the main menu
@@ -102,7 +105,7 @@ public class MainMenuController extends Application {
 		login.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Login button clicked - loginPopup() called in SongLibraryView");
+				System.out.println("Login button clicked - loginPopup() called in MainMenuController");
 				loginPopup();
 			}
 		});
@@ -373,9 +376,8 @@ public class MainMenuController extends Application {
 
 		System.out.println("- Attempting to register a new user (" + username + ") and password (" + password + ")");
 
-		/*
 		// Check if the username is available for registration
-		if (!library.usernameAvailable(username)) {
+		if (! database.usernameAvailable(username)) {
 			System.out.println("Error - username already taken.");
 			return false;
 		}
@@ -385,11 +387,9 @@ public class MainMenuController extends Application {
 			System.out.println("Error - passwords don't match during account creation.");
 			return false;
 		}
-		
-		*/
 
 		// If all error checks are passed, create the account and return true.
-		//library.registerCredentials(username, password);
+		database.registerCredentials(username, password);
 		registerWindow.close();
 		return true;
 	}
@@ -441,7 +441,7 @@ public class MainMenuController extends Application {
 		loginButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Attempting to login with account - loginAccount() called in SongLibraryView");
+				System.out.println("Attempting to login with account - loginAccount() called in MainMenuController");
 				loginAccount(userField.getText(), passwordField.getText());
 			}
 		});
@@ -461,21 +461,19 @@ public class MainMenuController extends Application {
 		// It would call verifyCredentials() from SongLibrary.
 
 		System.out.println("- Login with user (" + username + ") and password (" + password + ")");
-		/*
-		if (library.verifyCredentials(username, password)) {
+		
+		if (database.verifyCredentials(username, password)) {
 			// Successfully logged in, update windows
 			System.out.println("  - Successfully logged in!");
-			this.username = username;
+			//this.username = username;
 		} else {
 			// State why login failed (incorrect username/password, etc.)
 			System.out.println("  - Error when attempting to login.");
 			return;
 		}
 
-		System.out.println("  - Clearing login pane");
-		loginPane.getChildren().clear();
-		
-		*/
+		//System.out.println("  - Clearing login pane");
+		//loginPane.getChildren().clear();
 		
 		
 		loginWindow.close();
