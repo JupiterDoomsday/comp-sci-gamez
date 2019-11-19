@@ -138,56 +138,16 @@ public class GatesView extends MinigameView {
 		xor= new XORGateGame();
 		ch3= new Challenge3GatesGame();
 		text=new Label();
-		String buttonStyle = "-fx-background-color: #c3a38a;-fx-border-width: 0 3 3 0;-fx-background-radius:0px;";
-		String hoverStyle = "-fx-background-color: #816271;-fx-border-width: 0 3 3 0; -fx-background-insets: 0; -fx-background-radius:0px;";
+		
 		//setting up the buttons
 		ORButton=new Button("OR Gate");
-		ORButton.setFont(new Font("Sans-serif", 20));
-		ORButton.setStyle(buttonStyle);
-		ORButton.setMinHeight(50);
-		ORButton.setMinWidth(125);
-		ORButton.setOnMouseEntered(e -> {
-			ORButton.setStyle(hoverStyle);
-		});
-		ORButton.setOnMouseExited(e -> {
-			ORButton.setStyle(buttonStyle);
-		});
-		
 		ANDButton=new Button("AND Gate");
-		ANDButton.setFont(new Font("Sans-serif", 20));
-		ANDButton.setMinHeight(50);
-		ANDButton.setMinWidth(125);
-		ANDButton.setStyle(buttonStyle);
-		ANDButton.setOnMouseEntered(e -> {
-			ANDButton.setStyle(hoverStyle);
-		});
-		ANDButton.setOnMouseExited(e -> {
-			ANDButton.setStyle(buttonStyle);
-		});
-		
 		XORButton=new Button("XOR Gate");
-		XORButton.setFont(new Font("Sans-serif", 20));
-		XORButton.setMinHeight(50);
-		XORButton.setMinWidth(125);
-		XORButton.setStyle(buttonStyle);
-		XORButton.setOnMouseEntered(e -> {
-			XORButton.setStyle(hoverStyle);
-		});
-		XORButton.setOnMouseExited(e -> {
-			XORButton.setStyle(buttonStyle);
-		});
 		challenge3= new Button("Challenge 3");
-		challenge3.setMinHeight(50);
-		challenge3.setMinWidth(125);
-		challenge3.setStyle(buttonStyle);
-		challenge3.setOnMouseEntered(e -> {
-			challenge3.setStyle(hoverStyle);
-		});
-		challenge3.setOnMouseExited(e -> {
-			challenge3.setStyle(buttonStyle);
-		});
 		tutorial= new Button("Tutorial");
 		back = new Button("Back");
+		setButtons();
+		//seting up the events for each menu button
 		back.setOnAction( ae -> {
 			this.getChildren().clear();
 			setMenu();
@@ -228,10 +188,60 @@ public class GatesView extends MinigameView {
 		// TODO Auto-generated method stub
 		
 	}
-	public void setTutorial() {
+	private void setTutorial() {
 		//ObservableList list = stackPane.getChildren();
 		//list.addAll(text,textBox,layOut);
+	}
+	//this helper function sets up the events for the button styles and whatnot
+	private void setButtons() {
 		
+		String buttonStyle = "-fx-background-color: #c3a38a;-fx-border-width: 0 3 3 0;-fx-background-radius:0px; -fx-border-color: #997577;";
+		String hoverStyle = "-fx-background-color: #997577;-fx-border-width: 0 3 3 0; -fx-background-insets: 0; -fx-background-radius:0px; -fx-border-color: #c3a38a;";
+		String backButtonStyle="-fx-background-color: #816271;-fx-border-width: 3 3 3 3; -fx-background-radius:0px;-fx-border-color:#4e495f;";
+		//XOR button style
+		back.setStyle(backButtonStyle);
+		XORButton.setFont(new Font("Sans-serif", 20));
+		XORButton.setMinHeight(50);
+		XORButton.setMinWidth(125);
+		XORButton.setStyle(buttonStyle);
+		XORButton.setOnMouseEntered(e -> {
+			XORButton.setStyle(hoverStyle);
+		});
+		XORButton.setOnMouseExited(e -> {
+			XORButton.setStyle(buttonStyle);
+		});
+		//OR button style
+		ORButton.setFont(new Font("Sans-serif", 20));
+		ORButton.setStyle(buttonStyle);
+		ORButton.setMinHeight(50);
+		ORButton.setMinWidth(125);
+		ORButton.setOnMouseEntered(e -> {
+			ORButton.setStyle(hoverStyle);
+		});
+		ORButton.setOnMouseExited(e -> {
+			ORButton.setStyle(buttonStyle);
+		});
+		//AND button style
+		ANDButton.setFont(new Font("Sans-serif", 20));
+		ANDButton.setMinHeight(50);
+		ANDButton.setMinWidth(125);
+		ANDButton.setStyle(buttonStyle);
+		ANDButton.setOnMouseEntered(e -> {
+			ANDButton.setStyle(hoverStyle);
+		});
+		ANDButton.setOnMouseExited(e -> {
+			ANDButton.setStyle(buttonStyle);
+		});
+		//challenge3 button style
+		challenge3.setMinHeight(50);
+		challenge3.setMinWidth(125);
+		challenge3.setStyle(buttonStyle);
+		challenge3.setOnMouseEntered(e -> {
+			challenge3.setStyle(hoverStyle);
+		});
+		challenge3.setOnMouseExited(e -> {
+			challenge3.setStyle(buttonStyle);
+		});
 		
 	}
 	public void setMenu() {
