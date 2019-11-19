@@ -24,7 +24,7 @@ public class ArrayAttackView extends MinigameView {
 	private Canvas mainCanvas;
 	private GraphicsContext gc;
 	private ArrayAttackModel model;
-	private HBox controllerBox, newGameButtBox, bubbleSortButtBox, mergeSortButtBox;
+	private HBox controllerBox, newGameButtBox, bubbleSortButtBox, mergeSortButtBox, quickSortButtBox;
 	
 	@Override
 	public String settings() {
@@ -50,11 +50,14 @@ public class ArrayAttackView extends MinigameView {
 		
 		Button bubbleButt = new Button("Bubble Sort");
 		Button mergeButt = new Button("Merge Sort");
+		Button quickButt = new Button("Quick Sort");
 		
 		bubbleButt.setPrefSize(200, 50);
 		bubbleButt.setFont(new Font(20));
 		mergeButt.setPrefSize(200, 50);
 		mergeButt.setFont(new Font(20));
+		quickButt.setPrefSize(200, 50);
+		quickButt.setFont(new Font(20));
 		
 		bubbleButt.setOnAction(ae -> {
 			model.startBubble();
@@ -66,10 +69,15 @@ public class ArrayAttackView extends MinigameView {
 			controllerBox.getChildren().clear();
 			controllerBox.getChildren().add(mergeSortButtBox);
 		});
+		quickButt.setOnAction(ae -> {
+			model.startQuick();
+			controllerBox.getChildren().clear();
+			controllerBox.getChildren().add(quickSortButtBox);
+		});
 		
 		newGameButtBox.setPadding(new Insets(25));
 		newGameButtBox.setAlignment(Pos.CENTER);
-		newGameButtBox.getChildren().addAll(bubbleButt, mergeButt);
+		newGameButtBox.getChildren().addAll(bubbleButt, mergeButt, quickButt);
 		
 		
 		//Setup the buttons for bubblesort
@@ -115,6 +123,28 @@ public class ArrayAttackView extends MinigameView {
 		mergeSortButtBox.setPadding(new Insets(25));
 		mergeSortButtBox.setAlignment(Pos.CENTER);
 		mergeSortButtBox.getChildren().addAll(mergeLeftButt, mergeRightButt);
+		
+		//Setup the buttons for quicksort
+		quickSortButtBox = new HBox(20);
+		
+		Button quickLeftButt = new Button("Left");
+		Button quickRightButt = new Button("Right");
+		
+		quickLeftButt.setPrefSize(100, 50);
+		quickLeftButt.setFont(new Font(20));
+		quickRightButt.setPrefSize(100, 50);
+		quickRightButt.setFont(new Font(20));
+		
+		quickLeftButt.setOnAction(ae -> {
+			model.runQuick(true);
+		});
+		quickRightButt.setOnAction(ae -> {
+			model.runQuick(false);
+		});
+		
+		quickSortButtBox.setPadding(new Insets(25));
+		quickSortButtBox.setAlignment(Pos.CENTER);
+		quickSortButtBox.getChildren().addAll(quickLeftButt, quickRightButt);
 		
 		this.getChildren().add(view);
 		view.getChildren().addAll(mainCanvas, controllerBox);
@@ -183,12 +213,24 @@ public class ArrayAttackView extends MinigameView {
 		return blockMid + (indInBlock - selectionSize/2)*75;
 	}
 
-	public void updateQuick() {
-				
+	public void updateQuick(ArrayList<Integer> array1, ArrayList<Integer> array2, int curIndex, Integer pivot, int score) {
+		drawBackground(score);
+		gc.fillText(pivot.toString(), CANVAS_WIDTH/2.0, CANVAS_HEIGHT/2.0);
+		drawQuick(array1, array2, curIndex);
 	}
 	
-	private void drawQuick() {
-		
+	private void drawQuick(ArrayList<Integer> array1, ArrayList<Integer> array2, int curIndex) {
+		gc.setFill(Color.BLACK);
+		for(int i = 0; i < 8; i++)
+			gc.fillText(array2.get(i).toString(), (i * CANVAS_WIDTH/8.0) + CANVAS_WIDTH/16.0, CANVAS_HEIGHT*3/4.0);
+		for(int i = 0; i < array1.size(); i++) {
+			if(i == curIndex)
+				gc.setFill(Color.GREEN);
+			else
+				gc.setFill(Color.BLACK);
+			
+			gc.fillText(array1.get(i).toString(), (i * CANVAS_WIDTH/array2.size()) + CANVAS_WIDTH/16.0, CANVAS_HEIGHT/2.0);	
+		}
 	}
 	
 	private void drawBackground(int score) {
