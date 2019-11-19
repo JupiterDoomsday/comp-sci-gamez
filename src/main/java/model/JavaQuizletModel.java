@@ -2,13 +2,15 @@ package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class JavaQuizletModel {
 	private Queue<JavaQuizletGame> questions = new LinkedList();
-
+	private ArrayList<JavaQuizletGame> allQuestions = new ArrayList<>();
+	
 	public JavaQuizletModel() {
 
 	}
@@ -428,4 +430,29 @@ public class JavaQuizletModel {
 		
 		questions.add(newGame);
 	}
+	
+//	private void setRandomQuestions() {
+//		int questionType = 1;
+//		String[] question = { "", "" };
+//		question[0] = "All Java keywords are written in lower case.";
+//		String[] options = new String[] { "false", "true"};
+//		int correctChoice = 1;
+//
+//		String explanation = "No keywords in Java start with a capital letter.";
+//		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question.clone(), options.clone(), correctChoice, explanation);
+//		
+//		allQuestions.add(newGame);
+//		
+//		//===============================================================
+//		
+//		question = new String[]{ "", "" };
+//		question[0] = "A method name can start with a number.";
+//		options = new String[] { "true", "false"};
+//		correctChoice = 0;
+//
+//		explanation = "No keywords in Java start with a capital letter.";
+//		newGame = new JavaQuizletGame(questionType, question.clone(), options.clone(), correctChoice, explanation);
+//		
+//		allQuestions.add(newGame);
+//	}
 }
