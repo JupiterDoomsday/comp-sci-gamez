@@ -156,8 +156,8 @@ public class JavaQuizletModel {
 		question[1] = "";
 		String[] options = new String[] { "true, false, 0, 1", "true, false", "TRUE, FALSE", "TRUE, FALSE, 0, 1" };
 		int correctChoice = 1;
-
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
+		String explanation = "Unlike C/C++, booleans in java are represented with the\nliterals true and false.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
 
 		questions.add(newGame);
 	}
@@ -176,8 +176,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "Fizz", "Bar", "FizzBar", "BarFizz" };
 		int correctChoice = 2;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "The symbol 'a += b' means 'a = a + b'\nso it is basically a concatination.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 
@@ -191,8 +192,8 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "135", "135.0", "92", "92.0" };
 		int correctChoice = 3;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "Java convers int into floats automatically\nif needed.\n";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
 		questions.add(newGame);
 	}
 
@@ -203,8 +204,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "true", "false", "0", "1", "Null" };
 		int correctChoice = 2;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "All static values are automatically\ninitialized to 0, false, or null";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 
@@ -216,8 +218,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "-3", "-4", "-3.0", "-4.0" };
 		int correctChoice = 2;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "Math.ceil() will convert the value to the\nnearest highest whole number.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 
@@ -229,8 +232,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "True", "False" };
 		int correctChoice = 0;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "Java does allow $ and _ in variable names.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 
@@ -251,8 +255,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "1", "2", "7", "8" };
 		int correctChoice = 1;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "var2 is set to 1 in line 5.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 
@@ -279,8 +284,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "String", "Object" };
 		int correctChoice = 0;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 	
@@ -300,8 +306,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "1001", "1000", "9", "8"};
 		int correctChoice = 3;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "The symbol '&' is for binary AND.\nTherefore it will compare temp and data binary numbers.\n";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 	
@@ -318,9 +325,10 @@ public class JavaQuizletModel {
 				"}";
 		String[] options = new String[] { "0 | 0", "garbage value | garbage value", "Compile Error", "Exception"};
 		int correctChoice = 2;
-		;
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		
+		String explanation = "All elements in arrays need to be\ninitialized before using them.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 
@@ -333,8 +341,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "True", "False" };
 		int correctChoice = 1;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "All variables in java need to be declared\nbefore using them.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 
@@ -346,8 +355,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "True", "False" };
 		int correctChoice = 1;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "It is called 'Garbage Collection'";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 	
@@ -368,8 +378,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "25", "Error", "-25", "none" };
 		int correctChoice = 1;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "byte variables cannot be added.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 	
@@ -390,8 +401,10 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "Error", "11:16:24", " 9:15:24", "11:15:24" };
 		int correctChoice = 2;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "a '0' at beginning of a number means\nit is an octal number.\n"
+				+ "A '0x' means it is a hexadecimal.";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 	
@@ -410,8 +423,9 @@ public class JavaQuizletModel {
 		String[] options = new String[] { "120 200 014", "120 200 016", " 120 200 14", "120 200 16" };
 		int correctChoice = 2;
 
-		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice);
-
+		String explanation = "a '0' at beginning of a number means\nit is an octal number.\n";
+		JavaQuizletGame newGame = new JavaQuizletGame(questionType, question, options, correctChoice, explanation);
+		
 		questions.add(newGame);
 	}
 }

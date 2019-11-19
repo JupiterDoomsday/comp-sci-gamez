@@ -302,6 +302,10 @@ public class JavaQuizlet extends MinigameView {
 			}
 		});
 
+		Label explanation = new Label(nextQuestion.getExplanation());
+		explanation.setStyle("-fx-font-size: " + font_size + "px;-fx-text-fill: white");
+		gameBox.getChildren().add(explanation);
+		
 		if (currentSelection.equals(correctChoice)) {
 			gameSelectorButton.setText("Correct!");
 			gameSelectorButton.setStyle("-fx-background-color: green");
