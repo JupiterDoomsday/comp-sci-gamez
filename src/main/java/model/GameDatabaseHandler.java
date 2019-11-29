@@ -90,5 +90,22 @@ public class GameDatabaseHandler {
 		  }
 		  
 	  }
+	  
+	  public ResultSet getScores(String username, String game) throws SQLException {
+		  Statement stmt = conn.createStatement();
+		  String query = "select username, game, score from scores";
+		  if (username != null) {
+			  query += " where username = '" + username + "'";
+			if(game != null)
+				query += " and ";
+		  }
+		  if(game != null) {
+			  if (username == null)
+				  query += " where ";
+			  query += " game = '" + game + "'";
+		  }
+		  query +=";";
+		  return stmt.executeQuery(query);
+	  }
 
 }

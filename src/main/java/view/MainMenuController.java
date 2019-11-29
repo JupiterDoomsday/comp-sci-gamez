@@ -48,6 +48,7 @@ public class MainMenuController extends Application {
 	private Stage loginWindow, registerWindow;
 
 	private GameDatabaseHandler database;
+	private LeaderboardView LbView;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -56,6 +57,7 @@ public class MainMenuController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		database = GameDatabaseHandler.getInstance();
+		LbView = new LeaderboardView(database);
 		BorderPane bPane = new BorderPane();
 		ScrollPane sPane = new ScrollPane();
 		// Add a background image for the main menu
@@ -135,6 +137,42 @@ public class MainMenuController extends Application {
 		leaderboards.getItems().add(gatesGameMenu);
 		MenuItem javaQuizletMenu = new MenuItem("Java Quizlet");
 		leaderboards.getItems().add(javaQuizletMenu);
+		
+		overall.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				LbView.showLeaderboard(null);
+				
+			} 
+		});
+		
+		arrayAttackMenu.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				LbView.showLeaderboard("ArrayAttack");
+			} 
+		});
+		
+		gatesGameMenu.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				LbView.showLeaderboard("GatesGame");
+			} 
+		});
+		
+		binaryBattleMenu.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				LbView.showLeaderboard("BinaryBattle");
+			} 
+		});
+		
+		javaQuizletMenu.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				LbView.showLeaderboard("JavaQuizlet");
+			} 
+		});
 
 		// Add a title for our main menu
 		Text title = new Text("\n    Computer\n          Crash Course");
