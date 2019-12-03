@@ -107,5 +107,17 @@ public class GameDatabaseHandler {
 		  query +=";";
 		  return stmt.executeQuery(query);
 	  }
+	  
+	  public void setScore(String username, String game, int score) throws SQLException{
+		  String id = username + "-" + game;
+		  Statement stmt = conn.createStatement();
+		  String query = "select score from scores where id = '" + id +"';";
+		  int prev_high = stmt.executeQuery(query).getInt("score");
+		  if (prev_high >= score)
+			  return;
+		  query = "delete from scores where id = '" + id + "';" +
+			  "insert into scores(id ,username, game, score) values ('" + id + "','" + username + "','" + game + "'," + score + ");";
+		  stmt.executeQuery(query);
+	  }
 
 }
