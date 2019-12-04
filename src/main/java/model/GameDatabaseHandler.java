@@ -47,7 +47,7 @@ public class GameDatabaseHandler {
 		    // executeQuery makes a real query on the real database
 		    ResultSet rs = stmt.executeQuery(query);
 		    while (rs.next()) 
-		    	if(rs.getString(1).equals(username) && rs.getString(2).equals(password))
+		    	if(rs.getString(1).equals(username) && SecureIt.decrypt(rs.getString(2)).equals(password))
 		    		return true;
 		    return false;
 		    
@@ -61,7 +61,7 @@ public class GameDatabaseHandler {
 		  try {
 			  Statement stmt = conn.createStatement();
 			  // Store the SQL command:
-			  String command = "insert into accounts(username, password) values('" + username + "', '" + password + "');";
+			  String command = "insert into accounts(username, password) values('" + username + "', '" + SecureIt.encrypt(password) + "');";
 			  // executeQuery makes a real query on the real database
 			  stmt.executeUpdate(command);
 		  }
