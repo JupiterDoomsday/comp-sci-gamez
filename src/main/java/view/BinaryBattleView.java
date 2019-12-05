@@ -392,7 +392,7 @@ public class BinaryBattleView extends VBox{
 				
 				
 				interval = 0;
-				Timer timer = new Timer();
+				Timer timer = new Timer(true);
 				
 				
 

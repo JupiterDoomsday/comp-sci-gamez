@@ -248,7 +248,7 @@ public class ArrayAttackModel {
 	
 	private void setTimer() {
 		interval = INTERVAL_MAX;
-		Timer timer = new Timer();
+		Timer timer = new Timer(true);
 
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
