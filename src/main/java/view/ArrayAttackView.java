@@ -1,7 +1,11 @@
 package view;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout.Alignment;
+
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -16,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import model.ArrayAttackModel;
+import model.GameDatabaseHandler;
 
 public class ArrayAttackView extends MinigameView {
 
@@ -25,7 +30,7 @@ public class ArrayAttackView extends MinigameView {
 	private GraphicsContext gc;
 	private ArrayAttackModel model;
 	private HBox controllerBox, newGameButtBox, bubbleSortButtBox, mergeSortButtBox, quickSortButtBox;
-	
+
 	@Override
 	public String settings() {
 		// TODO Change this
@@ -44,6 +49,8 @@ public class ArrayAttackView extends MinigameView {
 		model = new ArrayAttackModel(this);
 		VBox view = new VBox();
 		controllerBox = new HBox();
+		controllerBox.setMinWidth(CANVAS_WIDTH);
+		controllerBox.setAlignment(Pos.CENTER);
 		
 		//Setup the buttons to start a new game
 		newGameButtBox = new HBox(20);
@@ -149,6 +156,8 @@ public class ArrayAttackView extends MinigameView {
 		this.getChildren().add(view);
 		view.getChildren().addAll(mainCanvas, controllerBox);
 		gc.setFont(new Font(50));
+		gc.setFill(Color.BLACK);
+		gc.fillText("Welcome to\nArray Attack!", CANVAS_WIDTH/2.0, CANVAS_HEIGHT/2.0);
 		newGame();
 	}
 
@@ -166,8 +175,10 @@ public class ArrayAttackView extends MinigameView {
 	public void stop() {
 	}
 
-	public void updateBubble(ArrayList<Integer> array, int curIndex1, int curIndex2, int score) {
-		drawBackground(score);
+	public void updateBubble(ArrayList<Integer> array, int curIndex1, int curIndex2, int score, int interval) {
+		if (interval == 0)
+			return;
+		drawBackground(score, interval);
 		for(int i = 0; i < 8; i++)
 			drawBubble(array.get(i), i, i == curIndex1 || i == curIndex2);
 	}
@@ -181,8 +192,10 @@ public class ArrayAttackView extends MinigameView {
 		
 	}
 	
-	public void updateMerge(ArrayList<Integer> array1, ArrayList<Integer> array2, int s1i1, int s1i2, int s2i1, int s2i2, int score) {
-		drawBackground(score);
+	public void updateMerge(ArrayList<Integer> array1, ArrayList<Integer> array2, int s1i1, int s1i2, int s2i1, int s2i2, int score, int interval) {
+		if (interval == 0)
+			return;
+		drawBackground(score, interval);
 		for(int i = 0; i < 8; i++)
 			drawMerge(array1.get(i), array2.get(i), i, s1i2 - s1i1 + 1, (i >= s1i1 && i <= s1i2), (i >= s2i1 && i <= s2i2));
 	}
@@ -213,18 +226,20 @@ public class ArrayAttackView extends MinigameView {
 		return blockMid + (indInBlock - selectionSize/2)*75;
 	}
 
-	public void updateQuick(ArrayList<Integer> array1, ArrayList<Integer> array2, int curIndex, Integer pivot, int score) {
-		drawBackground(score);
-		gc.fillText(pivot.toString(), CANVAS_WIDTH/2.0, CANVAS_HEIGHT/2.0);
-		drawQuick(array1, array2, curIndex);
+	public void updateQuick(ArrayList<Integer> array1, ArrayList<Integer> array2, Integer pivot, int score, int interval) {
+		if (interval == 0)
+			return;
+		drawBackground(score, interval);
+		gc.fillText(pivot.toString(), CANVAS_WIDTH/2.0, CANVAS_HEIGHT/2.5);
+		drawQuick(array1, array2);
 	}
 	
-	private void drawQuick(ArrayList<Integer> array1, ArrayList<Integer> array2, int curIndex) {
+	private void drawQuick(ArrayList<Integer> array1, ArrayList<Integer> array2) {
 		gc.setFill(Color.BLACK);
-		for(int i = 0; i < 8; i++)
-			gc.fillText(array2.get(i).toString(), (i * CANVAS_WIDTH/8.0) + CANVAS_WIDTH/16.0, CANVAS_HEIGHT*3/4.0);
+		for(int i = 0; i < array2.size(); i++)
+			gc.fillText(array2.get(i).toString(), (i * CANVAS_WIDTH/array2.size()) + CANVAS_WIDTH/16.0, CANVAS_HEIGHT*3/4.0);
 		for(int i = 0; i < array1.size(); i++) {
-			if(i == curIndex)
+			if(i == 0)
 				gc.setFill(Color.GREEN);
 			else
 				gc.setFill(Color.BLACK);
@@ -233,11 +248,41 @@ public class ArrayAttackView extends MinigameView {
 		}
 	}
 	
-	private void drawBackground(int score) {
+	private void drawBackground(int score, int interval) {
 		gc.setFill(Color.LAVENDER);
 		gc.fillRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		gc.setFill(Color.BLACK);
 		gc.fillText("Score: " + score, CANVAS_WIDTH/2.0, CANVAS_HEIGHT/6.0);
+		gc.fillText("Time: " + interval, CANVAS_WIDTH/2.0, CANVAS_HEIGHT/4.0);
+	}
+
+	public void setTimerText(int interval) {
+		gc.setFill(Color.LAVENDER);
+		gc.fillRect(CANVAS_WIDTH/2.0 - 100, CANVAS_HEIGHT/4.0 - 20 , 200, 50);
+		gc.setFill(Color.BLACK);
+		gc.fillText("Time: " + interval, CANVAS_WIDTH/2.0, CANVAS_HEIGHT/4.0);
+
+	}
+
+	public void timeUpScreen(int score) {
+		gc.setFill(Color.LAVENDER);
+		gc.fillRect(0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		gc.setFill(Color.BLACK);
+		gc.fillText("Game Over!\nScore: " + score, CANVAS_WIDTH/2.0, CANVAS_HEIGHT/2.0);
+		String username = MainMenuController.getUser();
+		if(username != null) {
+			try {
+				GameDatabaseHandler.getInstance().setScore(username, "ArrayAttack", score);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				newGame();
+			}
+			});
 	}
 
 }
