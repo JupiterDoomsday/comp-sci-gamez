@@ -1,6 +1,7 @@
 package view;
 
 import java.io.File;
+import java.sql.SQLException;
 
 import com.sun.prism.paint.Color;
 import javafx.event.ActionEvent;
@@ -27,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.Difficulties;
+import model.GameDatabaseHandler;
 import model.JavaQuizletGame;
 import model.JavaQuizletModel;
 
@@ -188,6 +190,14 @@ public class JavaQuizlet extends MinigameView {
 			incorrectScoreLabel.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
 			finalScoreLabel.setStyle("-fx-font-size: " + font_size + "px; -fx-text-fill: white;");
 
+			GameDatabaseHandler database = GameDatabaseHandler.getInstance();
+			try {
+				database.setScore("UsernameHere", "JavaQuizlet", finalScore);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			results.getChildren().addAll(lastQuestion, correctScoreLabel,incorrectScoreLabel,finalScoreLabel);
 			Button retry = new Button("Want to try again?");
 			results.getChildren().add(retry);
@@ -303,9 +313,9 @@ public class JavaQuizlet extends MinigameView {
 			node.setDisable(true);
 
 			if (node.getText().equals(nextQuestion.getCorrectChoice())) {
-				node.setStyle("-fx-text-fill: green;-fx-font-size: 18;");
+				node.setStyle("-fx-text-fill: lightgreen;-fx-font-size: 18;-fx-opacity: 1;");
 			} else {
-				node.setStyle("-fx-text-fill: red;-fx-font-size: 18;");
+				node.setStyle("-fx-text-fill: pink;-fx-font-size: 18;-fx-opacity: 1;");
 			}
 		});
 
