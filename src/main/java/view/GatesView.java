@@ -276,6 +276,7 @@ public class GatesView extends MinigameView {
 		animation.play();
 		textBoxAni.play();
 		text.setText("");
+		text.setFont(new Font("Arial", 32));
 		count=0;
 		EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
 			   @Override 

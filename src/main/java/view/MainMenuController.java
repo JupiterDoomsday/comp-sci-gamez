@@ -227,7 +227,7 @@ public class MainMenuController extends Application {
 		Button arrayAttackButton = new Button("Array Attack");
 		arrayAttackButton.setMinHeight(200.0);
 		arrayAttackButton.setMinWidth(500.0);
-		arrayAttackButton.setFont(new Font("Arial", 48));
+		arrayAttackButton.setFont(Font.loadFont("file:resources/fonts/MAINBRG_.ttf", 48));
 		arrayAttackButton.setStyle(buttonStyle);
 		arrayAttackButton.setOnMouseEntered(e -> {
 			arrayAttackButton.setStyle(hoverStyle);
@@ -240,7 +240,7 @@ public class MainMenuController extends Application {
 		Button binaryBattleButton = new Button("Binary Battle");
 		binaryBattleButton.setMinHeight(200.0);
 		binaryBattleButton.setMinWidth(500.0);
-		binaryBattleButton.setFont(new Font("Arial", 48));
+		binaryBattleButton.setFont(Font.loadFont("file:resources/fonts/MAINBRG_.ttf", 48));
 		binaryBattleButton.setStyle(buttonStyle);
 		binaryBattleButton.setOnMouseEntered(e -> {
 			binaryBattleButton.setStyle(hoverStyle);
@@ -253,7 +253,7 @@ public class MainMenuController extends Application {
 		Button gatesGameButton = new Button("Gates Game");
 		gatesGameButton.setMinHeight(200.0);
 		gatesGameButton.setMinWidth(500.0);
-		gatesGameButton.setFont(new Font("Arial", 48));
+		gatesGameButton.setFont(Font.loadFont("file:resources/fonts/MAINBRG_.ttf", 48));
 		gatesGameButton.setStyle(buttonStyle);
 		gatesGameButton.setOnMouseEntered(e -> {
 			gatesGameButton.setStyle(hoverStyle);
@@ -266,7 +266,7 @@ public class MainMenuController extends Application {
 		Button javaQuizletButton = new Button("Java Quizlet");
 		javaQuizletButton.setMinHeight(200.0);
 		javaQuizletButton.setMinWidth(500.0);
-		javaQuizletButton.setFont(new Font("Arial", 48));
+		javaQuizletButton.setFont(Font.loadFont("file:resources/fonts/MAINBRG_.ttf", 48));
 		javaQuizletButton.setStyle(buttonStyle);
 		javaQuizletButton.setOnMouseEntered(e -> {
 			javaQuizletButton.setStyle(hoverStyle);
@@ -663,7 +663,7 @@ public class MainMenuController extends Application {
 			text.setFill(Color.WHITE);
 		}
 		else if (rating > 0) {
-			text.setFill(Color.GREEN);
+			text.setFill(Color.LIMEGREEN);
 		}
 	}
 

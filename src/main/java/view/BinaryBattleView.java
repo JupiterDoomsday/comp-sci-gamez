@@ -565,7 +565,7 @@ public class BinaryBattleView extends VBox{
 	
 	private void setTimer(Text timerText) {
 		interval = 10;
-		Timer timer = new Timer();
+		Timer timer = new Timer(true);
 
 		timer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
@@ -595,7 +595,13 @@ public class BinaryBattleView extends VBox{
 			
 			try {
 				GameDatabaseHandler gdh = new GameDatabaseHandler();
-				gdh.setScore("test", "Binary Battle", model.score);
+				String username = MainMenuController.getUser();
+				if(username != null) {
+					System.out.println("Submitted score");
+					gdh.setScore(username, "Binary Battle", model.score);
+					gdh.setScore(username, "BinaryBattle", model.score);
+				}
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
