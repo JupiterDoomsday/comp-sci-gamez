@@ -56,6 +56,14 @@ public class GatesView extends MinigameView {
 	private Image lampOff;
 	private StackPane textBox;
 	private ImageView mascot;
+	private Image bitwise;
+	private Image onSwitch;
+	private Image offSwitch;
+	private Image gateScreen;
+	private Image gateExample;
+	private Image lightExample;
+	private Image offExample;
+	private Image onExample;
 	private Label text;
 	private VBox vBox;
 	private Queue<GatesGame> levels;
@@ -77,10 +85,17 @@ public class GatesView extends MinigameView {
 	private Background background;
 	private BackgroundFill background_fill;
 	private int count;
-	private String[] dialouge= {"Oh my! It seems you need a course on gates!","No worry! I Commie-chan am here to assist you!",
-			"First things first, Us computers like me represent our logic in binary bits.",
+	private String[] dialouge= {"Oh my! It seems you need a course on gates!",
+			"No worry! I Commie-chan am here to assist you!",
+			"First things first, Us computers represent our logic in binary bits of 1's and 0's",
 			"True is represented by 1 and false is represented by 0",
-			"In this minigame FALSE is represented by an off switch", "While TRUE is represented by an on switch!","Each wire represents a bit of logic thats Either TRUE of FALSE"};
+			"In this minigame FALSE is represented by an off switch", 
+			"While TRUE is represented by an on switch!",
+			"Each switch represents a wire connected to a gate",
+			"Our goal is to figure what sequence of switches will make our gate output true", 
+			"Our Gate output is represented by a lightbulb",
+			"On is TRUE while off is FALSE",
+			"different gates require different sequences of switch outputs,\nSo I highly encourage you try out the levels yourself and practice"};
 	
 	GatesGame curGame;
 	private void  setGatesView(GatesGame game) {
@@ -154,7 +169,7 @@ public class GatesView extends MinigameView {
 		levels= new LinkedList<GatesGame>();
 		text= new Label();
 		textBox= new StackPane();
-		text.setFont(new Font("Sans-serif", 100));
+		text.setFont(new Font("Sans-serif", 250));
 		bp= new BorderPane();
 		bp.setMinHeight(900);
 		bp.setMinWidth(1200);
@@ -220,8 +235,16 @@ public class GatesView extends MinigameView {
 			emptyTile=new Image(new FileInputStream("Image/empty.png"));
 			lampOff=new Image(new FileInputStream("Image/lightbulb.png"));
 			lampOn=new Image(new FileInputStream("Image/lightbulb_lit.png"));
-			img= new ImageView(new Image(new FileInputStream("Image/invo-Background.png")));
+			onSwitch= new Image(new FileInputStream("Image/switch_on.png"));
+			offSwitch= new Image(new FileInputStream("Image/switch_off.png"));
+			img= new ImageView(new Image(new FileInputStream("Image/text_box.png")));
 			mascot= new ImageView(new Image(new FileInputStream("Image/commie-chan.png")));
+			gateScreen= new Image(new FileInputStream("Image/gates_screen.png"));
+			offExample= new Image(new FileInputStream("Image/switch_off_example.png"));
+			onExample= new Image(new FileInputStream("Image/switch_on_example.png"));
+			bitwise= new Image(new FileInputStream("Image/example.png"));
+			gateExample= new Image(new FileInputStream("Image/gateExample.png"));
+			lightExample= new Image(new FileInputStream("Image/lightbulbExample.png"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -238,13 +261,13 @@ public class GatesView extends MinigameView {
 		TranslateTransition animation= new TranslateTransition();
 		animation.setDuration(Duration.millis(3000));
 		animation.setNode(mascot);
-		animation.setFromY(25);
+		animation.setFromY(-50);
 		animation.setFromX(850);
-		animation.setByX(-500);
+		animation.setByX(-600);
 		TranslateTransition textBoxAni= new TranslateTransition();
 		textBoxAni.setDuration(Duration.millis(2000));
 		textBoxAni.setFromY(400);
-		textBoxAni.setFromX(250);
+		//textBoxAni.setFromX(10);
 		textBoxAni.setByY(-100);
 		textBoxAni.setNode(textBox);
 		animation.play();
@@ -255,13 +278,36 @@ public class GatesView extends MinigameView {
 				   text.setText("");
 				   if(count == dialouge.length) {
 					count=0;
+					stack.getChildren().remove(0);
 					getChildren().clear();
 					getChildren().add(bp);
+					return;
 				   }
-				   else {
-					   AnimateText(text,dialouge[count]);
-					   count++;
+				   else if(count==2) {
+					   stack.getChildren().add(0,new ImageView(bitwise));
 				   }
+				   else if(count==4) {
+					   stack.getChildren().remove(0);
+					   stack.getChildren().add(0,new ImageView(offExample));
+				   }
+				   else if(count==5) {
+					   stack.getChildren().remove(0);
+					   stack.getChildren().add(0,new ImageView(onExample));
+				   }
+				   else if(count==6) {
+					   stack.getChildren().remove(0);
+					   stack.getChildren().add(0,new ImageView(gateExample));
+				   }
+				   else if(count==8) {
+					   stack.getChildren().remove(0);
+					   stack.getChildren().add(0,new ImageView(lightExample));
+				   }
+				   else if(count==10) {
+					   stack.getChildren().remove(0);
+					   stack.getChildren().add(0, new ImageView(gateScreen));
+				   }
+				   AnimateText(text,dialouge[count]);
+				   count++;
 			   } 
 			};
 		stack.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
@@ -337,6 +383,16 @@ public class GatesView extends MinigameView {
 		challenge3.setOnMouseExited(e -> {
 			challenge3.setStyle(buttonStyle);
 		});
+		//challenge3 button style
+				tutorial.setMinHeight(50);
+				tutorial.setMinWidth(125);
+				tutorial.setStyle(buttonStyle);
+				tutorial.setOnMouseEntered(e -> {
+					tutorial.setStyle(hoverStyle);
+				});
+				tutorial.setOnMouseExited(e -> {
+					tutorial.setStyle(buttonStyle);
+				});
 	}
 	public void setMenu() {
 		bp.setBackground(background);
