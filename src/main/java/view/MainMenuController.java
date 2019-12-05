@@ -49,6 +49,11 @@ public class MainMenuController extends Application {
 
 	private GameDatabaseHandler database;
 	private LeaderboardView LbView;
+	
+	private String user;
+	
+	private Menu profile;
+	private MenuItem login, register, logout;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -100,10 +105,10 @@ public class MainMenuController extends Application {
 		});
 
 		// Add a profile menu (login, register, etc.)
-		Menu profile = new Menu("Profile");
+		profile = new Menu("Profile");
 		menuBar.getMenus().add(profile);
-		MenuItem login = new MenuItem("Login");
-		profile.getItems().add(login);
+		login = new MenuItem("Login");
+	
 		login.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -112,17 +117,27 @@ public class MainMenuController extends Application {
 			}
 		});
 		
-		MenuItem register = new MenuItem("Register");
-		profile.getItems().add(register);
+		register = new MenuItem("Register");
 		// When create account button is clicked, we want to open the create account
-				// popup window.
-				register.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("Create Account button clicked - createAccount() called in SongLibraryView");
-						registerPopup();
-					}
-				});
+		// popup window.
+		register.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Create Account button clicked - createAccount() called in MainMenuController");
+				registerPopup();
+			}
+		});
+		
+		logout = new MenuItem("Logout");
+		logout.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Logout button clicked");
+				setLoggedout();
+			}
+		});
+		
+		setLoggedout();
 
 		// Add a leaderboards menu (overall + leaderboard for each game)
 		Menu leaderboards = new Menu("Leaderboards");
@@ -318,6 +333,19 @@ public class MainMenuController extends Application {
 		primaryStage.show();
 	}
 	
+	private void setLoggedout() {
+		user = null;
+		profile.getItems().clear();
+		profile.getItems().add(login);
+		profile.getItems().add(register);
+	}
+	
+	private void setLoggedin(String username) {
+		user = username;
+		profile.getItems().clear();
+		profile.getItems().add(logout);
+	}
+
 	private void registerPopup() {
 		// This is just for creating the create account popup.
 		registerWindow = new Stage();
@@ -421,6 +449,7 @@ public class MainMenuController extends Application {
 
 		// If all error checks are passed, create the account and return true.
 		database.registerCredentials(username, password);
+		setLoggedin(username);
 		registerWindow.close();
 		return true;
 	}
@@ -495,6 +524,7 @@ public class MainMenuController extends Application {
 		
 		if (database.verifyCredentials(username, password)) {
 			// Successfully logged in, update windows
+			setLoggedin(username);
 			System.out.println("  - Successfully logged in!");
 			//this.username = username;
 		} else {
@@ -503,49 +533,7 @@ public class MainMenuController extends Application {
 			return;
 		}
 
-		//System.out.println("  - Clearing login pane");
-		//loginPane.getChildren().clear();
-		
-		
 		loginWindow.close();
-		/*
-		Button logout = new Button("Logout");
-		logout.setPadding(new Insets(10, 50, 10, 50));
-		logout.setFont(new Font("Arial", 14));
-
-		// When login button is clicked, we want to open the login popup window.
-		logout.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Logout button clicked");
-				clearUser();
-				loginPane.getChildren().clear();
-				observableListLayout();
-				System.out.println("About to clean the song queue");
-				songQueue.clearSongQueue();
-				System.out.println("Song queue cleared");
-			}
-		});
-
-		loginPane.add(logout, 0, 0);
-		GridPane.setMargin(logout, new Insets(0, 20, 20, 120));
-
-		Button songHistory = new Button("Song History");
-		songHistory.setPadding(new Insets(10, 10, 10, 10));
-
-		// When create account button is clicked, we want to open the create account
-		// popup window.
-		songHistory.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Song History button clicked");
-				songHistoryPopup();
-			}
-		});
-
-		loginPane.add(songHistory, 0, 1);
-		GridPane.setMargin(songHistory, new Insets(0, 0, 0, 130));
-		*/
 	}
 
 }
