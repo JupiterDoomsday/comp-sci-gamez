@@ -4,25 +4,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Queue;
 
 import javafx.animation.Animation;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
-import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -31,12 +22,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.ANDGateGame;
 import model.Challenge2GatesGame;
@@ -57,8 +46,6 @@ public class GatesView extends MinigameView {
 	private StackPane textBox;
 	private ImageView mascot;
 	private Image bitwise;
-	private Image onSwitch;
-	private Image offSwitch;
 	private Image gateScreen;
 	private Image gateExample;
 	private Image lightExample;
@@ -83,7 +70,6 @@ public class GatesView extends MinigameView {
 	private Button tutorial;
 	private Button back;
 	private Background background;
-	private BackgroundFill background_fill;
 	private int count;
 	private String[] dialouge= {"Oh my! It seems you need a course on gates!",
 			"No worry! I Commie-chan am here to assist you!",
@@ -235,8 +221,6 @@ public class GatesView extends MinigameView {
 			emptyTile=new Image(new FileInputStream("Image/empty.png"));
 			lampOff=new Image(new FileInputStream("Image/lightbulb.png"));
 			lampOn=new Image(new FileInputStream("Image/lightbulb_lit.png"));
-			onSwitch= new Image(new FileInputStream("Image/switch_on.png"));
-			offSwitch= new Image(new FileInputStream("Image/switch_off.png"));
 			img= new ImageView(new Image(new FileInputStream("Image/text_box.png")));
 			mascot= new ImageView(new Image(new FileInputStream("Image/commie-chan.png")));
 			gateScreen= new Image(new FileInputStream("Image/gates_screen.png"));
@@ -257,7 +241,6 @@ public class GatesView extends MinigameView {
 	}
 	private void setTutorial() { 
 		stack.setBackground(background);
-		ObservableList list = stack.getChildren();
 		TranslateTransition animation= new TranslateTransition();
 		animation.setDuration(Duration.millis(3000));
 		animation.setNode(mascot);
