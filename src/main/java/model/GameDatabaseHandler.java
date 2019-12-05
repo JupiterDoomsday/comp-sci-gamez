@@ -135,9 +135,12 @@ public class GameDatabaseHandler {
 	  public void setRating(String username, String game, int rating) throws SQLException{
 		  String id = username + "-" + game;
 		  Statement stmt = conn.createStatement();
-		  String query = "delete from scores where id = '" + id + "';" +
-			  "insert into ratings(id ,username, game, rating) values ('" + id + "','" + username + "','" + game + "'," + rating + ");";
-		  stmt.executeQuery(query);
+		  String query = "delete from ratings where id = '" + id + "';";
+		  stmt.executeUpdate(query);
+		  
+		  stmt = conn.createStatement();
+		  query = "insert into ratings(id ,username, game, rating) values ('" + id + "','" + username + "','" + game + "'," + rating + ");";
+		  stmt.executeUpdate(query);
 	  }
 
 }
