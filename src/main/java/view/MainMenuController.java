@@ -2,6 +2,7 @@ package view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -341,6 +342,7 @@ public class MainMenuController extends Application {
 
 		// Add a BorderPane to the Scene
 		Scene scene = new Scene(bPane, 1200, 900);
+		String css = this.getClass().getResource("stylesheet.css").toExternalForm();
 		primaryStage.setScene(scene);
 
 		// Start the application

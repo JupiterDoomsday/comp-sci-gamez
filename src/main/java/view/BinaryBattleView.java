@@ -34,6 +34,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import model.BinaryBattleModel;
+import model.GameDatabaseHandler;
 
 public class BinaryBattleView extends VBox{
 	
@@ -43,8 +44,9 @@ public class BinaryBattleView extends VBox{
 	private ArrayList<Text> textList;
 	//private int childToChange = 0;
 	private VBox vBox;
-	private int interval = 3;
+	private int interval = 60;
 	//private int score = 0;
+	int numsCompleted = 0;
 	
 	public BinaryBattleView() {
 		
@@ -54,7 +56,6 @@ public class BinaryBattleView extends VBox{
 		binaryStrings = new ArrayList<>();
 		textList = new ArrayList<>();
 		
-		//beginBinaryGame();
 		
 		layoutView();
 	}
@@ -362,11 +363,120 @@ public class BinaryBattleView extends VBox{
 	
 	private void layoutNimbleNibbles() {
 		
+		vBox.getChildren().clear();
 		
+		Text startMessage = new Text("\n\n\n\nTime yourself and try to convert 10 numbers as fast as possible.");
+		startMessage.setFill(Color.WHITE);
+		startMessage.setFont(Font.font("Sans-serif", FontWeight.NORMAL, FontPosture.REGULAR, 32));
+		vBox.setAlignment(Pos.CENTER);
+		vBox.getChildren().add(startMessage);
+		VBox.setMargin(startMessage,  new Insets(20, 20, 20, 20));
 		
-	}
-	
-	private void layoutNibbleScoreScreen() {
+		Button start = new Button("Start");
+		start.setFont(Font.font("Sans-serif", FontWeight.BOLD, FontPosture.REGULAR, 72));
+		vBox.getChildren().add(start);
+		
+		start.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				
+				vBox.getChildren().clear();
+				
+				Text timerText = new Text("Time: 0");
+				timerText.setFill(Color.WHITE);
+				timerText.setFont(Font.font("Sans-serif", FontWeight.NORMAL, FontPosture.REGULAR, 40));
+				vBox.setAlignment(Pos.CENTER);
+				vBox.getChildren().add(timerText);
+				VBox.setMargin(timerText, new Insets(20, 30, 20, 20));
+				
+				
+				
+				interval = 0;
+				Timer timer = new Timer();
+				
+				
+
+				timer.scheduleAtFixedRate(new TimerTask() {
+					public void run() {
+
+						System.out.println("numsCompleted: " + numsCompleted);
+						if(numsCompleted < 1) {
+							System.out.println("Increasing interval");
+							interval++;
+							Platform.runLater(() -> timerText.setText("Time: " + interval));
+							
+						} else {
+							
+							System.out.println("0 reached, break");
+							
+							Platform.runLater(() -> {
+								vBox.getChildren().clear();
+								Text finalScore = new Text("Final Score: " + interval + " seconds");
+								finalScore.setFill(Color.WHITE);
+								finalScore.setFont(Font.font("Sans-serif", FontWeight.NORMAL, FontPosture.REGULAR, 100));
+								vBox.getChildren().add(finalScore);
+								vBox.setAlignment(Pos.BOTTOM_CENTER);
+								VBox.setMargin(finalScore, new Insets(20, 20, 20, 20));
+							});
+							
+							timer.cancel();
+						}
+					}
+				}, 1000, 1000);
+				
+				Text binaryNumber = new Text();
+				binaryNumber.setText(model.generateRandomNibble());
+				System.out.println("Binary number: " + binaryNumber.getText());
+				binaryNumber.setFill(Color.WHITE);
+				binaryNumber.setFont(Font.font("Sans-serif", FontWeight.NORMAL, FontPosture.REGULAR, 100));
+				vBox.setAlignment(Pos.BOTTOM_CENTER);
+				vBox.getChildren().add(binaryNumber);
+				
+				GridPane gp = new GridPane();
+				TextField textField = new TextField();
+				textField.requestFocus();
+				textField.setMinHeight(50);
+				textField.setMinWidth(150);
+				textField.setAlignment(Pos.CENTER);
+				textField.textProperty().addListener(new ChangeListener<String>() {
+		            @Override
+		            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+		                if (!newValue.matches("\\d{0,3}?")) {
+		                    textField.setText(oldValue);
+		                }
+		            }
+		        });
+				gp.add(textField, 0, 0);
+				
+				Button checkButton = new Button("Check answer");
+				checkButton.setFont(Font.font("Sans-serif", FontWeight.BOLD, FontPosture.REGULAR, 20));
+				checkButton.setMinHeight(40.0);
+				checkButton.setMinWidth(150.0);
+				checkButton.setDefaultButton(true);
+				gp.add(checkButton, 1, 0);
+				gp.setAlignment(Pos.CENTER);
+				GridPane.setMargin(checkButton, new Insets(20, 20, 20, 20));
+				gp.setPadding(new Insets(70, 70, 70, 70));
+				
+				System.out.println("Current byte num: " + model.currentNibbleNum);
+				
+				checkButton.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						if(Integer.parseInt(textField.getText()) == model.currentNibbleNum) {
+							textField.clear();
+							model.score++;
+							numsCompleted++;
+							binaryNumber.setText(model.generateRandomNibble());
+						}
+					}
+				});		
+				
+				vBox.getChildren().add(gp);
+				
+				
+			}
+		});
 		
 	}
 	
@@ -389,7 +499,7 @@ public class BinaryBattleView extends VBox{
 				
 				vBox.getChildren().clear();
 				
-				Text timerText = new Text("Time: 10");
+				Text timerText = new Text("Time: 60");
 				setTimer(timerText);
 				timerText.setFill(Color.WHITE);
 				timerText.setFont(Font.font("Sans-serif", FontWeight.NORMAL, FontPosture.REGULAR, 40));
@@ -482,6 +592,14 @@ public class BinaryBattleView extends VBox{
 			vBox.getChildren().add(finalScore);
 			vBox.setAlignment(Pos.BOTTOM_CENTER);
 			VBox.setMargin(finalScore, new Insets(20, 20, 20, 20));
+			
+			try {
+				GameDatabaseHandler gdh = new GameDatabaseHandler();
+				gdh.setScore("test", "Binary Battle", model.score);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});	
 	}
 	
