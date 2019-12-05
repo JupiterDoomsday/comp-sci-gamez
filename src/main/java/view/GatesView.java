@@ -174,7 +174,7 @@ public class GatesView extends MinigameView {
 		//levels= new LinkedList<GatesGame>();
 		text= new Label();
 		textBox= new StackPane();
-		text.setFont(new Font("Sans-serif", 250));
+		text.setFont(new Font("Sans-serif", 20));
 		bp= new BorderPane();
 		bp.setMinHeight(900);
 		bp.setMinWidth(1200);
@@ -275,13 +275,15 @@ public class GatesView extends MinigameView {
 		textBoxAni.setNode(textBox);
 		animation.play();
 		textBoxAni.play();
+		text.setText("");
+		count=0;
 		EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
 			   @Override 
 			   public void handle(MouseEvent e) { 
 				   text.setText("");
 				   if(count == dialouge.length) {
-					count=0;
-					stack.getChildren().remove(0);
+					stack.getChildren().removeAll();
+					stack.removeEventFilter(MouseEvent.MOUSE_CLICKED, this);
 					getChildren().clear();
 					getChildren().add(bp);
 					mediaPlayer.stop();
