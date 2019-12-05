@@ -1,28 +1,27 @@
 package view;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Observer;
+
 import java.util.Queue;
+
+import javafx.scene.media.Media;
 
 import javafx.animation.Animation;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
-import javafx.application.Application;
+
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TextField;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -31,12 +30,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.ANDGateGame;
 import model.Challenge2GatesGame;
@@ -57,8 +56,6 @@ public class GatesView extends MinigameView {
 	private StackPane textBox;
 	private ImageView mascot;
 	private Image bitwise;
-	private Image onSwitch;
-	private Image offSwitch;
 	private Image gateScreen;
 	private Image gateExample;
 	private Image lightExample;
@@ -66,11 +63,12 @@ public class GatesView extends MinigameView {
 	private Image onExample;
 	private Label text;
 	private VBox vBox;
-	private Queue<GatesGame> levels;
+	//private Queue<GatesGame> levels;
 	private GridPane layOut;
 	private ANDGateGame and;
 	private ORGatesGame or;
 	private XORGateGame xor;
+	private MediaPlayer mediaPlayer;
 	private challenge1GatesGame ch1;
 	private Challenge2GatesGame ch2;
 	private Challenge3GatesGame ch3;
@@ -118,9 +116,9 @@ public class GatesView extends MinigameView {
 					im= new ImageView(g.getImg());
 					layOut.add(im,j,i);
 					if(g.gateOutput())
-						layOut.add(new  ImageView(lampOn),g.getX(),g.getY());
+						layOut.add(new ImageView(lampOn),g.getX(),g.getY());
 					else
-						layOut.add(new  ImageView(lampOff),g.getX(),g.getY());
+						layOut.add(new ImageView(lampOff),g.getX(),g.getY());
 				}
 			}
 		}
@@ -129,19 +127,22 @@ public class GatesView extends MinigameView {
 			Wire w= wires.get(i);
 			w.setOnAction( ae -> {
 				w.invert();
-				 if(w.state())
+				 if(w.state()) {
 						w.setGraphic(new ImageView(w.getOnImg()));
-					else
+						playSound("./resources/gatesgameSoundFX/footstep.wav");
+				 }
+					else {
 						w.setGraphic(new ImageView(w.getOffImg()));
+						playSound("./resources/gatesgameSoundFX/switch.wav");
+					}
 				checkState();
+				
 			});
 			w.setStyle("-fx-padding: 0 0 0 0; -fx-margin: 0 0 0 0;");
 			layOut.add(w, wires.get(i).getX(), wires.get(i).getY());
 		}
-		bp.getChildren().add(layOut);
-		bp.getChildren().add(back);
-		//layOut.setAlignment(Pos.CENTER);
-		//back.setAlignment(Pos.BOTTOM_RIGHT);
+		bp.getChildren().add(0,layOut);
+		bp.getChildren().add(1,back);
 	}
 	 /**
 	   * This changes and updates the view every game sate change
@@ -166,7 +167,7 @@ public class GatesView extends MinigameView {
 		this.setMinHeight(900);
 		BackgroundFill background_fill = new BackgroundFill(Color.rgb(8,20,30),CornerRadii.EMPTY, Insets.EMPTY);
 		background = new Background(background_fill);
-		levels= new LinkedList<GatesGame>();
+		//levels= new LinkedList<GatesGame>();
 		text= new Label();
 		textBox= new StackPane();
 		text.setFont(new Font("Sans-serif", 250));
@@ -235,8 +236,6 @@ public class GatesView extends MinigameView {
 			emptyTile=new Image(new FileInputStream("Image/empty.png"));
 			lampOff=new Image(new FileInputStream("Image/lightbulb.png"));
 			lampOn=new Image(new FileInputStream("Image/lightbulb_lit.png"));
-			onSwitch= new Image(new FileInputStream("Image/switch_on.png"));
-			offSwitch= new Image(new FileInputStream("Image/switch_off.png"));
 			img= new ImageView(new Image(new FileInputStream("Image/text_box.png")));
 			mascot= new ImageView(new Image(new FileInputStream("Image/commie-chan.png")));
 			gateScreen= new Image(new FileInputStream("Image/gates_screen.png"));
@@ -254,10 +253,10 @@ public class GatesView extends MinigameView {
 		this.getChildren().add(bp);	
 		stack.getChildren().add(mascot);
 		stack.getChildren().add(textBox);
+		
 	}
 	private void setTutorial() { 
 		stack.setBackground(background);
-		ObservableList list = stack.getChildren();
 		TranslateTransition animation= new TranslateTransition();
 		animation.setDuration(Duration.millis(3000));
 		animation.setNode(mascot);
@@ -281,6 +280,7 @@ public class GatesView extends MinigameView {
 					stack.getChildren().remove(0);
 					getChildren().clear();
 					getChildren().add(bp);
+					mediaPlayer.stop();
 					return;
 				   }
 				   else if(count==2) {
@@ -312,6 +312,7 @@ public class GatesView extends MinigameView {
 			};
 		stack.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 		this.getChildren().add(stack);
+		playSound("./resources/gatesgameSoundFX/Aso - Chillhop Essentials - Summer 2016 - 14 Ultra Violet.mp3");
 	}
 	
 	//this helper function sets up the events for the button styles and whatnot
@@ -419,6 +420,7 @@ public class GatesView extends MinigameView {
 		VBox.setMargin(tutorial, new Insets(20, 20, 20, 20));
 	}
 	private void checkState() {
+		//System.out.println("Checking state of game");
 		ArrayList<Gate> gates= curGame.getListOfGates();
 		for(int i=0;i< gates.size();i++) {
 			if(gates.get(i).gateOutput())
@@ -448,11 +450,16 @@ public class GatesView extends MinigameView {
 		// TODO Auto-generated method stub
 
 	}
+	private void playSound(String file) {
+		Media sound = new Media(new File(file).toURI().toString());
+		mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.play();
+	}
 
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
-		System.out.println("You solved it!");
+		mediaPlayer.stop();
 		
 	}
 }
