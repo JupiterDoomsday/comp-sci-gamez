@@ -108,6 +108,7 @@ public class MainMenuController extends Application {
 			public void handle(ActionEvent ae) {
 				try {
 					start(primaryStage);
+					//stop()
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
