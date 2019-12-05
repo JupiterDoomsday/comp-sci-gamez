@@ -14,6 +14,7 @@ public class Gate{
 	private Wire wire1;
 	private Wire wire2;
 	private Image img;
+	private boolean isNot=false;
 	private int x,y;
 	
 	public Gate(Wire one, Wire two, String state, int x, int y){
@@ -54,6 +55,9 @@ public class Gate{
 	public Image getImg() {
 		return img;
 	}
+	public void Negate() {
+		isNot=true;
+	}
 	public String getLogic() {
 		switch(gateType){
 		case AND:
@@ -67,16 +71,20 @@ public class Gate{
 		}
 	}
 	public boolean gateOutput() {
+		boolean output;
 		switch(gateType){
 		case AND:
-			return wire1.state() && wire2.state();
+			output= wire1.state() && wire2.state();
 		case OR:
-			return wire1.state() || wire2.state();
+			output= wire1.state() || wire2.state();
 		case XOR:
-			return (!(wire1.state() && wire2.state()) && (wire1.state() || wire2.state()));
+			output= (!(wire1.state() && wire2.state()) && (wire1.state() || wire2.state()));
 		default:
-			return false;
+			output=false;
 		}
+		if(isNot)
+			return !output;
+		return output;
 	}
 	
 	
