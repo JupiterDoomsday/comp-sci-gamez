@@ -32,6 +32,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -65,10 +66,10 @@ public class MainMenuController extends Application {
 	private HBox ratingArrayAttack;
 	private HBox ratingGatesGame;
 	private HBox ratingJavaQuizlet;
-	Label ratingLabelArrayAttack;
-	Label ratingLabelBinaryBattle;
-	Label ratingLabelGatesGame;
-	Label ratingLabelJavaQuizlet;
+	TextFlow ratingLabelArrayAttack;
+	TextFlow ratingLabelBinaryBattle;
+	TextFlow ratingLabelGatesGame;
+	TextFlow ratingLabelJavaQuizlet;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -342,7 +343,7 @@ public class MainMenuController extends Application {
 
 		// Add a BorderPane to the Scene
 		Scene scene = new Scene(bPane, 1200, 900);
-		String css = this.getClass().getResource("stylesheet.css").toExternalForm();
+//		String css = this.getClass().getResource("stylesheet.css").toExternalForm();
 		primaryStage.setScene(scene);
 
 		// Start the application
@@ -456,7 +457,7 @@ public class MainMenuController extends Application {
 		// setting up the rating buttons
 		Button ratingPosArrayAttack = new Button("Like");
 		Button ratingNegArrayAttack = new Button("Dislike");
-		ratingLabelArrayAttack = new Label("+0");
+		ratingLabelArrayAttack = new TextFlow();
 		ratingLabelArrayAttack.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
 
 		ratingArrayAttack.getChildren().addAll(ratingPosArrayAttack,
@@ -464,21 +465,21 @@ public class MainMenuController extends Application {
 		
 		Button ratingPosBinaryBattle = new Button("Like");
 		Button ratingNegBinaryBattle = new Button("Dislike");
-		ratingLabelBinaryBattle = new Label("+0");
+		ratingLabelBinaryBattle = new TextFlow();
 		ratingLabelBinaryBattle.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
 		ratingBinaryBattle.getChildren().addAll(ratingPosBinaryBattle,
 				ratingNegBinaryBattle, ratingLabelBinaryBattle);
 		
 		Button ratingPosGatesGame = new Button("Like");
 		Button ratingNegGatesGame = new Button("Dislike");
-		ratingLabelGatesGame = new Label("+0");
+		ratingLabelGatesGame = new TextFlow();
 		ratingLabelGatesGame.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
 		ratingGatesGame.getChildren().addAll(ratingPosGatesGame,
 				ratingNegGatesGame, ratingLabelGatesGame);
 		
 		Button ratingPosJavaQuizlet = new Button("Like");
 		Button ratingNegJavaQuizlet = new Button("Dislike");
-		ratingLabelJavaQuizlet = new Label("+0");
+		ratingLabelJavaQuizlet = new TextFlow();
 		ratingLabelJavaQuizlet.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
 		ratingJavaQuizlet.getChildren().addAll(ratingPosJavaQuizlet,
 				ratingNegJavaQuizlet, ratingLabelJavaQuizlet);
@@ -613,19 +614,52 @@ public class MainMenuController extends Application {
 	}
 	
 	private void setRatingLabels() {
+		Text ratingText1 = new Text(" Rating = ");
+		Text ratingText2 = new Text(" Rating = ");
+		Text ratingText3 = new Text(" Rating = ");
+		Text ratingText4 = new Text(" Rating = ");
+		ratingText1.setFill(Color.WHITE);
+		ratingText2.setFill(Color.WHITE);
+		ratingText3.setFill(Color.WHITE);
+		ratingText4.setFill(Color.WHITE);
+		
 		int totalRating = getRatingValue("ArrayAttack");
-		ratingLabelArrayAttack.setText(" Rating=" + totalRating);
+		Text rateArrayAttack = new Text(totalRating + "");
+		assignColor(rateArrayAttack, totalRating);
+		ratingLabelArrayAttack.getChildren().clear();
+		ratingLabelArrayAttack.getChildren().addAll(ratingText1, rateArrayAttack);
 		
 		totalRating = getRatingValue("BinaryBattle");
-		ratingLabelBinaryBattle.setText(" Rating=" + totalRating);
+		Text rateBinaryBattle = new Text(totalRating + "");
+		assignColor(rateBinaryBattle, totalRating);
+		ratingLabelBinaryBattle.getChildren().clear();
+		ratingLabelBinaryBattle.getChildren().addAll(ratingText2, rateBinaryBattle);
 		
 		totalRating = getRatingValue("GatesGame");
-		ratingLabelGatesGame.setText(" Rating=" + totalRating);
+		Text rateGatesGame = new Text(totalRating + "");
+		assignColor(rateGatesGame, totalRating);
+		ratingLabelGatesGame.getChildren().clear();
+		ratingLabelGatesGame.getChildren().addAll(ratingText3, rateGatesGame);
 		
 		totalRating = getRatingValue("JavaQuizlet");
-		ratingLabelJavaQuizlet.setText(" Rating=" + totalRating);
+		Text rateJavaQuizlet = new Text(totalRating + "");
+		assignColor(rateJavaQuizlet, totalRating);
+		ratingLabelJavaQuizlet.getChildren().clear();
+		ratingLabelJavaQuizlet.getChildren().addAll(ratingText4, rateJavaQuizlet);
 	}
 	
+	private void assignColor(Text text, int rating) {
+		if (rating < 0) {
+			text.setFill(Color.RED);
+		}
+		else if (rating == 0) {
+			text.setFill(Color.WHITE);
+		}
+		else if (rating > 0) {
+			text.setFill(Color.GREEN);
+		}
+	}
+
 	private boolean createAccount(String username, String password, String reenterPassword) {
 		// This handles attempting to create an account.
 		// It would call usernameAvailable() and registerCredentials().
