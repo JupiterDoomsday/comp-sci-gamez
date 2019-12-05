@@ -55,6 +55,7 @@ public class MainMenuController extends Application {
 
 	private GameDatabaseHandler database;
 	private LeaderboardView LbView;
+	private static MainMenuController instance;
 	
 	private String user;
 	
@@ -71,12 +72,17 @@ public class MainMenuController extends Application {
 	TextFlow ratingLabelGatesGame;
 	TextFlow ratingLabelJavaQuizlet;
 	
+	public static String getUser() {
+		return instance.user;
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		instance = this;
 		database = GameDatabaseHandler.getInstance();
 		LbView = new LeaderboardView(database);
 		BorderPane bPane = new BorderPane();
@@ -343,7 +349,7 @@ public class MainMenuController extends Application {
 
 		// Add a BorderPane to the Scene
 		Scene scene = new Scene(bPane, 1200, 900);
-//		String css = this.getClass().getResource("stylesheet.css").toExternalForm();
+		//String css = this.getClass().getResource("stylesheet.css").toExternalForm();
 		primaryStage.setScene(scene);
 
 		// Start the application

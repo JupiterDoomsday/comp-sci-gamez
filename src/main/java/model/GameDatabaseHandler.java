@@ -113,12 +113,16 @@ public class GameDatabaseHandler {
 		  String id = username + "-" + game;
 		  Statement stmt = conn.createStatement();
 		  String query = "select score from scores where id = '" + id +"';";
-		  int prev_high = stmt.executeQuery(query).getInt("score");
-		  if (prev_high >= score)
-			  return;
-		  query = "delete from scores where id = '" + id + "';" +
-			  "insert into scores(id ,username, game, score) values ('" + id + "','" + username + "','" + game + "'," + score + ");";
-		  stmt.executeQuery(query);
+		  ResultSet rs = stmt.executeQuery(query);
+		  if(rs.next()) {
+		  	int prev_high = rs.getInt("score");
+		  	if (prev_high >= score)
+		  		return;
+		  }
+		  query = "delete from scores where id = '" + id + "';";
+		  stmt.execute(query);
+		  query = "insert into scores(id ,username, game, score) values ('" + id + "','" + username + "','" + game + "'," + score + ");";
+		  stmt.execute(query);
 	  }
 	  
 	  public ArrayList<Integer> getRating(String game) throws SQLException {
@@ -136,11 +140,11 @@ public class GameDatabaseHandler {
 		  String id = username + "-" + game;
 		  Statement stmt = conn.createStatement();
 		  String query = "delete from ratings where id = '" + id + "';";
-		  stmt.executeUpdate(query);
+		  stmt.execute(query);
 		  
 		  stmt = conn.createStatement();
 		  query = "insert into ratings(id ,username, game, rating) values ('" + id + "','" + username + "','" + game + "'," + rating + ");";
-		  stmt.executeUpdate(query);
+		  stmt.execute(query);
 	  }
 
 }

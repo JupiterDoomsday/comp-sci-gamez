@@ -3,32 +3,39 @@ package model;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.application.Platform;
 import view.ArrayAttackView;
 
 public class ArrayAttackModel {
+	
+	private static int INTERVAL_MAX = 120;
 	
 	private ArrayList<Integer> array;
 	private ArrayAttackView view;
 	private int score;
 	private Random rand;
 	private int curIndex;
+	private int interval;
 
 	//Merge variables
 	private ArrayList<Integer> array2;
 	private int s1i1, s1i2, s2i1, s2i2;
 	
 	//Quick variables
-	private int quickIndex;
+	private int quickIndex, pivot;
 	private LinkedList<ArrayList<Integer>> toPartition;
-	private ArrayList<Integer> array3;
-	private ArrayList<Integer> array4;
+	private ArrayList<Integer> arrayLeft;
+	private ArrayList<Integer> arrayRight;
 	
 	public ArrayAttackModel(ArrayAttackView view) {
 		this.view = view;
 		rand = new Random();
 		score = 0;
 		curIndex = 0;
+		interval = 60;
 	}
 	
 	private void generateRandomUnsorted() {
@@ -59,7 +66,8 @@ public class ArrayAttackModel {
 	//Bubble sort methods
 	public void startBubble() {
 		generateRandomUnsorted();
-		view.updateBubble(array, curIndex, curIndex + 1, score);
+		view.updateBubble(array, curIndex, curIndex + 1, score, interval);
+		setTimer();
 	}
 
 	public void runBubble(boolean swap) {
@@ -73,7 +81,7 @@ public class ArrayAttackModel {
 		}
 		else if(curIndex > 6)
 			curIndex = 0;
-		view.updateBubble(array, curIndex, curIndex + 1, score);	
+		view.updateBubble(array, curIndex, curIndex + 1, score, interval);	
 	}
 	
 	private void swap() {
@@ -89,7 +97,8 @@ public class ArrayAttackModel {
 		s1i2 = 0; 
 		s2i1 = 1;
 		s2i2 = 1;
-		view.updateMerge(array, array2, s1i1, s1i2, s2i1, s2i2, score);	
+		view.updateMerge(array, array2, s1i1, s1i2, s2i1, s2i2, score, interval);
+		setTimer();
 	}
 	
 	public void runMerge(boolean left) {
@@ -97,7 +106,7 @@ public class ArrayAttackModel {
 		if(array.get(s1i2) == null && array.get(s2i2) == null) {
 			updateSelected();
 		}
-		view.updateMerge(array, array2, s1i1, s1i2, s2i1, s2i2, score);	
+		view.updateMerge(array, array2, s1i1, s1i2, s2i1, s2i2, score, interval);	
 	}
 	
 	private void merge(boolean left){
@@ -158,28 +167,27 @@ public class ArrayAttackModel {
 	//Quick sort methods
 	public void startQuick() {
 		generateRandomUnsorted();
-		int pivot = getPivot(array);
+		pivot = getPivot(array);
 		quickIndex = 0;
 		toPartition = new LinkedList<>();
 		array2 = array;
 		array = new ArrayList<>();
-		array3 = new ArrayList<>();
-		array4 = new ArrayList<>();
-		view.updateQuick(array2, compositeArray(), quickIndex, pivot, score);
+		arrayLeft = new ArrayList<>();
+		arrayRight = new ArrayList<>();
+		view.updateQuick(array2, compositeArray(), pivot, score, interval);
+		setTimer();
 	}
 
 	public void runQuick(boolean left) {
 		if (left)
-			array3.add(array2.remove(curIndex));
+			arrayLeft.add(array2.remove(0));
 		else
-			array4.add(array2.remove(curIndex));
-		curIndex++;
-		if(curIndex >= array2.size()) {
-			toPartition.add(array4);
-			toPartition.add(array3);
-			array3 = new ArrayList<>();
-			array4  = new ArrayList<>();
-			curIndex = 0;
+			arrayRight.add(array2.remove(0));
+		if(array2.size() == 0) {
+			toPartition.add(arrayRight);
+			toPartition.add(arrayLeft);
+			arrayLeft = new ArrayList<>();
+			arrayRight  = new ArrayList<>();
 			array2 = toPartition.pollLast();
 			while(array2 != null && array2.size() <= 1) {
 				if(array2.size() != 0) {
@@ -193,16 +201,16 @@ public class ArrayAttackModel {
 					score++;
 					generateRandomUnsorted();
 				}
-				int pivot = getPivot(array);
 				quickIndex = 0;
 				toPartition = new LinkedList<>();
 				array2 = array;
 				array = new ArrayList<>();
-				array3 = new ArrayList<>();
-				array4 = new ArrayList<>();
+				arrayLeft = new ArrayList<>();
+				arrayRight = new ArrayList<>();
 			}
-			
+			pivot = getPivot(array2);
 		}
+		view.updateQuick(array2, compositeArray(), pivot, score, interval);
 	}
 
 	private int getPivot(ArrayList<Integer> array) {
@@ -213,29 +221,49 @@ public class ArrayAttackModel {
 		int v3 = array.get(array.size()-1);
 		if(v1 >= v2) {
 			if (v2 >= v3)
-				return array.size()/2;
+				return v2;
 			else if (v1 >= v3)
-				return array.size()-1;
+				return v3;
 			else
-				return 0;
+				return v1;
 		}
 		else {
 			if(v2 <= v3)
-				return array.size()/2;
+				return v2;
 			else if (v1 <= v3)
-				return array.size()-1;
+				return v3;
 			else
-				return 0;
+				return v1;
 		}
 	}
 	
 	private ArrayList<Integer> compositeArray() {
 		ArrayList<Integer> comp = new ArrayList<>();
 		comp.addAll(array);
-		comp.addAll(array3);
+		comp.addAll(arrayLeft);
 		comp.addAll(array2);
-		comp.addAll(array4);
+		comp.addAll(arrayRight);
 		return comp;
+	}
+	
+	private void setTimer() {
+		interval = INTERVAL_MAX;
+		Timer timer = new Timer();
+
+		timer.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				if(interval > 0) {
+					interval--;
+					Platform.runLater(() -> view.setTimerText(interval));
+					
+				} else {
+					timer.cancel();
+					view.timeUpScreen(score);
+					System.out.println("0 reached, break");
+					interval = INTERVAL_MAX;
+				}
+			}
+		}, 1000, 1000);
 	}
 
 }
