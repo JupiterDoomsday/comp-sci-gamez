@@ -2,6 +2,9 @@ package view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,11 +27,13 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.GameDatabaseHandler;
 import model.Gate;
@@ -49,7 +54,22 @@ public class MainMenuController extends Application {
 
 	private GameDatabaseHandler database;
 	private LeaderboardView LbView;
+	
+	private String user;
+	
+	private Menu profile;
+	private MenuItem login, register, logout;
 
+	//ratings
+	private HBox ratingBinaryBattle;
+	private HBox ratingArrayAttack;
+	private HBox ratingGatesGame;
+	private HBox ratingJavaQuizlet;
+	Label ratingLabelArrayAttack;
+	Label ratingLabelBinaryBattle;
+	Label ratingLabelGatesGame;
+	Label ratingLabelJavaQuizlet;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -100,10 +120,10 @@ public class MainMenuController extends Application {
 		});
 
 		// Add a profile menu (login, register, etc.)
-		Menu profile = new Menu("Profile");
+		profile = new Menu("Profile");
 		menuBar.getMenus().add(profile);
-		MenuItem login = new MenuItem("Login");
-		profile.getItems().add(login);
+		login = new MenuItem("Login");
+	
 		login.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -112,17 +132,27 @@ public class MainMenuController extends Application {
 			}
 		});
 		
-		MenuItem register = new MenuItem("Register");
-		profile.getItems().add(register);
+		register = new MenuItem("Register");
 		// When create account button is clicked, we want to open the create account
-				// popup window.
-				register.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						System.out.println("Create Account button clicked - createAccount() called in SongLibraryView");
-						registerPopup();
-					}
-				});
+		// popup window.
+		register.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Create Account button clicked - createAccount() called in MainMenuController");
+				registerPopup();
+			}
+		});
+		
+		logout = new MenuItem("Logout");
+		logout.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				System.out.println("Logout button clicked");
+				setLoggedout();
+			}
+		});
+		
+		setLoggedout();
 
 		// Add a leaderboards menu (overall + leaderboard for each game)
 		Menu leaderboards = new Menu("Leaderboards");
@@ -308,9 +338,11 @@ public class MainMenuController extends Application {
 			}
 		});
 		
+		setUpRatingSystem(gp);
 
 		// Add a BorderPane to the Scene
 		Scene scene = new Scene(bPane, 1200, 900);
+		String css = this.getClass().getResource("stylesheet.css").toExternalForm();
 		primaryStage.setScene(scene);
 
 		// Start the application
@@ -318,6 +350,19 @@ public class MainMenuController extends Application {
 		primaryStage.show();
 	}
 	
+	private void setLoggedout() {
+		user = null;
+		profile.getItems().clear();
+		profile.getItems().add(login);
+		profile.getItems().add(register);
+	}
+	
+	private void setLoggedin(String username) {
+		user = username;
+		profile.getItems().clear();
+		profile.getItems().add(logout);
+	}
+
 	private void registerPopup() {
 		// This is just for creating the create account popup.
 		registerWindow = new Stage();
@@ -400,7 +445,187 @@ public class MainMenuController extends Application {
 		registerWindow.setTitle("Register");
 		registerWindow.show();
 	}
+	
+	private void setUpRatingSystem(GridPane gp) {
+		// box containing the rating buttons
+		ratingArrayAttack = new HBox();
+		ratingBinaryBattle = new HBox();
+		ratingGatesGame = new HBox();
+		ratingJavaQuizlet = new HBox();
+		
+		// setting up the rating buttons
+		Button ratingPosArrayAttack = new Button("Like");
+		Button ratingNegArrayAttack = new Button("Dislike");
+		ratingLabelArrayAttack = new Label("+0");
+		ratingLabelArrayAttack.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
 
+		ratingArrayAttack.getChildren().addAll(ratingPosArrayAttack,
+				ratingNegArrayAttack, ratingLabelArrayAttack);
+		
+		Button ratingPosBinaryBattle = new Button("Like");
+		Button ratingNegBinaryBattle = new Button("Dislike");
+		ratingLabelBinaryBattle = new Label("+0");
+		ratingLabelBinaryBattle.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
+		ratingBinaryBattle.getChildren().addAll(ratingPosBinaryBattle,
+				ratingNegBinaryBattle, ratingLabelBinaryBattle);
+		
+		Button ratingPosGatesGame = new Button("Like");
+		Button ratingNegGatesGame = new Button("Dislike");
+		ratingLabelGatesGame = new Label("+0");
+		ratingLabelGatesGame.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
+		ratingGatesGame.getChildren().addAll(ratingPosGatesGame,
+				ratingNegGatesGame, ratingLabelGatesGame);
+		
+		Button ratingPosJavaQuizlet = new Button("Like");
+		Button ratingNegJavaQuizlet = new Button("Dislike");
+		ratingLabelJavaQuizlet = new Label("+0");
+		ratingLabelJavaQuizlet.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
+		ratingJavaQuizlet.getChildren().addAll(ratingPosJavaQuizlet,
+				ratingNegJavaQuizlet, ratingLabelJavaQuizlet);
+		
+		// setting vbox so that we can have labels on top of the ratings
+		VBox ratingJavaQuizletV = new VBox();
+		Label javaQuizletLabel = new Label("Java Quizlet");
+		javaQuizletLabel.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
+		ratingJavaQuizletV.getChildren().addAll(javaQuizletLabel, ratingJavaQuizlet);
+		
+		VBox ratingArrayAttackV = new VBox();
+		Label arrayAttackLabel = new Label("Array Attack");
+		arrayAttackLabel.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
+		ratingArrayAttackV.getChildren().addAll(arrayAttackLabel, ratingArrayAttack);
+		
+		VBox ratingBinaryBattleV = new VBox();
+		Label binaryBattleLabel = new Label("Binary Battle");
+		binaryBattleLabel.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
+		ratingBinaryBattleV.getChildren().addAll(binaryBattleLabel, ratingBinaryBattle);
+		
+		VBox ratingGatesGameV = new VBox();
+		Label gatesGameLabel = new Label("Gates Game");
+		gatesGameLabel.setStyle("-fx-font-size: 15px;-fx-text-fill: white");
+		ratingGatesGameV.getChildren().addAll(gatesGameLabel, ratingGatesGame);
+		
+		
+		//adding final box to gridpane
+		HBox ratingLeftH = new HBox();
+		ratingLeftH.getChildren().addAll(ratingArrayAttackV, ratingBinaryBattleV);
+		ratingLeftH.setSpacing(80);
+		HBox ratingRightH = new HBox();
+		ratingRightH.getChildren().addAll(ratingGatesGameV, ratingJavaQuizletV);
+		ratingRightH.setSpacing(80);
+		
+		// adding to gridpane
+		gp.add(ratingLeftH, 0, 2);
+		gp.add(ratingRightH, 1, 2);
+		
+		setRatingLabels();
+		
+		ratingPosArrayAttack.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addRating("ArrayAttack", 1);
+				setRatingLabels();
+			}
+		});
+		
+		ratingNegArrayAttack.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addRating("ArrayAttack", -1);
+				setRatingLabels();
+			}
+		});
+		
+		ratingPosBinaryBattle.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addRating("BinaryBattle", 1);
+				setRatingLabels();
+			}
+		});
+		
+		ratingNegBinaryBattle.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addRating("BinaryBattle", -1);
+				setRatingLabels();
+			}
+		});
+		
+		ratingPosGatesGame.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addRating("GatesGame", 1);
+				setRatingLabels();
+			}
+		});
+		
+		ratingNegGatesGame.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addRating("GatesGame", -1);
+				setRatingLabels();
+			}
+		});
+		
+		ratingPosJavaQuizlet.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addRating("JavaQuizlet", 1);
+				setRatingLabels();
+			}
+		});
+		
+		ratingNegJavaQuizlet.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				addRating("JavaQuizlet", -1);
+				setRatingLabels();
+			}
+		});
+	}
+	
+	private void addRating(String game, int value) {
+		if(user == null) {
+			System.out.println("Log in first!");
+			return;
+		}
+		
+		try {
+			database.setRating(user, game, value);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+	}
+
+	private int getRatingValue(String game) {
+		ArrayList<Integer> ratings = null;
+		try {
+			ratings = database.getRating(game);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		int sum = 0;
+		for(int i = 0; i < ratings.size(); i++)
+		    sum += ratings.get(i);
+		
+		return sum;
+	}
+	
+	private void setRatingLabels() {
+		int totalRating = getRatingValue("ArrayAttack");
+		ratingLabelArrayAttack.setText(" Rating=" + totalRating);
+		
+		totalRating = getRatingValue("BinaryBattle");
+		ratingLabelBinaryBattle.setText(" Rating=" + totalRating);
+		
+		totalRating = getRatingValue("GatesGame");
+		ratingLabelGatesGame.setText(" Rating=" + totalRating);
+		
+		totalRating = getRatingValue("JavaQuizlet");
+		ratingLabelJavaQuizlet.setText(" Rating=" + totalRating);
+	}
+	
 	private boolean createAccount(String username, String password, String reenterPassword) {
 		// This handles attempting to create an account.
 		// It would call usernameAvailable() and registerCredentials().
@@ -421,6 +646,7 @@ public class MainMenuController extends Application {
 
 		// If all error checks are passed, create the account and return true.
 		database.registerCredentials(username, password);
+		setLoggedin(username);
 		registerWindow.close();
 		return true;
 	}
@@ -495,6 +721,7 @@ public class MainMenuController extends Application {
 		
 		if (database.verifyCredentials(username, password)) {
 			// Successfully logged in, update windows
+			setLoggedin(username);
 			System.out.println("  - Successfully logged in!");
 			//this.username = username;
 		} else {
@@ -503,49 +730,7 @@ public class MainMenuController extends Application {
 			return;
 		}
 
-		//System.out.println("  - Clearing login pane");
-		//loginPane.getChildren().clear();
-		
-		
 		loginWindow.close();
-		/*
-		Button logout = new Button("Logout");
-		logout.setPadding(new Insets(10, 50, 10, 50));
-		logout.setFont(new Font("Arial", 14));
-
-		// When login button is clicked, we want to open the login popup window.
-		logout.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Logout button clicked");
-				clearUser();
-				loginPane.getChildren().clear();
-				observableListLayout();
-				System.out.println("About to clean the song queue");
-				songQueue.clearSongQueue();
-				System.out.println("Song queue cleared");
-			}
-		});
-
-		loginPane.add(logout, 0, 0);
-		GridPane.setMargin(logout, new Insets(0, 20, 20, 120));
-
-		Button songHistory = new Button("Song History");
-		songHistory.setPadding(new Insets(10, 10, 10, 10));
-
-		// When create account button is clicked, we want to open the create account
-		// popup window.
-		songHistory.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Song History button clicked");
-				songHistoryPopup();
-			}
-		});
-
-		loginPane.add(songHistory, 0, 1);
-		GridPane.setMargin(songHistory, new Insets(0, 0, 0, 130));
-		*/
 	}
 
 }
