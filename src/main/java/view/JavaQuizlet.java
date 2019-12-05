@@ -192,7 +192,8 @@ public class JavaQuizlet extends MinigameView {
 
 			GameDatabaseHandler database = GameDatabaseHandler.getInstance();
 			try {
-				database.setScore("UsernameHere", "JavaQuizlet", finalScore);
+				if (MainMenuController.getUser() != null)
+					database.setScore(MainMenuController.getUser(), "JavaQuizlet", finalScore);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

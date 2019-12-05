@@ -29,7 +29,7 @@ public class ArrayAttackView extends MinigameView {
 	private Canvas mainCanvas;
 	private GraphicsContext gc;
 	private ArrayAttackModel model;
-	private HBox controllerBox, newGameButtBox, bubbleSortButtBox, mergeSortButtBox, quickSortButtBox;
+	private HBox controllerBox, newGameButtBox, bubbleSortButtBox, mergeSortButtBox, quickSortButtBox, tutButtBox;
 
 	@Override
 	public String settings() {
@@ -58,6 +58,7 @@ public class ArrayAttackView extends MinigameView {
 		Button bubbleButt = new Button("Bubble Sort");
 		Button mergeButt = new Button("Merge Sort");
 		Button quickButt = new Button("Quick Sort");
+		Button tutButt = new Button("Tutorial");
 		
 		bubbleButt.setPrefSize(200, 50);
 		bubbleButt.setFont(new Font(20));
@@ -65,6 +66,8 @@ public class ArrayAttackView extends MinigameView {
 		mergeButt.setFont(new Font(20));
 		quickButt.setPrefSize(200, 50);
 		quickButt.setFont(new Font(20));
+		tutButt.setPrefSize(200, 50);
+		tutButt.setFont(new Font(20));
 		
 		bubbleButt.setOnAction(ae -> {
 			model.startBubble();
@@ -82,9 +85,15 @@ public class ArrayAttackView extends MinigameView {
 			controllerBox.getChildren().add(quickSortButtBox);
 		});
 		
+		tutButt.setOnAction(ae -> {
+			showTutorial();
+			controllerBox.getChildren().clear();
+			controllerBox.getChildren().add(tutButtBox);
+		});
+		
 		newGameButtBox.setPadding(new Insets(25));
 		newGameButtBox.setAlignment(Pos.CENTER);
-		newGameButtBox.getChildren().addAll(bubbleButt, mergeButt, quickButt);
+		newGameButtBox.getChildren().addAll(bubbleButt, mergeButt, quickButt, tutButt);
 		
 		
 		//Setup the buttons for bubblesort
@@ -153,12 +162,20 @@ public class ArrayAttackView extends MinigameView {
 		quickSortButtBox.setAlignment(Pos.CENTER);
 		quickSortButtBox.getChildren().addAll(quickLeftButt, quickRightButt);
 		
+		//Setup the buttons for the tutorial
+		tutButtBox = new HBox(20);
+		
 		this.getChildren().add(view);
 		view.getChildren().addAll(mainCanvas, controllerBox);
 		gc.setFont(new Font(50));
 		gc.setFill(Color.BLACK);
 		gc.fillText("Welcome to\nArray Attack!", CANVAS_WIDTH/2.0, CANVAS_HEIGHT/2.0);
 		newGame();
+	}
+
+	private void showTutorial() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void newGame() {
@@ -230,7 +247,7 @@ public class ArrayAttackView extends MinigameView {
 		if (interval == 0)
 			return;
 		drawBackground(score, interval);
-		gc.fillText(pivot.toString(), CANVAS_WIDTH/2.0, CANVAS_HEIGHT/2.5);
+		gc.fillText("Pivot: " + pivot, CANVAS_WIDTH/2.0, CANVAS_HEIGHT/2.5);
 		drawQuick(array1, array2);
 	}
 	
