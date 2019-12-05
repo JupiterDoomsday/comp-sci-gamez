@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class GameDatabaseHandler {
 
@@ -47,7 +48,7 @@ public class GameDatabaseHandler {
 		    // executeQuery makes a real query on the real database
 		    ResultSet rs = stmt.executeQuery(query);
 		    while (rs.next()) 
-		    	if(rs.getString(1).equals(username) && rs.getString(2).equals(password))
+		    	if(rs.getString(1).equals(username) && SecureIt.decrypt(rs.getString(2)).equals(password))
 		    		return true;
 		    return false;
 		    
@@ -61,7 +62,7 @@ public class GameDatabaseHandler {
 		  try {
 			  Statement stmt = conn.createStatement();
 			  // Store the SQL command:
-			  String command = "insert into accounts(username, password) values('" + username + "', '" + password + "');";
+			  String command = "insert into accounts(username, password) values('" + username + "', '" + SecureIt.encrypt(password) + "');";
 			  // executeQuery makes a real query on the real database
 			  stmt.executeUpdate(command);
 		  }
@@ -106,6 +107,40 @@ public class GameDatabaseHandler {
 		  }
 		  query +=";";
 		  return stmt.executeQuery(query);
+	  }
+	  
+	  public void setScore(String username, String game, int score) throws SQLException{
+		  String id = username + "-" + game;
+		  Statement stmt = conn.createStatement();
+		  String query = "select score from scores where id = '" + id +"';";
+		  int prev_high = stmt.executeQuery(query).getInt("score");
+		  if (prev_high >= score)
+			  return;
+		  query = "delete from scores where id = '" + id + "';" +
+			  "insert into scores(id ,username, game, score) values ('" + id + "','" + username + "','" + game + "'," + score + ");";
+		  stmt.executeQuery(query);
+	  }
+	  
+	  public ArrayList<Integer> getRating(String game) throws SQLException {
+		  Statement stmt = conn.createStatement();
+		  String query = "select rating from ratings where game = '" + game + "';";
+		  ResultSet rs = stmt.executeQuery(query);
+		  ArrayList<Integer> retList = new ArrayList<>();
+		  while(rs.next()) {
+			  retList.add(rs.getInt("rating"));
+		  }
+		  return retList;
+	  }
+	  
+	  public void setRating(String username, String game, int rating) throws SQLException{
+		  String id = username + "-" + game;
+		  Statement stmt = conn.createStatement();
+		  String query = "delete from ratings where id = '" + id + "';";
+		  stmt.executeUpdate(query);
+		  
+		  stmt = conn.createStatement();
+		  query = "insert into ratings(id ,username, game, rating) values ('" + id + "','" + username + "','" + game + "'," + rating + ");";
+		  stmt.executeUpdate(query);
 	  }
 
 }

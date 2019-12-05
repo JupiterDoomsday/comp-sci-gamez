@@ -6,6 +6,7 @@ public class BinaryBattleModel {
 	
 	public int currentByteNum = 0;
 	public int score = 0;
+	public int currentNibbleNum = 0;
 	
 	public String generateRandomByte() {
 		
@@ -22,6 +23,21 @@ public class BinaryBattleModel {
 		
 		
 		return "\n" + bString.substring(0, 4) + " " + bString.substring(4);
+	}
+	
+	public String generateRandomNibble() {
+		
+		Random rand = new Random();
+		
+		int val = rand.nextInt(16);
+		currentNibbleNum = val;
+		
+		String nString = Integer.toBinaryString(val);
+		while(nString.length() < 4) {
+			nString = "0" + nString;
+		}
+		
+		return "\n" + nString;
 	}
 
 }
