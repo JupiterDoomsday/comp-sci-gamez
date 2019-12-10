@@ -93,7 +93,7 @@ public class ArrayAttackView extends MinigameView {
 		
 		newGameButtBox.setPadding(new Insets(25));
 		newGameButtBox.setAlignment(Pos.CENTER);
-		newGameButtBox.getChildren().addAll(bubbleButt, mergeButt, quickButt, tutButt);
+		newGameButtBox.getChildren().addAll(bubbleButt, mergeButt, quickButt);
 		
 		
 		//Setup the buttons for bubblesort
@@ -275,7 +275,7 @@ public class ArrayAttackView extends MinigameView {
 
 	public void setTimerText(int interval) {
 		gc.setFill(Color.LAVENDER);
-		gc.fillRect(CANVAS_WIDTH/2.0 - 100, CANVAS_HEIGHT/4.0 - 20 , 200, 50);
+		gc.fillRect(CANVAS_WIDTH/2.0 - 150, CANVAS_HEIGHT/4.0 - 20 , 300, 50);
 		gc.setFill(Color.BLACK);
 		gc.fillText("Time: " + interval, CANVAS_WIDTH/2.0, CANVAS_HEIGHT/4.0);
 

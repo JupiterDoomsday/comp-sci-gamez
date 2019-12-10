@@ -35,7 +35,7 @@ public class ArrayAttackModel {
 		rand = new Random();
 		score = 0;
 		curIndex = 0;
-		interval = 60;
+		interval = INTERVAL_MAX;
 	}
 	
 	private void generateRandomUnsorted() {
@@ -65,9 +65,10 @@ public class ArrayAttackModel {
 	
 	//Bubble sort methods
 	public void startBubble() {
+		score = 0;
+		setTimer();
 		generateRandomUnsorted();
 		view.updateBubble(array, curIndex, curIndex + 1, score, interval);
-		setTimer();
 	}
 
 	public void runBubble(boolean swap) {
@@ -93,12 +94,13 @@ public class ArrayAttackModel {
 	//Merge sort methods
 	public void startMerge() {
 		generateRandomUnsorted();
+		score = 0;
+		setTimer();
 		s1i1 = 0;
 		s1i2 = 0; 
 		s2i1 = 1;
 		s2i2 = 1;
 		view.updateMerge(array, array2, s1i1, s1i2, s2i1, s2i2, score, interval);
-		setTimer();
 	}
 	
 	public void runMerge(boolean left) {
@@ -167,6 +169,8 @@ public class ArrayAttackModel {
 	//Quick sort methods
 	public void startQuick() {
 		generateRandomUnsorted();
+		score = 0;
+		setTimer();
 		pivot = getPivot(array);
 		quickIndex = 0;
 		toPartition = new LinkedList<>();
@@ -175,7 +179,6 @@ public class ArrayAttackModel {
 		arrayLeft = new ArrayList<>();
 		arrayRight = new ArrayList<>();
 		view.updateQuick(array2, compositeArray(), pivot, score, interval);
-		setTimer();
 	}
 
 	public void runQuick(boolean left) {
